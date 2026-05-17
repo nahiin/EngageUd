@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partnership Opportunities | NextGen EngageU Hub</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Core CSS -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body class="page-home">
+
+    <!-- ========== NAVBAR ========== -->
+    <script>window._navCfg = { transparent: false, activePage: 'partnerships' };</script>
+    <nav class="hp-nav" id="hp-nav">
+        <div class="hp-nav-inner">
+            <!-- Logo -->
+            <a href="index.html" class="hp-logo">
+                <img src="assets/images/nextgenengageu-logo.png" alt="NextGen EngageU Hub" class="hp-logo-img">
+                <div class="hp-logo-brand">
+                    <span class="hp-logo-brand-sub">NextGen</span>
+                    <div class="hp-logo-brand-main">Engage<span>U</span> Hub</div>
+                </div>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hp-nav-links">
+                <a href="index.html#hp-home"         data-nav-key="home">Home</a>
+                <a href="index.html#hp-about"        data-nav-key="about">About</a>
+                <a href="index.html#hp-focus"        data-nav-key="focus">Focus Areas</a>
+                <a href="index.html#hp-competitions" data-nav-key="competitions">Competitions</a>
+                <a href="partnerships.html"          data-nav-key="partnerships">Partnerships</a>
+                <a href="index.html#hp-join"         data-nav-key="join">Join</a>
+            </div>
+
+            <!-- Desktop Auth Area (hidden on mobile via CSS) -->
+            <div class="hp-auth-area">
+                <div id="hp-auth-out" class="hp-auth-out">
+                    <a href="login.html" id="hp-login-btn" class="hp-nav-login-btn">Login</a>
+                    <a href="signup.html" class="hp-nav-cta">Join the Hub</a>
+                </div>
+                <div id="hp-auth-in" class="hp-auth-in" style="display:none;">
+                    <div class="hp-user-menu">
+                        <button class="hp-user-trigger" id="hp-user-trigger">
+                            <div class="hp-user-avatar" id="hp-user-avatar"><i class="bi bi-person-fill"></i></div>
+                            <span class="hp-user-name" id="hp-user-name">John</span>
+                            <i class="bi bi-chevron-down hp-user-chevron"></i>
+                        </button>
+                        <div class="hp-user-dropdown" id="hp-user-dropdown">
+                            <div class="hp-user-dd-header">
+                                <span class="hp-user-dd-name" id="hp-dd-name">John Doe</span>
+                                <span class="hp-user-dd-email" id="hp-dd-email">john@pmu.edu.sa</span>
+                            </div>
+                            <div class="hp-user-dd-sep"></div>
+                            <a href="my-submissions.html" class="hp-user-dd-item"><i class="bi bi-file-earmark-text"></i> My Submissions</a>
+                            <div class="hp-user-dd-sep"></div>
+                            <button class="hp-user-dd-item hp-user-dd-logout" id="hp-logout-btn"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hamburger (mobile only) -->
+            <button class="hp-mobile-toggle" id="hp-mobile-toggle" aria-label="Open menu">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Drawer Backdrop -->
+    <div class="hp-drawer-overlay" id="hp-drawer-overlay"></div>
+
+    <!-- Side Drawer -->
+    <div class="hp-side-drawer" id="hp-side-drawer" aria-hidden="true">
+
+        <div class="hp-drawer-header">
+            <a href="index.html" class="hp-logo">
+                <img src="assets/images/nextgenengageu-logo.png" alt="NextGen EngageU Hub" class="hp-logo-img">
+                <div class="hp-logo-brand">
+                    <span class="hp-logo-brand-sub">NextGen</span>
+                    <div class="hp-logo-brand-main">Engage<span>U</span> Hub</div>
+                </div>
+            </a>
+            <button class="hp-drawer-close" id="hp-drawer-close" aria-label="Close menu">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <nav class="hp-drawer-nav">
+            <a href="index.html#hp-home"         class="hp-drawer-link" data-nav-key="home">Home</a>
+            <a href="index.html#hp-about"        class="hp-drawer-link" data-nav-key="about">About</a>
+            <a href="index.html#hp-focus"        class="hp-drawer-link" data-nav-key="focus">Focus Areas</a>
+            <a href="index.html#hp-competitions" class="hp-drawer-link" data-nav-key="competitions">Competitions</a>
+            <a href="partnerships.html"          class="hp-drawer-link" data-nav-key="partnerships">Partnerships</a>
+            <a href="index.html#hp-join"         class="hp-drawer-link" data-nav-key="join">Join</a>
+        </nav>
+
+        <!-- Single auth section — mobile only, no duplication -->
+        <div class="hp-drawer-auth">
+            <div id="hp-mobile-auth-out">
+                <a href="login.html" id="hp-mobile-login-btn" class="hp-drawer-login-btn">Login</a>
+                <a href="signup.html" class="hp-drawer-join-btn">Join the Hub <i class="bi bi-arrow-right"></i></a>
+            </div>
+            <div id="hp-mobile-auth-in" style="display:none;">
+                <a href="my-submissions.html" class="hp-drawer-link"><i class="bi bi-file-earmark-text me-2"></i> My Submissions</a>
+                <button class="hp-drawer-logout-btn" id="hp-mobile-logout"><i class="bi bi-box-arrow-right me-2"></i> Logout</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+    (function () {
+        var cfg = window._navCfg || {};
+
+        var nav       = document.getElementById('hp-nav');
+        var overlay   = document.getElementById('hp-drawer-overlay');
+        var drawer    = document.getElementById('hp-side-drawer');
+        var toggleBtn = document.getElementById('hp-mobile-toggle');
+        var closeBtn  = document.getElementById('hp-drawer-close');
+
+        if (!nav) return;
+
+        /* ---- Scroll behaviour ---- */
+        if (!cfg.transparent) nav.classList.add('scrolled');
+        window.addEventListener('scroll', function () {
+            nav.classList.toggle('scrolled', window.scrollY > 30);
+        }, { passive: true });
+
+        /* ---- Side drawer ---- */
+        function openDrawer() {
+            drawer.classList.add('open');
+            overlay.classList.add('open');
+            drawer.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeDrawer() {
+            drawer.classList.remove('open');
+            overlay.classList.remove('open');
+            drawer.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        if (toggleBtn) toggleBtn.addEventListener('click', openDrawer);
+        if (closeBtn)  closeBtn.addEventListener('click', closeDrawer);
+        if (overlay)   overlay.addEventListener('click', closeDrawer);
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
+
+        drawer.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeDrawer); });
+        drawer.querySelectorAll('button').forEach(function (b) {
+            if (b !== closeBtn) b.addEventListener('click', closeDrawer);
+        });
+
+        /* ---- Active nav link ---- */
+        if (cfg.activePage) {
+            document.querySelectorAll('[data-nav-key="' + cfg.activePage + '"]').forEach(function (el) {
+                el.classList.add('active');
+                el.style.color = 'var(--secondary-color)';
+                el.style.fontWeight = '600';
+            });
+        }
+
+        /* ---- Auth state ---- */
+        var KEY  = 'engageu_user';
+        var DEMO = { name: 'John Doe', email: 'john@pmu.edu.sa', initials: '<i class="bi bi-person-fill"></i>' };
+
+        function getUser()   { return JSON.parse(localStorage.getItem(KEY) || 'null'); }
+        function saveUser(u) { localStorage.setItem(KEY, JSON.stringify(u)); }
+        function clearUser() { localStorage.removeItem(KEY); }
+
+        function applyState(user) {
+            var out  = document.getElementById('hp-auth-out');
+            var inn  = document.getElementById('hp-auth-in');
+            var mOut = document.getElementById('hp-mobile-auth-out');
+            var mInn = document.getElementById('hp-mobile-auth-in');
+            if (!out) return;
+            if (user) {
+                out.style.display = 'none'; inn.style.display = '';
+                if (mOut) mOut.style.display = 'none';
+                if (mInn) mInn.style.display = '';
+                var av = document.getElementById('hp-user-avatar');
+                var nm = document.getElementById('hp-user-name');
+                var dn = document.getElementById('hp-dd-name');
+                var de = document.getElementById('hp-dd-email');
+                if (av) av.innerHTML = user.initials;
+                if (nm) nm.textContent = user.name.split(' ')[0];
+                if (dn) dn.textContent = user.name;
+                if (de) de.textContent = user.email;
+            } else {
+                out.style.display = ''; inn.style.display = 'none';
+                if (mOut) mOut.style.display = '';
+                if (mInn) mInn.style.display = 'none';
+            }
+        }
+
+        applyState(getUser());
+
+        var loginBtn = document.getElementById('hp-login-btn');
+        if (loginBtn) loginBtn.addEventListener('click', function (e) { e.preventDefault(); saveUser(DEMO); applyState(DEMO); });
+
+        var mLoginBtn = document.getElementById('hp-mobile-login-btn');
+        if (mLoginBtn) mLoginBtn.addEventListener('click', function (e) { e.preventDefault(); saveUser(DEMO); applyState(DEMO); });
+
+        var logoutBtn = document.getElementById('hp-logout-btn');
+        if (logoutBtn) logoutBtn.addEventListener('click', function () { clearUser(); applyState(null); });
+
+        var mLogout = document.getElementById('hp-mobile-logout');
+        if (mLogout) mLogout.addEventListener('click', function () { clearUser(); applyState(null); });
+
+        var trigger  = document.getElementById('hp-user-trigger');
+        var dropdown = document.getElementById('hp-user-dropdown');
+        if (trigger && dropdown) {
+            trigger.addEventListener('click', function (e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('open');
+                var ch = trigger.querySelector('.hp-user-chevron');
+                if (ch) ch.classList.toggle('rotated');
+            });
+            document.addEventListener('click', function () {
+                dropdown.classList.remove('open');
+                var ch = trigger.querySelector('.hp-user-chevron');
+                if (ch) ch.classList.remove('rotated');
+            });
+        }
+    })();
+    </script>
+
+    <!-- ========== PAGE HERO ========== -->
+    <div class="pp-hero">
+        <div class="pp-hero-dots"></div>
+        <div class="pp-hero-orbs"></div>
+        <div class="pp-hero-content">
+            <div class="pp-hero-eyebrow">
+                <i class="bi bi-handshake"></i>
+                Collaborate with PMU
+            </div>
+            <h1 class="pp-hero-title">
+                PARTNERSHIP<br>
+                <span class="accent">OPPORTUNITIES</span><br>
+                AT PMU
+            </h1>
+            <div class="pp-hero-divider"></div>
+            <p class="pp-hero-subtitle">Co-create competitions, drive innovation, and shape future-ready talent through meaningful academic-industry collaboration.</p>
+        </div>
+    </div>
+
+    <!-- ========== WHY PARTNER ========== -->
+    <section class="hp-section pp-why">
+        <div class="hp-section-inner">
+            <div class="hp-section-header hp-reveal" style="margin-bottom: 56px;">
+                <span class="hp-eyebrow">Why Collaborate</span>
+                <h2 class="hp-section-title">WHY PARTNER WITH PMU</h2>
+                <div class="hp-divider"></div>
+            </div>
+
+            <div class="hp-section-inner-narrow" style="max-width: 860px; margin: 0 auto;">
+                <div class="pp-why-text hp-reveal hp-reveal-delay-1">
+                    <p>At PMU, we believe that true innovation happens when academia and industry come together to address real-world challenges. Through meaningful collaborations, our partners have the opportunity to co-create competitions that tackle both industry-specific and community-driven problems, while directly contributing to the development of practical solutions. These partnerships empower students to apply their knowledge in real contexts, gain industry-relevant skills, and prepare for the workforce of tomorrow. In alignment with Vision 2030, PMU partnerships foster applied learning, innovation, and societal impact while connecting industry expertise with academic excellence.</p>
+                </div>
+            </div>
+
+            <!-- Value Pillars -->
+            <div class="pp-why-pillars hp-reveal hp-reveal-delay-2">
+                <div class="pp-pillar">
+                    <div class="pp-pillar-icon pp-pillar-icon-orange">
+                        <i class="bi bi-lightbulb-fill"></i>
+                    </div>
+                    <h4>Co-Create Competitions</h4>
+                    <p>Design challenges that address your industry's real problems alongside academic talent.</p>
+                </div>
+                <div class="pp-pillar">
+                    <div class="pp-pillar-icon pp-pillar-icon-blue">
+                        <i class="bi bi-mortarboard-fill"></i>
+                    </div>
+                    <h4>Develop Future Talent</h4>
+                    <p>Empower students with industry-relevant skills and real-world application of knowledge.</p>
+                </div>
+                <div class="pp-pillar">
+                    <div class="pp-pillar-icon pp-pillar-icon-purple">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+                    <h4>Drive Innovation</h4>
+                    <p>Generate practical, scalable solutions to societal and industrial challenges.</p>
+                </div>
+                <div class="pp-pillar">
+                    <div class="pp-pillar-icon pp-pillar-icon-green">
+                        <i class="bi bi-globe2"></i>
+                    </div>
+                    <h4>Vision 2030 Aligned</h4>
+                    <p>Foster applied learning and societal impact in line with national priorities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PARTNERSHIP FOCUS AREAS ========== -->
+    <section class="hp-section pp-focus">
+        <div class="hp-focus-glow"></div>
+        <div class="hp-section-inner">
+            <div class="hp-section-header hp-reveal">
+                <span class="hp-eyebrow">Areas of Collaboration</span>
+                <h2 class="hp-section-title">PARTNERSHIP FOCUS AREAS</h2>
+                <div class="hp-divider"></div>
+                <p class="hp-section-desc" style="max-width: 620px;">PMU's NextGen EngageU Hub welcomes industry and institutional partners across multiple sectors to design and launch competitions, projects, and initiatives.</p>
+            </div>
+
+            <div class="pp-focus-grid hp-reveal hp-reveal-delay-1">
+
+                <div class="pp-focus-item">
+                    <div class="pp-focus-item-icon" style="background: #eff6ff; color: #3b82f6;">
+                        <i class="bi bi-cpu-fill"></i>
+                    </div>
+                    <span class="pp-focus-item-text">AI & Emerging Technologies</span>
+                </div>
+
+                <div class="pp-focus-item">
+                    <div class="pp-focus-item-icon" style="background: #f5f3ff; color: #8b5cf6;">
+                        <i class="bi bi-book-fill"></i>
+                    </div>
+                    <span class="pp-focus-item-text">Education & Future of Learning</span>
+                </div>
+
+                <div class="pp-focus-item">
+                    <div class="pp-focus-item-icon" style="background: #fff7ed; color: var(--secondary-color);">
+                        <i class="bi bi-rocket-takeoff-fill"></i>
+                    </div>
+                    <span class="pp-focus-item-text">Entrepreneurship & Startups</span>
+                </div>
+
+                <div class="pp-focus-item">
+                    <div class="pp-focus-item-icon" style="background: #f0fdf4; color: #22c55e;">
+                        <i class="bi bi-tree-fill"></i>
+                    </div>
+                    <span class="pp-focus-item-text">Sustainability & Green Solutions</span>
+                </div>
+
+                <div class="pp-focus-item">
+                    <div class="pp-focus-item-icon" style="background: #fdf4ff; color: #c026d3;">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <span class="pp-focus-item-text">Social Responsibility & Community Impact</span>
+                </div>
+
+                <div class="pp-focus-item">
+                    <div class="pp-focus-item-icon" style="background: #f0f9ff; color: #0284c7;">
+                        <i class="bi bi-gear-fill"></i>
+                    </div>
+                    <span class="pp-focus-item-text">Engineering & Applied Sciences</span>
+                </div>
+
+                <div class="pp-focus-item">
+                    <div class="pp-focus-item-icon" style="background: #fafafa; color: #71717a;">
+                        <i class="bi bi-grid-3x3-gap-fill"></i>
+                    </div>
+                    <span class="pp-focus-item-text">Open Industrial & Societal Challenges</span>
+                </div>
+
+            </div>
+
+            <p class="pp-focus-note hp-reveal hp-reveal-delay-2">
+                We remain open to new themes based on partner priorities and emerging national needs — competitions and challenges can be tailored to your specific sector and objectives.
+            </p>
+        </div>
+    </section>
+
+    <!-- ========== PARTNERSHIP DISCOVERY FORM ========== -->
+    <section class="hp-section pp-form-section">
+        <div class="hp-section-inner">
+            <div class="hp-section-header hp-reveal" style="margin-bottom: 56px;">
+                <span class="hp-eyebrow">Get in Touch</span>
+                <h2 class="hp-section-title">PARTNERSHIP DISCOVERY FORM</h2>
+                <div class="hp-divider"></div>
+                <p class="hp-section-desc" style="max-width: 600px;">To explore partnership opportunities and initiate discussions on joint competitions or challenges, please fill in the form below. Our team will coordinate a meeting and guide you through the collaboration process.</p>
+            </div>
+
+            <div class="pp-form-card hp-reveal hp-reveal-delay-1">
+
+                <!-- Card Header -->
+                <div class="pp-form-header">
+                    <div class="pp-form-header-icon">
+                        <i class="bi bi-send-fill"></i>
+                    </div>
+                    <div class="pp-form-header-text">
+                        <h3>Contact Information</h3>
+                        <p>All fields are required unless marked optional</p>
+                    </div>
+                </div>
+
+                <!-- Card Body -->
+                <div class="pp-form-body">
+
+                    <!-- Success banner -->
+                    <div class="pp-success-banner" id="pp-success">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Thank you! Your inquiry has been submitted. Our partnerships team will be in touch within 2–3 business days.</span>
+                    </div>
+
+                    <form id="pp-form" method="post" action="/partnerships/submit" enctype="multipart/form-data" novalidate>
+
+                        <!-- Contact Info -->
+                        <p class="pp-form-section-label">Contact Information</p>
+
+                        <div class="pp-form-row">
+                            <div class="pp-form-group">
+                                <label class="pp-label" for="pp-name">Name of Contact Person</label>
+                                <input type="text" class="form-control" id="pp-name" name="contact_name" placeholder="Full name" required>
+                            </div>
+                            <div class="pp-form-group">
+                                <label class="pp-label" for="pp-title">Title / Position</label>
+                                <input type="text" class="form-control" id="pp-title" name="contact_title" placeholder="e.g. CEO, Director, Manager" required>
+                            </div>
+                        </div>
+
+                        <div class="pp-form-row">
+                            <div class="pp-form-group">
+                                <label class="pp-label" for="pp-org-name">Organization Name</label>
+                                <input type="text" class="form-control" id="pp-org-name" name="organization_name" placeholder="Your organization or company" required>
+                            </div>
+                            <div class="pp-form-group">
+                                <label class="pp-label" for="pp-org-type">Organization Type</label>
+                                <select class="form-select" id="pp-org-type" name="organization_type" required>
+                                    <option value="" disabled selected>Select type</option>
+                                    <option>Private Company</option>
+                                    <option>Government Entity</option>
+                                    <option>Academic Institution</option>
+                                    <option>Non-Profit / NGO</option>
+                                    <option>Startup</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="pp-form-row">
+                            <div class="pp-form-group">
+                                <label class="pp-label" for="pp-email">Email Address</label>
+                                <input type="email" class="form-control" id="pp-email" name="email" placeholder="official@organization.com" required>
+                            </div>
+                            <div class="pp-form-group">
+                                <label class="pp-label" for="pp-phone">Phone Number</label>
+                                <input type="tel" class="form-control" id="pp-phone" name="phone" placeholder="+966 5X XXX XXXX" required>
+                            </div>
+                        </div>
+
+                        <!-- Focus Areas -->
+                        <p class="pp-form-section-label" style="margin-top: 32px;">Focus Areas of Interest</p>
+
+                        <div class="pp-form-group">
+                            <label class="pp-label">Select all that apply</label>
+                            <div class="pp-focus-checks" id="pp-focus-checks">
+                                <label class="pp-focus-check-label">
+                                    <input type="checkbox" name="focus_areas[]" value="AI & Technology">
+                                    <i class="bi bi-cpu-fill" style="font-size: 12px;"></i> AI & Technology
+                                </label>
+                                <label class="pp-focus-check-label">
+                                    <input type="checkbox" name="focus_areas[]" value="Education">
+                                    <i class="bi bi-book-fill" style="font-size: 12px;"></i> Education
+                                </label>
+                                <label class="pp-focus-check-label">
+                                    <input type="checkbox" name="focus_areas[]" value="Entrepreneurship">
+                                    <i class="bi bi-rocket-takeoff-fill" style="font-size: 12px;"></i> Entrepreneurship
+                                </label>
+                                <label class="pp-focus-check-label">
+                                    <input type="checkbox" name="focus_areas[]" value="Sustainability">
+                                    <i class="bi bi-tree-fill" style="font-size: 12px;"></i> Sustainability
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pp-form-group">
+                            <label class="pp-label" for="pp-other-area">Other Areas <span class="pp-optional">(Optional)</span></label>
+                            <input type="text" class="form-control" id="pp-other-area" name="focus_areas_other" placeholder="Describe any other focus area or sector…">
+                        </div>
+
+                        <!-- Message -->
+                        <p class="pp-form-section-label" style="margin-top: 32px;">Inquiry Details</p>
+
+                        <div class="pp-form-group">
+                            <label class="pp-label" for="pp-message">Inquiry / Message</label>
+                            <textarea class="form-control" id="pp-message" name="message" rows="5"
+                                placeholder="Describe your interest in partnering with PMU, the type of competition or initiative you have in mind, and any specific goals or challenges you'd like to address." required
+                                style="resize: vertical; min-height: 140px; padding: 14px; line-height: 1.6;"></textarea>
+                        </div>
+
+                        <div class="pp-form-group">
+                            <label class="pp-label" for="pp-attachment">Attachment
+                                <span class="pp-optional">(Optional)</span>
+                            </label>
+                            <div class="custom-file-upload">
+                                <div class="form-control" id="pp-file-display" onclick="document.getElementById('pp-attachment').click()" style="cursor:pointer;">
+                                    <span class="btn-file-custom"><i class="bi bi-paperclip me-2"></i>Choose File</span>
+                                    <span class="file-name-placeholder" id="pp-file-name">Company profile, proposal, or relevant document&hellip;</span>
+                                </div>
+                                <input type="file" id="pp-attachment" name="attachment" class="d-none"
+                                    accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.png,.jpg,.jpeg">
+                            </div>
+                            <small style="font-size: 12px; color: var(--text-light); margin-top: 6px; display: block;">Accepted: PDF, Word, PowerPoint, Excel, Images — Max 10 MB</small>
+                        </div>
+
+                        <!-- Submit -->
+                        <div style="margin-top: 36px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding-top: 28px; border-top: 1px solid var(--border-color);">
+                            <p style="font-family: 'Inter', sans-serif; font-size: 13px; color: var(--text-light); margin: 0; max-width: 380px; line-height: 1.6;">
+                                <i class="bi bi-shield-check me-1" style="color: var(--secondary-color);"></i>
+                                Your information is kept confidential and will only be used to coordinate partnership discussions.
+                            </p>
+                            <button type="submit" class="pp-submit-btn">
+                                <i class="bi bi-send-fill"></i> Submit Inquiry
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="hp-footer">
+        <div class="hp-footer-inner">
+            <div class="hp-footer-top">
+                <div class="hp-footer-logo">
+                    <div class="hp-logo-icon"><span>NG</span></div>
+                    <div class="hp-footer-logo-text">
+                        <span class="hp-footer-logo-name">NextGen EngageU Hub</span>
+                        <span class="hp-footer-logo-sub">Prince Mohammad bin Fahd University</span>
+                    </div>
+                </div>
+                <nav class="hp-footer-nav">
+                    <a href="index.html#hp-home">Home</a>
+                    <a href="index.html#hp-about">About</a>
+                    <a href="index.html#hp-focus">Focus Areas</a>
+                    <a href="index.html#hp-competitions">Competitions</a>
+                    <a href="partnerships.html">Partnerships</a>
+                    <a href="index.html#hp-join">Join</a>
+                </nav>
+            </div>
+            <div class="hp-footer-divider">
+                <p class="hp-footer-copyright">© 2026 NextGen EngageU Hub — Prince Mohammad bin Fahd University. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmX9cJEHJ3Z+VFxFSFTSqB1/Vss" crossorigin="anonymous"></script>
+
+    <script>
+
+        // ---- Scroll reveal ----
+        const revealEls = document.querySelectorAll('.hp-reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        revealEls.forEach(el => revealObserver.observe(el));
+
+        // ---- Focus area checkboxes ----
+        document.querySelectorAll('.pp-focus-check-label').forEach(label => {
+            label.addEventListener('click', () => {
+                const cb = label.querySelector('input[type="checkbox"]');
+                cb.checked = !cb.checked;
+                label.classList.toggle('checked', cb.checked);
+            });
+        });
+
+        // ---- File input display ----
+        document.getElementById('pp-attachment').addEventListener('change', function () {
+            const name = this.files[0] ? this.files[0].name : 'Company profile, proposal, or relevant document…';
+            document.getElementById('pp-file-name').textContent = name;
+        });
+
+        // ---- Form submit ----
+        document.getElementById('pp-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (!this.checkValidity()) {
+                this.classList.add('was-validated');
+                return;
+            }
+            // Show success banner and reset
+            document.getElementById('pp-success').classList.add('show');
+            this.reset();
+            this.classList.remove('was-validated');
+            document.querySelectorAll('.pp-focus-check-label').forEach(l => l.classList.remove('checked'));
+            document.getElementById('pp-file-name').textContent = 'Company profile, proposal, or relevant document…';
+            window.scrollTo({ top: document.getElementById('pp-form').closest('.hp-section').offsetTop - 80, behavior: 'smooth' });
+        });
+    </script>
+
+
+</body>
+</html>

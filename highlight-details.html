@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RWADTHON 2026 is LIVE | Highlights | NextGen EngageU Hub</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body class="page-home">
+
+    <!-- ========== NAVBAR ========== -->
+    <script>window._navCfg = { transparent: false, activePage: 'highlights' };</script>
+    <nav class="hp-nav" id="hp-nav">
+        <div class="hp-nav-inner">
+            <!-- Logo -->
+            <a href="index.html" class="hp-logo">
+                <img src="assets/images/nextgenengageu-logo.png" alt="NextGen EngageU Hub" class="hp-logo-img">
+                <div class="hp-logo-brand">
+                    <span class="hp-logo-brand-sub">NextGen</span>
+                    <div class="hp-logo-brand-main">Engage<span>U</span> Hub</div>
+                </div>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hp-nav-links">
+                <a href="index.html#hp-home"         data-nav-key="home">Home</a>
+                <a href="index.html#hp-about"        data-nav-key="about">About</a>
+                <a href="index.html#hp-focus"        data-nav-key="focus">Focus Areas</a>
+                <a href="index.html#hp-competitions" data-nav-key="competitions">Competitions</a>
+                <a href="partnerships.html"          data-nav-key="partnerships">Partnerships</a>
+                <a href="index.html#hp-join"         data-nav-key="join">Join</a>
+            </div>
+
+            <!-- Desktop Auth Area (hidden on mobile via CSS) -->
+            <div class="hp-auth-area">
+                <div id="hp-auth-out" class="hp-auth-out">
+                    <a href="login.html" id="hp-login-btn" class="hp-nav-login-btn">Login</a>
+                    <a href="signup.html" class="hp-nav-cta">Join the Hub</a>
+                </div>
+                <div id="hp-auth-in" class="hp-auth-in" style="display:none;">
+                    <div class="hp-user-menu">
+                        <button class="hp-user-trigger" id="hp-user-trigger">
+                            <div class="hp-user-avatar" id="hp-user-avatar"><i class="bi bi-person-fill"></i></div>
+                            <span class="hp-user-name" id="hp-user-name">John</span>
+                            <i class="bi bi-chevron-down hp-user-chevron"></i>
+                        </button>
+                        <div class="hp-user-dropdown" id="hp-user-dropdown">
+                            <div class="hp-user-dd-header">
+                                <span class="hp-user-dd-name" id="hp-dd-name">John Doe</span>
+                                <span class="hp-user-dd-email" id="hp-dd-email">john@pmu.edu.sa</span>
+                            </div>
+                            <div class="hp-user-dd-sep"></div>
+                            <a href="my-submissions.html" class="hp-user-dd-item"><i class="bi bi-file-earmark-text"></i> My Submissions</a>
+                            <div class="hp-user-dd-sep"></div>
+                            <button class="hp-user-dd-item hp-user-dd-logout" id="hp-logout-btn"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hamburger (mobile only) -->
+            <button class="hp-mobile-toggle" id="hp-mobile-toggle" aria-label="Open menu">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Drawer Backdrop -->
+    <div class="hp-drawer-overlay" id="hp-drawer-overlay"></div>
+
+    <!-- Side Drawer -->
+    <div class="hp-side-drawer" id="hp-side-drawer" aria-hidden="true">
+
+        <div class="hp-drawer-header">
+            <a href="index.html" class="hp-logo">
+                <img src="assets/images/nextgenengageu-logo.png" alt="NextGen EngageU Hub" class="hp-logo-img">
+                <div class="hp-logo-brand">
+                    <span class="hp-logo-brand-sub">NextGen</span>
+                    <div class="hp-logo-brand-main">Engage<span>U</span> Hub</div>
+                </div>
+            </a>
+            <button class="hp-drawer-close" id="hp-drawer-close" aria-label="Close menu">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <nav class="hp-drawer-nav">
+            <a href="index.html#hp-home"         class="hp-drawer-link" data-nav-key="home">Home</a>
+            <a href="index.html#hp-about"        class="hp-drawer-link" data-nav-key="about">About</a>
+            <a href="index.html#hp-focus"        class="hp-drawer-link" data-nav-key="focus">Focus Areas</a>
+            <a href="index.html#hp-competitions" class="hp-drawer-link" data-nav-key="competitions">Competitions</a>
+            <a href="partnerships.html"          class="hp-drawer-link" data-nav-key="partnerships">Partnerships</a>
+            <a href="index.html#hp-join"         class="hp-drawer-link" data-nav-key="join">Join</a>
+        </nav>
+
+        <!-- Single auth section — mobile only, no duplication -->
+        <div class="hp-drawer-auth">
+            <div id="hp-mobile-auth-out">
+                <a href="login.html" id="hp-mobile-login-btn" class="hp-drawer-login-btn">Login</a>
+                <a href="signup.html" class="hp-drawer-join-btn">Join the Hub <i class="bi bi-arrow-right"></i></a>
+            </div>
+            <div id="hp-mobile-auth-in" style="display:none;">
+                <a href="my-submissions.html" class="hp-drawer-link"><i class="bi bi-file-earmark-text me-2"></i> My Submissions</a>
+                <button class="hp-drawer-logout-btn" id="hp-mobile-logout"><i class="bi bi-box-arrow-right me-2"></i> Logout</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+    (function () {
+        var cfg = window._navCfg || {};
+
+        var nav       = document.getElementById('hp-nav');
+        var overlay   = document.getElementById('hp-drawer-overlay');
+        var drawer    = document.getElementById('hp-side-drawer');
+        var toggleBtn = document.getElementById('hp-mobile-toggle');
+        var closeBtn  = document.getElementById('hp-drawer-close');
+
+        if (!nav) return;
+
+        /* ---- Scroll behaviour ---- */
+        if (!cfg.transparent) nav.classList.add('scrolled');
+        window.addEventListener('scroll', function () {
+            nav.classList.toggle('scrolled', window.scrollY > 30);
+        }, { passive: true });
+
+        /* ---- Side drawer ---- */
+        function openDrawer() {
+            drawer.classList.add('open');
+            overlay.classList.add('open');
+            drawer.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeDrawer() {
+            drawer.classList.remove('open');
+            overlay.classList.remove('open');
+            drawer.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        if (toggleBtn) toggleBtn.addEventListener('click', openDrawer);
+        if (closeBtn)  closeBtn.addEventListener('click', closeDrawer);
+        if (overlay)   overlay.addEventListener('click', closeDrawer);
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
+
+        drawer.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeDrawer); });
+        drawer.querySelectorAll('button').forEach(function (b) {
+            if (b !== closeBtn) b.addEventListener('click', closeDrawer);
+        });
+
+        /* ---- Active nav link ---- */
+        if (cfg.activePage) {
+            document.querySelectorAll('[data-nav-key="' + cfg.activePage + '"]').forEach(function (el) {
+                el.classList.add('active');
+                el.style.color = 'var(--secondary-color)';
+                el.style.fontWeight = '600';
+            });
+        }
+
+        /* ---- Auth state ---- */
+        var KEY  = 'engageu_user';
+        var DEMO = { name: 'John Doe', email: 'john@pmu.edu.sa', initials: '<i class="bi bi-person-fill"></i>' };
+
+        function getUser()   { return JSON.parse(localStorage.getItem(KEY) || 'null'); }
+        function saveUser(u) { localStorage.setItem(KEY, JSON.stringify(u)); }
+        function clearUser() { localStorage.removeItem(KEY); }
+
+        function applyState(user) {
+            var out  = document.getElementById('hp-auth-out');
+            var inn  = document.getElementById('hp-auth-in');
+            var mOut = document.getElementById('hp-mobile-auth-out');
+            var mInn = document.getElementById('hp-mobile-auth-in');
+            if (!out) return;
+            if (user) {
+                out.style.display = 'none'; inn.style.display = '';
+                if (mOut) mOut.style.display = 'none';
+                if (mInn) mInn.style.display = '';
+                var av = document.getElementById('hp-user-avatar');
+                var nm = document.getElementById('hp-user-name');
+                var dn = document.getElementById('hp-dd-name');
+                var de = document.getElementById('hp-dd-email');
+                if (av) av.innerHTML = user.initials;
+                if (nm) nm.textContent = user.name.split(' ')[0];
+                if (dn) dn.textContent = user.name;
+                if (de) de.textContent = user.email;
+            } else {
+                out.style.display = ''; inn.style.display = 'none';
+                if (mOut) mOut.style.display = '';
+                if (mInn) mInn.style.display = 'none';
+            }
+        }
+
+        applyState(getUser());
+
+        var loginBtn = document.getElementById('hp-login-btn');
+        if (loginBtn) loginBtn.addEventListener('click', function (e) { e.preventDefault(); saveUser(DEMO); applyState(DEMO); });
+
+        var mLoginBtn = document.getElementById('hp-mobile-login-btn');
+        if (mLoginBtn) mLoginBtn.addEventListener('click', function (e) { e.preventDefault(); saveUser(DEMO); applyState(DEMO); });
+
+        var logoutBtn = document.getElementById('hp-logout-btn');
+        if (logoutBtn) logoutBtn.addEventListener('click', function () { clearUser(); applyState(null); });
+
+        var mLogout = document.getElementById('hp-mobile-logout');
+        if (mLogout) mLogout.addEventListener('click', function () { clearUser(); applyState(null); });
+
+        var trigger  = document.getElementById('hp-user-trigger');
+        var dropdown = document.getElementById('hp-user-dropdown');
+        if (trigger && dropdown) {
+            trigger.addEventListener('click', function (e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('open');
+                var ch = trigger.querySelector('.hp-user-chevron');
+                if (ch) ch.classList.toggle('rotated');
+            });
+            document.addEventListener('click', function () {
+                dropdown.classList.remove('open');
+                var ch = trigger.querySelector('.hp-user-chevron');
+                if (ch) ch.classList.remove('rotated');
+            });
+        }
+    })();
+    </script>
+
+    <!-- ========== HERO ========== -->
+    <section class="hd-hero">
+        <div class="hd-hero-bg">
+            <img src="assets/images/rwadthon-poster.png" alt="">
+            <div class="hd-hero-overlay"></div>
+        </div>
+        <div class="hd-hero-content">
+            <div class="hd-breadcrumb">
+                <a href="highlights.html"><i class="bi bi-arrow-left"></i> All Highlights</a>
+            </div>
+            <div class="hd-hero-meta">
+                <span class="hl-cat-badge hl-cat-tech"><i class="bi bi-cpu-fill"></i> Technology</span>
+                <span class="hd-date"><i class="bi bi-calendar3"></i> January 15, 2026</span>
+            </div>
+            <h1 class="hd-hero-title">RWADTHON 2026 is LIVE — Applications Now Open</h1>
+            <p class="hd-hero-sub">Apply now to PMU's most prestigious technology hackathon. Teams of 3–5 students compete for SAR 30,000 in prizes, mentorship, and direct industry exposure.</p>
+        </div>
+    </section>
+
+    <!-- ========== BODY ========== -->
+    <div class="hd-body">
+        <div class="hd-body-inner">
+
+            <!-- ---- MAIN CONTENT ---- -->
+            <main class="hd-main">
+
+                <!-- Summary -->
+                <div class="hd-prose hp-reveal">
+                    <p>RWADTHON 2026 is officially open for applications — and this year's edition promises to be the biggest yet. Hosted by Prince Mohammad bin Fahd University's NextGen EngageU Hub in partnership with leading technology firms across the Kingdom, the competition challenges student teams to tackle real, industry-defined problems in a high-energy 48-hour sprint.</p>
+
+                    <p>This edition introduces a new qualifier round, allowing more teams than ever to get involved. Teams that successfully pass the online proposal stage will be invited to PMU's main campus in Al Khobar for the on-site final, where they'll build, test, and pitch their solutions to a panel of judges drawn from Saudi Aramco, STC, and the Ministry of Communications.</p>
+
+                    <h3>What Makes RWADTHON Different?</h3>
+                    <p>Unlike traditional hackathons, RWADTHON is built around <strong>real problem statements</strong> sourced directly from industry partners. Teams won't be working on abstract challenges — they'll be solving issues that organisations are actively trying to address today. This year's themes include smart infrastructure, digital health, and sustainable logistics.</p>
+
+                    <p>Mentors from the private sector will be on-site throughout the event, offering technical guidance, business feedback, and networking opportunities. Top-performing teams will also be connected with startup accelerators and investment programmes as part of the Hub's commitment to turning competition outcomes into lasting impact.</p>
+
+                    <h3>Who Can Apply?</h3>
+                    <ul>
+                        <li>University students (all years and disciplines)</li>
+                        <li>Secondary school students (with faculty supervisor sign-off)</li>
+                        <li>Interdisciplinary teams of 3 to 5 members</li>
+                        <li>Both Saudi and international participants are welcome</li>
+                    </ul>
+
+                    <p>Applications close on <strong>May 31, 2026</strong>. Teams are encouraged to apply early — qualifying proposals are reviewed on a rolling basis and early applicants receive priority feedback from the organising committee.</p>
+
+                    <blockquote class="hd-blockquote">
+                        <p>"RWADTHON is more than a competition. It's a proving ground — the place where students realise they can build something the world actually needs."</p>
+                        <cite>— Dean of Student Affairs, PMU</cite>
+                    </blockquote>
+
+                    <p>For full competition details, eligibility requirements, and submission guidelines, visit the official competition page or contact the EngageU Hub team directly at <strong>engageu@pmu.edu.sa</strong>.</p>
+                </div>
+
+                <!-- Image Gallery -->
+                <div class="hd-section hp-reveal">
+                    <div class="hd-section-label">
+                        <i class="bi bi-images"></i> Photo Gallery
+                    </div>
+
+                    <div id="hd-gallery" class="carousel slide hd-carousel" data-bs-ride="false">
+                        <!-- Indicators -->
+                        <div class="carousel-indicators hd-carousel-indicators">
+                            <button type="button" data-bs-target="#hd-gallery" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                            <button type="button" data-bs-target="#hd-gallery" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#hd-gallery" data-bs-slide-to="2"></button>
+                            <button type="button" data-bs-target="#hd-gallery" data-bs-slide-to="3"></button>
+                        </div>
+
+                        <!-- Slides -->
+                        <div class="carousel-inner hd-carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="assets/images/rwadthon-poster.png" alt="RWADTHON Opening Ceremony">
+                                <div class="hd-carousel-caption">Opening Ceremony — PMU Grand Hall</div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/images/hero-bg.png" alt="Teams at work">
+                                <div class="hd-carousel-caption">Teams building their prototypes during the 48-hour sprint</div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/images/highlight-judging.png" alt="Judging panel">
+                                <div class="hd-carousel-caption">Industry judges evaluating final presentations</div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/images/highlight-ceremony.png" alt="Awards ceremony">
+                                <div class="hd-carousel-caption">Winners receiving their awards from PMU leadership</div>
+                            </div>
+                        </div>
+
+                        <!-- Controls -->
+                        <button class="hd-carousel-btn hd-carousel-prev" type="button" data-bs-target="#hd-gallery" data-bs-slide="prev">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+                        <button class="hd-carousel-btn hd-carousel-next" type="button" data-bs-target="#hd-gallery" data-bs-slide="next">
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Video -->
+                <div class="hd-section hp-reveal">
+                    <div class="hd-section-label">
+                        <i class="bi bi-play-circle-fill"></i> Event Video
+                    </div>
+                    <div class="hd-video-wrap">
+                        <video class="hd-video-el" controls preload="metadata"
+                            poster="assets/images/rwadthon-poster.png">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <div class="hd-cta-bar hp-reveal">
+                    <div>
+                        <p class="hd-cta-label">Ready to Compete?</p>
+                        <p class="hd-cta-sub">Check out all of the open and upcoming competitions</p>
+                    </div>
+                    <a href="index.html#hp-competitions" class="hp-btn-primary">
+                        View More <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+            </main>
+
+            <!-- ---- SIDEBAR ---- -->
+            <aside class="hd-sidebar">
+
+                <!-- Share -->
+                <div class="hd-sidebar-card">
+                    <h3 class="hd-sidebar-title">Share</h3>
+                    <div class="hd-share-btns">
+                        <button class="hd-share-btn" onclick="navigator.clipboard.writeText(window.location.href); this.innerHTML='<i class=\'bi bi-check2\'></i> Copied!'">
+                            <i class="bi bi-link-45deg"></i> Copy Link
+                        </button>
+                        <a href="#" class="hd-share-btn hd-share-x">
+                            <i class="bi bi-twitter-x"></i> Share
+                        </a>
+                    </div>
+                </div>
+
+                <!-- More Highlights -->
+                <div class="hd-sidebar-card">
+                    <h3 class="hd-sidebar-title">More Highlights</h3>
+                    <div class="hd-related">
+
+                        <a href="highlight-details.html" class="hd-related-item">
+                            <img src="assets/images/highlight-judging.png" alt="">
+                            <div class="hd-related-info">
+                                <span class="hd-related-cat">Entrepreneurship</span>
+                                <p class="hd-related-title">Startup Pitch Finals: Five Teams Make It to the Stage</p>
+                            </div>
+                        </a>
+
+                        <a href="highlight-details.html" class="hd-related-item">
+                            <img src="assets/images/highlight-awards.png" alt="">
+                            <div class="hd-related-info">
+                                <span class="hd-related-cat">Sustainability</span>
+                                <p class="hd-related-title">PMU Sustainability Week 2025 — A Hub of Green Ideas</p>
+                            </div>
+                        </a>
+
+                        <a href="highlight-details.html" class="hd-related-item">
+                            <img src="assets/images/highlight-teams.png" alt="">
+                            <div class="hd-related-info">
+                                <span class="hd-related-cat">Education</span>
+                                <p class="hd-related-title">EdTech Innovation Challenge Wraps Up With Record Participation</p>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+
+                <!-- Back to all -->
+                <a href="highlights.html" class="hd-back-btn">
+                    <i class="bi bi-arrow-left"></i> Back to All Highlights
+                </a>
+
+            </aside>
+
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="hp-footer">
+        <div class="hp-footer-inner">
+            <div class="hp-footer-top">
+                <div class="hp-footer-logo">
+                    <img src="assets/images/nextgenengageu-logo.png" alt="NextGen EngageU Hub" class="hp-footer-logo-img">
+                </div>
+                <nav class="hp-footer-nav">
+                    <a href="index.html#hp-home">Home</a>
+                    <a href="index.html#hp-about">About</a>
+                    <a href="index.html#hp-focus">Focus Areas</a>
+                    <a href="index.html#hp-competitions">Competitions</a>
+                    <a href="index.html#hp-partnerships">Partnerships</a>
+                    <a href="index.html#hp-join">Join</a>
+                </nav>
+            </div>
+            <div class="hp-footer-divider">
+                <p class="hp-footer-copyright">© 2026 NextGen EngageU Hub — Prince Mohammad bin Fahd University. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmX9cJEHJ3Z+VFxFSFTSqB1/Vss" crossorigin="anonymous"></script>
+
+    <script>
+        // Scroll reveal
+        const revealEls = document.querySelectorAll('.hp-reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        revealEls.forEach(el => revealObserver.observe(el));
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Competition | EngageU Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div id="admin-wrapper">
+        <nav id="sidebar">
+            <div class="sidebar-header d-flex align-items-center justify-content-between">
+                <div class="auth-logo fs-4 m-0">Engage<span>U</span></div>
+                <button class="btn btn-sm d-lg-none" id="sidebarCloseBtn"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <ul class="components">
+                <li class="active">
+                    <a href="admin-competitions.html"><i class="bi bi-trophy"></i> Competitions</a>
+                </li>
+                <li>
+                    <a href="admin-applications-list.html"><i class="bi bi-file-earmark-text"></i> Applications</a>
+                </li>
+                <li>
+                    <a href="admin-users.html"><i class="bi bi-people"></i> Users</a>
+                </li>
+                <li>
+                    <a href="admin-highlights.html"><i class="bi bi-star"></i> Highlights</a>
+                </li>
+                <li class="mt-4">
+                    <a href="login.html" class="text-danger"><i class="bi bi-box-arrow-left"></i> Logout</a>
+
+                </li>
+            </ul>
+        </nav>
+
+        <div id="page-content-wrapper">
+            <nav class="top-navbar">
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-light d-lg-none me-3" id="sidebarToggleBtn"><i class="bi bi-list fs-4"></i></button>
+                    <h4 class="m-0 fw-bold">Competitions</h4>
+                </div>
+                <div class="user-profile d-flex align-items-center">
+                    <div class="text-end me-3 d-none d-md-block">
+                        <p class="m-0 fw-semibold fs-6 text-dark">admin@pmu.edu.sa</p>
+                        <small class="text-muted">Manager</small>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center text-white fw-bold rounded-circle shadow-sm avatar-circle-lg bg-avatar-primary">AD</div>
+                </div>
+            </nav>
+
+            <div class="container-fluid p-4 p-md-5">
+                
+                <div class="mb-4">
+                    <a href="admin-competitions.html" class="btn-back"><i class="bi bi-arrow-left me-2"></i> Back to List</a>
+                </div>
+
+                <div class="dashboard-card p-4 p-md-5 animate-fade-up">
+                    <h5 class="fw-bold mb-4">Edit competition</h5>
+                    
+                    <form action="#" method="POST" enctype="multipart/form-data">
+                        <!-- Top Row: Subject & Status -->
+                        <div class="row mb-4">
+                            <div class="col-md-8">
+                                <label class="form-label fw-semibold text-muted small">Subject</label>
+                                <input type="text" class="form-control" name="subject" value="RWADTHON Competition 2026">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold text-muted small">Visibility Status</label>
+                                <select class="form-select border" name="status">
+                                    <option value="Open" selected>Open</option>
+                                    <option value="Upcoming">Upcoming</option>
+                                    <option value="Closed">Closed</option>
+                                    <option value="Completed">Completed</option>
+                                    <option value="Hidden">Hidden (Draft)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Row 2: Type, Language, Semester, Year -->
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold text-muted small">Competition Type</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light comp-type-icon"><i class="bi bi-trophy text-muted"></i></span>
+                                    <select class="form-select border-start-0" name="competition_type">
+                                        <option selected disabled>Select Type...</option>
+                                        <option value="Entrepreneurship">Entrepreneurship</option>
+                                        <option value="Technology" selected>Technology</option>
+                                        <option value="Education">Education</option>
+                                        <option value="Sustainability">Sustainability</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold text-muted small">Language</label>
+                                <select class="form-select border" name="language">
+                                    <option value="English">English</option>
+                                    <option value="Arabic">Arabic</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label fw-semibold text-muted small">Semester</label>
+                                <select class="form-select border" name="semester">
+                                    <option value="Fall">Fall</option>
+                                    <option value="Spring">Spring</option>
+                                    <option value="Summer">Summer</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label fw-semibold text-muted small">Year</label>
+                                <input type="text" class="form-control" name="year" placeholder="e.g. 2026">
+                            </div>
+                        </div>
+
+                        <!-- Row 3: Dates -->
+                        <div class="row mb-4">
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold text-muted small">Creation Date</label>
+                                <input type="text" class="form-control bg-light" name="creation_date" value="Auto-generated" readonly>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold text-muted small">Event Date</label>
+                                <input type="text" class="form-control date-time-picker" name="event_date" placeholder="Select Date">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold text-muted small">Open Date & Time</label>
+                                <input type="text" class="form-control date-time-picker" name="open_date" placeholder="Select Open Date">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold text-muted small">Close Date & Time</label>
+                                <input type="text" class="form-control date-time-picker" name="close_date" placeholder="Select Close Date">
+                            </div>
+                        </div>
+
+                        <!-- Row 4: Location & Poster -->
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-muted small">Location</label>
+                                <input type="text" class="form-control" name="location" placeholder="e.g. PMU Main Campus or Virtual Link">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-muted small">Poster Image</label>
+                                <div class="custom-file-upload">
+                                    <input type="file" class="d-none" name="poster" id="posterInput" accept=".jpg,.jpeg,.png">
+
+                                    <label for="posterInput" class="form-control d-flex align-items-center p-0 overflow-hidden" style="cursor: pointer;">
+                                        <span class="btn-file-custom">Choose File</span>
+                                        <span class="file-name-placeholder ps-3">No file chosen</span>
+                                    </label>
+                                </div>
+                                <small class="text-muted">JPG or PNG only (Recommended: 1200x600px)</small>
+
+                            </div>
+                        </div>
+
+                                                <!-- Row 5: Attachments & Video Link -->
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-muted small">Attachments</label>
+                                <div class="custom-file-upload">
+                                    <input type="file" class="d-none" name="attachments" id="attachmentsInput" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png,.mp4">
+
+                                    <label for="attachmentsInput" class="form-control d-flex align-items-center p-0 overflow-hidden" style="cursor: pointer;">
+                                        <span class="btn-file-custom">Choose File</span>
+                                        <span class="file-name-placeholder ps-3">No file chosen</span>
+                                    </label>
+                                </div>
+
+                                <small class="text-muted">Supported: PDF, DOC, PPT, JPG, PNG, MP4</small>
+
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-muted small">Promotional Video</label>
+                                <div class="custom-file-upload">
+                                    <input type="file" class="d-none" name="video" id="videoInput" accept=".mp4">
+
+                                    <label for="videoInput" class="form-control d-flex align-items-center p-0 overflow-hidden" style="cursor: pointer;">
+                                        <span class="btn-file-custom">Choose File</span>
+                                        <span class="file-name-placeholder ps-3">No file chosen</span>
+                                    </label>
+                                </div>
+
+                                <small class="text-muted">MP4 format only.</small>
+
+                            </div>
+                        </div>
+
+                        <hr class="my-5 border-light">
+                        <h6 class="fw-bold mb-4">Rich Content Sections</h6>
+
+                        <!-- Rich Text Editor fields -->
+                        <!-- 1. Organizer -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-muted small">Organizer</label>
+                            <div class="rich-text-wrapper border rounded bg-white">
+                                <div class="rich-text-toolbar border-bottom bg-light p-2 d-flex gap-2">
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-type-bold"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-type-italic"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-list-ul"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-link-45deg"></i></button>
+                                </div>
+                                <div class="rich-text-editor form-control border-0 shadow-none" contenteditable="true" data-placeholder="Enter organizing department or entity..." style="min-height: 120px; padding: 1.25rem;"></div>
+                                <textarea name="organizer" class="d-none"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- 2. Brief -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-muted small">Brief Description</label>
+                            <div class="rich-text-wrapper border rounded bg-white">
+                                <div class="rich-text-toolbar border-bottom bg-light p-2 d-flex gap-2">
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-type-bold"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-type-italic"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-list-ul"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-link-45deg"></i></button>
+                                </div>
+                                <div class="rich-text-editor form-control border-0 shadow-none" contenteditable="true" data-placeholder="Short description of the competition..." style="min-height: 150px; padding: 1.25rem;"></div>
+                                <textarea name="brief" class="d-none"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- 3. Details -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-muted small">Details</label>
+                            <div class="rich-text-wrapper border rounded bg-white">
+                                <div class="rich-text-toolbar border-bottom bg-light p-2 d-flex gap-2">
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-type-bold"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-type-italic"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-list-ul"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-link-45deg"></i></button>
+                                </div>
+                                <div class="rich-text-editor form-control border-0 shadow-none" contenteditable="true" data-placeholder="Comprehensive competition details..." style="min-height: 180px; padding: 1.25rem;"></div>
+                                <textarea name="details" class="d-none"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- 4. Objectives -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-muted small">Objectives</label>
+                            <div class="rich-text-wrapper border rounded bg-white">
+                                <div class="rich-text-toolbar border-bottom bg-light p-2 d-flex gap-2">
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-type-bold"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-type-italic"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-list-ul"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-link-45deg"></i></button>
+                                </div>
+                                <div class="rich-text-editor form-control border-0 shadow-none" contenteditable="true" data-placeholder="List the primary objectives..." style="min-height: 150px; padding: 1.25rem;"></div>
+                                <textarea name="objectives" class="d-none"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- 5. Evaluation Criteria -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-muted small">Evaluation Criteria</label>
+                            <div class="rich-text-wrapper border rounded bg-white">
+                                <div class="rich-text-toolbar border-bottom bg-light p-2 d-flex gap-2">
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-type-bold"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-type-italic"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-list-ul"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-link-45deg"></i></button>
+                                </div>
+                                <div class="rich-text-editor form-control border-0 shadow-none" contenteditable="true" data-placeholder="How will submissions be judged?" style="min-height: 150px; padding: 1.25rem;"></div>
+                                <textarea name="evaluation_criteria" class="d-none"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- 6. Prize -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-muted small">Prize</label>
+                            <div class="rich-text-wrapper border rounded bg-white">
+                                <div class="rich-text-toolbar border-bottom bg-light p-2 d-flex gap-2">
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-type-bold"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-type-italic"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-list-ul"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-link-45deg"></i></button>
+                                </div>
+                                <div class="rich-text-editor form-control border-0 shadow-none" contenteditable="true" data-placeholder="Prizes and awards details..." style="min-height: 150px; padding: 1.25rem;"></div>
+                                <textarea name="prize" class="d-none"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- 7. Rules -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-muted small">Rules</label>
+                            <div class="rich-text-wrapper border rounded bg-white">
+                                <div class="rich-text-toolbar border-bottom bg-light p-2 d-flex gap-2">
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-type-bold"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-type-italic"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-list-ul"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-link-45deg"></i></button>
+                                </div>
+                                <div class="rich-text-editor form-control border-0 shadow-none" contenteditable="true" data-placeholder="Competition rules and guidelines..." style="min-height: 150px; padding: 1.25rem;"></div>
+                                <textarea name="rules" class="d-none"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- 8. Winners -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-muted small">Winners</label>
+                            <div class="rich-text-wrapper border rounded bg-white">
+                                <div class="rich-text-toolbar border-bottom bg-light p-2 d-flex gap-2">
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-type-bold"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-type-italic"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-list-ul"></i></button>
+                                    <button type="button" class="btn btn-sm btn-light"><i class="bi bi-link-45deg"></i></button>
+                                </div>
+                                <div class="rich-text-editor form-control border-0 shadow-none" contenteditable="true" data-placeholder="Announce winners here (if applicable)..." style="min-height: 150px; padding: 1.25rem;"></div>
+                                <textarea name="winners" class="d-none"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-actions mt-5">
+                            <a href="admin-competitions.html" class="btn btn-cancel">Cancel</a>
+                            <button type="submit" class="btn btn-primary-custom">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmX9cJEHJ3Z+VFxFSFTSqB1/Vss" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.querySelector('form[method="POST"]').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Saving Changes...';
+            btn.disabled = true;
+            setTimeout(() => {
+                window.location.href = 'admin-competitions.html';
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>

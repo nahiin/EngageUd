@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGen EngageU Hub | Prince Mohammad bin Fahd University</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Preload first hero image to eliminate blank flash -->
+    <link rel="preload" as="image" href="assets/images/PMU_image3.jpg">
+
+    <!-- Core CSS -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body class="page-home">
+
+    <!-- ========== NAVBAR ========== -->
+    <script>window._navCfg = { transparent: true, activePage: 'home' };</script>
+    <nav class="hp-nav" id="hp-nav">
+        <div class="hp-nav-inner">
+            <!-- Logo -->
+            <a href="index.html" class="hp-logo">
+                <img src="assets/images/nextgenengageu-logo.png" alt="NextGen EngageU Hub" class="hp-logo-img">
+                <div class="hp-logo-brand">
+                    <span class="hp-logo-brand-sub">NextGen</span>
+                    <div class="hp-logo-brand-main">Engage<span>U</span> Hub</div>
+                </div>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hp-nav-links">
+                <a href="index.html#hp-home"         data-nav-key="home">Home</a>
+                <a href="index.html#hp-about"        data-nav-key="about">About</a>
+                <a href="index.html#hp-focus"        data-nav-key="focus">Focus Areas</a>
+                <a href="index.html#hp-competitions" data-nav-key="competitions">Competitions</a>
+                <a href="partnerships.html"          data-nav-key="partnerships">Partnerships</a>
+                <a href="index.html#hp-join"         data-nav-key="join">Join</a>
+            </div>
+
+            <!-- Desktop Auth Area (hidden on mobile via CSS) -->
+            <div class="hp-auth-area">
+                <div id="hp-auth-out" class="hp-auth-out">
+                    <a href="login.html" id="hp-login-btn" class="hp-nav-login-btn">Login</a>
+                    <a href="signup.html" class="hp-nav-cta">Join the Hub</a>
+                </div>
+                <div id="hp-auth-in" class="hp-auth-in" style="display:none;">
+                    <div class="hp-user-menu">
+                        <button class="hp-user-trigger" id="hp-user-trigger">
+                            <div class="hp-user-avatar" id="hp-user-avatar"><i class="bi bi-person-fill"></i></div>
+                            <span class="hp-user-name" id="hp-user-name">John</span>
+                            <i class="bi bi-chevron-down hp-user-chevron"></i>
+                        </button>
+                        <div class="hp-user-dropdown" id="hp-user-dropdown">
+                            <div class="hp-user-dd-header">
+                                <span class="hp-user-dd-name" id="hp-dd-name">John Doe</span>
+                                <span class="hp-user-dd-email" id="hp-dd-email">john@pmu.edu.sa</span>
+                            </div>
+                            <div class="hp-user-dd-sep"></div>
+                            <a href="my-submissions.html" class="hp-user-dd-item"><i class="bi bi-file-earmark-text"></i> My Submissions</a>
+                            <div class="hp-user-dd-sep"></div>
+                            <button class="hp-user-dd-item hp-user-dd-logout" id="hp-logout-btn"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hamburger (mobile only) -->
+            <button class="hp-mobile-toggle" id="hp-mobile-toggle" aria-label="Open menu">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Drawer Backdrop -->
+    <div class="hp-drawer-overlay" id="hp-drawer-overlay"></div>
+
+    <!-- Side Drawer -->
+    <div class="hp-side-drawer" id="hp-side-drawer" aria-hidden="true">
+
+        <div class="hp-drawer-header">
+            <a href="index.html" class="hp-logo">
+                <img src="assets/images/nextgenengageu-logo.png" alt="NextGen EngageU Hub" class="hp-logo-img">
+                <div class="hp-logo-brand">
+                    <span class="hp-logo-brand-sub">NextGen</span>
+                    <div class="hp-logo-brand-main">Engage<span>U</span> Hub</div>
+                </div>
+            </a>
+            <button class="hp-drawer-close" id="hp-drawer-close" aria-label="Close menu">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <nav class="hp-drawer-nav">
+            <a href="index.html#hp-home"         class="hp-drawer-link" data-nav-key="home">Home</a>
+            <a href="index.html#hp-about"        class="hp-drawer-link" data-nav-key="about">About</a>
+            <a href="index.html#hp-focus"        class="hp-drawer-link" data-nav-key="focus">Focus Areas</a>
+            <a href="index.html#hp-competitions" class="hp-drawer-link" data-nav-key="competitions">Competitions</a>
+            <a href="partnerships.html"          class="hp-drawer-link" data-nav-key="partnerships">Partnerships</a>
+            <a href="index.html#hp-join"         class="hp-drawer-link" data-nav-key="join">Join</a>
+        </nav>
+
+        <!-- Single auth section — mobile only, no duplication -->
+        <div class="hp-drawer-auth">
+            <div id="hp-mobile-auth-out">
+                <a href="login.html" id="hp-mobile-login-btn" class="hp-drawer-login-btn">Login</a>
+                <a href="signup.html" class="hp-drawer-join-btn">Join the Hub <i class="bi bi-arrow-right"></i></a>
+            </div>
+            <div id="hp-mobile-auth-in" style="display:none;">
+                <a href="my-submissions.html" class="hp-drawer-link"><i class="bi bi-file-earmark-text me-2"></i> My Submissions</a>
+                <button class="hp-drawer-logout-btn" id="hp-mobile-logout"><i class="bi bi-box-arrow-right me-2"></i> Logout</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+    (function () {
+        var cfg = window._navCfg || {};
+
+        var nav       = document.getElementById('hp-nav');
+        var overlay   = document.getElementById('hp-drawer-overlay');
+        var drawer    = document.getElementById('hp-side-drawer');
+        var toggleBtn = document.getElementById('hp-mobile-toggle');
+        var closeBtn  = document.getElementById('hp-drawer-close');
+
+        if (!nav) return;
+
+        /* ---- Scroll behaviour ---- */
+        if (!cfg.transparent) nav.classList.add('scrolled');
+        window.addEventListener('scroll', function () {
+            nav.classList.toggle('scrolled', window.scrollY > 30);
+        }, { passive: true });
+
+        /* ---- Side drawer ---- */
+        function openDrawer() {
+            drawer.classList.add('open');
+            overlay.classList.add('open');
+            drawer.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeDrawer() {
+            drawer.classList.remove('open');
+            overlay.classList.remove('open');
+            drawer.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        if (toggleBtn) toggleBtn.addEventListener('click', openDrawer);
+        if (closeBtn)  closeBtn.addEventListener('click', closeDrawer);
+        if (overlay)   overlay.addEventListener('click', closeDrawer);
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
+
+        drawer.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeDrawer); });
+        drawer.querySelectorAll('button').forEach(function (b) {
+            if (b !== closeBtn) b.addEventListener('click', closeDrawer);
+        });
+
+        /* ---- Active nav link ---- */
+        if (cfg.activePage) {
+            document.querySelectorAll('[data-nav-key="' + cfg.activePage + '"]').forEach(function (el) {
+                el.classList.add('active');
+                el.style.color = 'var(--secondary-color)';
+                el.style.fontWeight = '600';
+            });
+        }
+
+        /* ---- Auth state ---- */
+        var KEY  = 'engageu_user';
+        var DEMO = { name: 'John Doe', email: 'john@pmu.edu.sa', initials: '<i class="bi bi-person-fill"></i>' };
+
+        function getUser()   { return JSON.parse(localStorage.getItem(KEY) || 'null'); }
+        function saveUser(u) { localStorage.setItem(KEY, JSON.stringify(u)); }
+        function clearUser() { localStorage.removeItem(KEY); }
+
+        function applyState(user) {
+            var out  = document.getElementById('hp-auth-out');
+            var inn  = document.getElementById('hp-auth-in');
+            var mOut = document.getElementById('hp-mobile-auth-out');
+            var mInn = document.getElementById('hp-mobile-auth-in');
+            if (!out) return;
+            if (user) {
+                out.style.display = 'none'; inn.style.display = '';
+                if (mOut) mOut.style.display = 'none';
+                if (mInn) mInn.style.display = '';
+                var av = document.getElementById('hp-user-avatar');
+                var nm = document.getElementById('hp-user-name');
+                var dn = document.getElementById('hp-dd-name');
+                var de = document.getElementById('hp-dd-email');
+                if (av) av.innerHTML = user.initials;
+                if (nm) nm.textContent = user.name.split(' ')[0];
+                if (dn) dn.textContent = user.name;
+                if (de) de.textContent = user.email;
+            } else {
+                out.style.display = ''; inn.style.display = 'none';
+                if (mOut) mOut.style.display = '';
+                if (mInn) mInn.style.display = 'none';
+            }
+        }
+
+        applyState(getUser());
+
+        var loginBtn = document.getElementById('hp-login-btn');
+        if (loginBtn) loginBtn.addEventListener('click', function (e) { e.preventDefault(); saveUser(DEMO); applyState(DEMO); });
+
+        var mLoginBtn = document.getElementById('hp-mobile-login-btn');
+        if (mLoginBtn) mLoginBtn.addEventListener('click', function (e) { e.preventDefault(); saveUser(DEMO); applyState(DEMO); });
+
+        var logoutBtn = document.getElementById('hp-logout-btn');
+        if (logoutBtn) logoutBtn.addEventListener('click', function () { clearUser(); applyState(null); });
+
+        var mLogout = document.getElementById('hp-mobile-logout');
+        if (mLogout) mLogout.addEventListener('click', function () { clearUser(); applyState(null); });
+
+        var trigger  = document.getElementById('hp-user-trigger');
+        var dropdown = document.getElementById('hp-user-dropdown');
+        if (trigger && dropdown) {
+            trigger.addEventListener('click', function (e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('open');
+                var ch = trigger.querySelector('.hp-user-chevron');
+                if (ch) ch.classList.toggle('rotated');
+            });
+            document.addEventListener('click', function () {
+                dropdown.classList.remove('open');
+                var ch = trigger.querySelector('.hp-user-chevron');
+                if (ch) ch.classList.remove('rotated');
+            });
+        }
+    })();
+    </script>
+
+    <!-- ========== HERO ========== -->
+    <section id="hp-home" class="hp-hero">
+        <!-- Background -->
+        <div class="hp-hero-bg">
+            <div class="hp-hero-slide hp-hero-slide-first"><img src="assets/images/PMU_image3.jpg" alt=""></div>
+            <div class="hp-hero-slide"><img src="assets/images/PMU_image.jpg" alt=""></div>
+            <div class="hp-hero-slide"><img src="assets/images/PMU_image2.jpg" alt=""></div>
+            <div class="hp-hero-bg-overlay"></div>
+        </div>
+
+        <!-- Animated Orbs -->
+        <div class="hp-hero-orbs">
+            <div class="hp-orb hp-orb-orange"></div>
+            <div class="hp-orb hp-orb-navy"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="hp-hero-content">
+            <p class="hp-hero-eyebrow">Prince Mohammad bin Fahd University &nbsp;|&nbsp; KSA-Educators</p>
+            <h1 class="hp-hero-title">
+                <span class="accent">NEXTGEN</span><br>
+                <span>ENGAGEU HUB</span>
+            </h1>
+            <div class="hp-hero-divider"></div>
+            <p class="hp-hero-tagline">Empowering innovators through competitions, collaboration, and community impact.</p>
+            <div class="hp-hero-actions">
+                <a href="#hp-competitions" class="hp-btn-primary">Explore Competitions</a>
+                <a href="#hp-about" class="hp-btn-ghost">Learn More</a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <a href="#hp-about" class="hp-scroll-indicator">
+            <i class="bi bi-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section id="hp-about" class="hp-section hp-about">
+        <div class="hp-section-inner-narrow">
+            <div class="hp-section-header hp-reveal">
+                <span class="hp-eyebrow">Who We Are</span>
+                <h2 class="hp-section-title">ABOUT US</h2>
+                <div class="hp-divider"></div>
+            </div>
+            <div class="hp-about-text hp-reveal hp-reveal-delay-1">
+                <p>NextGen EngageU Hub offers a unique opportunity for individuals from diverse backgrounds to contribute to solving community challenges by participating in announced competitions held throughout the year.</p>
+                <p>With a focus on four key themes — <strong>Entrepreneurship</strong>, <strong>Technology</strong>, <strong>Education</strong>, and <strong>Sustainability</strong> — the Hub enables participants to develop and showcase innovative solutions and create meaningful impact. These themes guide engagement while remaining flexible, allowing the introduction of new and emerging focus areas based on societal needs and partner priorities.</p>
+                <p>At its core, the Hub redefines learning and skill development, making it an immersive and enriching journey. It serves as a bridge between theoretical knowledge and real-world application, ensuring that learning is not only informative but also engaging and enjoyable. Participants are encouraged to apply their knowledge and experience in a dynamic environment that promotes creativity, collaboration, and problem-solving across all stages of personal and professional growth.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOCUS AREAS ========== -->
+    <section id="hp-focus" class="hp-section hp-focus">
+        <div class="hp-focus-glow"></div>
+        <div class="hp-section-inner">
+            <div class="hp-section-header hp-reveal">
+                <span class="hp-eyebrow">What Drives Us</span>
+                <h2 class="hp-section-title">OUR FOCUS AREAS</h2>
+                <div class="hp-divider"></div>
+                <p class="hp-section-desc" style="max-width: 600px;">These themes shape competitions, guide partnerships, and help participants engage in areas aligned with their interests, expertise, and aspirations.</p>
+            </div>
+
+            <div class="hp-focus-grid">
+                <!-- Entrepreneurship -->
+                <div class="hp-focus-card hp-focus-orange hp-reveal">
+                    <div class="hp-focus-card-inner">
+                        <div class="hp-focus-card-top">
+                            <div class="hp-focus-icon-wrap"><i class="bi bi-rocket-takeoff-fill"></i></div>
+                            <span class="hp-focus-card-sublabel">From Ideas to Impact</span>
+                        </div>
+                        <h3>Entrepreneurship</h3>
+                        <p>This theme fosters innovative thinking, venture creation, and business-driven problem solving. Participants explore how ideas can be transformed into practical solutions, startups, or scalable initiatives through real challenges, mentorship, and collaboration.</p>
+                    </div>
+                </div>
+
+                <!-- Technology -->
+                <div class="hp-focus-card hp-focus-blue hp-reveal hp-reveal-delay-1">
+                    <div class="hp-focus-card-inner">
+                        <div class="hp-focus-card-top">
+                            <div class="hp-focus-icon-wrap"><i class="bi bi-cpu-fill"></i></div>
+                            <span class="hp-focus-card-sublabel">Building Solutions for Tomorrow</span>
+                        </div>
+                        <h3>Technology</h3>
+                        <p>Focused on applied and emerging technologies, this theme supports the development of digital and tech-enabled solutions. Participants engage with technology as a tool for innovation across disciplines, addressing real-world and industry challenges.</p>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="hp-focus-card hp-focus-purple hp-reveal">
+                    <div class="hp-focus-card-inner">
+                        <div class="hp-focus-card-top">
+                            <div class="hp-focus-icon-wrap"><i class="bi bi-book-fill"></i></div>
+                            <span class="hp-focus-card-sublabel">Reimagining How We Learn</span>
+                        </div>
+                        <h3>Education</h3>
+                        <p>This theme centers on enhancing learning experiences and educational systems. Participants design creative tools, methods, and solutions that improve teaching, learning, and engagement across schools, universities, and lifelong learning environments.</p>
+                    </div>
+                </div>
+
+                <!-- Sustainability -->
+                <div class="hp-focus-card hp-focus-green hp-reveal hp-reveal-delay-1">
+                    <div class="hp-focus-card-inner">
+                        <div class="hp-focus-card-top">
+                            <div class="hp-focus-icon-wrap"><i class="bi bi-tree-fill"></i></div>
+                            <span class="hp-focus-card-sublabel">Solutions That Matter</span>
+                        </div>
+                        <h3>Sustainability</h3>
+                        <p>Addressing environmental, social, and economic challenges, this theme promotes responsible innovation and long-term impact. Participants develop solutions that support sustainable development, social responsibility, and community well-being.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== COMMUNITY / VOICES ========== -->
+    <section class="hp-section hp-community">
+        <div class="hp-section-inner">
+            <!-- Header -->
+            <div class="hp-section-header hp-reveal" style="margin-bottom: 56px;">
+                <span class="hp-eyebrow">Voices</span>
+                <h2 class="hp-section-title">HEAR FROM OUR COMMUNITY</h2>
+                <div class="hp-divider"></div>
+                <p class="hp-section-desc" style="max-width: 600px;">Hear from PMU leadership, students, and the EngageU Hub team as they share the vision, purpose, and opportunities behind NextGen EngageU Hub.</p>
+            </div>
+
+            <!-- Big centered video player -->
+            <div class="hp-video-player-wrap hp-reveal hp-reveal-delay-1">
+                <div class="hp-video-player" id="hp-video-player" role="button" tabindex="0"
+                     aria-label="Play Hub Story video"
+                     onclick="this.innerHTML='<iframe src=\'https://www.youtube.com/embed/aqz-KE-bpKQ?autoplay=1&rel=0\' allow=\'autoplay; fullscreen\' allowfullscreen style=\'position:absolute;inset:0;width:100%;height:100%;border:none;border-radius:20px;\'></iframe>'; this.style.cursor='default';"
+                     onkeydown="if(event.key==='Enter'||event.key===' ')this.click();">
+                    <div class="hp-video-player-inner">
+                        <div class="hp-video-player-btn">
+                            <i class="bi bi-play-fill" style="margin-left:4px;"></i>
+                        </div>
+                        <p class="hp-video-player-label">Watch the Hub Story</p>
+                        <p class="hp-video-player-sub">Click to play</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- What's Next block -->
+            <div class="hp-whats-next hp-reveal hp-reveal-delay-2">
+                <span class="hp-eyebrow">What's Next?</span>
+                <h3>Explore highlights from events, competitions, and community engagement as the Hub continues to grow.</h3>
+                <a href="highlights.html" class="hp-pill-btn">
+                    <i class="bi bi-stars"></i> View Highlights
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== COMPETITIONS ========== -->
+    <section id="hp-competitions" class="hp-section hp-competitions">
+        <div class="hp-competitions-glow"></div>
+        <div class="hp-section-inner">
+            <div class="hp-section-header hp-reveal" style="margin-bottom: 48px;">
+                <span class="hp-eyebrow">Get Involved</span>
+                <h2 class="hp-section-title">COMPETITIONS</h2>
+                <div class="hp-divider"></div>
+            </div>
+
+            <!-- Filter Row -->
+            <div class="hp-filter-row hp-reveal hp-reveal-delay-1">
+                <button class="hp-filter-btn active" data-filter="all">All</button>
+                <button class="hp-filter-btn" data-filter="open">Open</button>
+                <button class="hp-filter-btn" data-filter="upcoming">Upcoming</button>
+                <button class="hp-filter-btn" data-filter="closed">Closed</button>
+            </div>
+
+            <!-- Competition Cards Grid -->
+            <div class="hp-competitions-grid" id="hp-competitions-grid">
+
+                <!-- Innovation Challenge 2026 -->
+                <div class="hp-comp-card" data-status="open">
+                    <div class="hp-comp-card-inner">
+                        <div class="hp-comp-card-top">
+                            <span class="hp-badge hp-badge-open">Open</span>
+                            <span class="hp-category hp-category-tech">Technology</span>
+                        </div>
+                        <h3>Innovation Challenge 2026</h3>
+                        <p>Build innovative tech solutions for real-world problems.</p>
+                        <div class="hp-comp-meta">
+                            <div class="hp-comp-meta-item"><i class="bi bi-calendar3"></i><span>March 15 - April 30, 2026</span></div>
+                            <div class="hp-comp-meta-item"><i class="bi bi-people"></i><span>Students</span></div>
+                            <div class="hp-comp-meta-item"><i class="bi bi-tag"></i><span>Hackathon</span></div>
+                        </div>
+                        <div class="hp-comp-actions">
+                            <a href="competition-details.html" class="hp-comp-details-btn"><i class="bi bi-info-circle"></i> Details</a>
+                            <a href="submission.html" class="hp-comp-apply-btn">Apply Now <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Startup Pitch Competition -->
+                <div class="hp-comp-card" data-status="upcoming">
+                    <div class="hp-comp-card-inner">
+                        <div class="hp-comp-card-top">
+                            <span class="hp-badge hp-badge-upcoming">Upcoming</span>
+                            <span class="hp-category hp-category-entrepreneurship">Entrepreneurship</span>
+                        </div>
+                        <h3>Startup Pitch Competition</h3>
+                        <p>Present your startup idea to industry leaders and investors.</p>
+                        <div class="hp-comp-meta">
+                            <div class="hp-comp-meta-item"><i class="bi bi-calendar3"></i><span>May 1 - June 15, 2026</span></div>
+                            <div class="hp-comp-meta-item"><i class="bi bi-people"></i><span>Professionals</span></div>
+                            <div class="hp-comp-meta-item"><i class="bi bi-tag"></i><span>Pitch Competition</span></div>
+                        </div>
+                        <div class="hp-comp-actions">
+                            <a href="competition-details.html" class="hp-comp-details-btn"><i class="bi bi-info-circle"></i> Details</a>
+                            <a href="submission.html" class="hp-comp-apply-btn">Apply Now <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sustainable Solutions Contest -->
+                <div class="hp-comp-card" data-status="closed">
+                    <div class="hp-comp-card-inner">
+                        <div class="hp-comp-card-top">
+                            <span class="hp-badge hp-badge-closed">Closed</span>
+                            <span class="hp-category hp-category-sustainability">Sustainability</span>
+                        </div>
+                        <h3>Sustainable Solutions Contest</h3>
+                        <p>Develop sustainable solutions for environmental challenges.</p>
+                        <div class="hp-comp-meta">
+                            <div class="hp-comp-meta-item"><i class="bi bi-calendar3"></i><span>February 1 - February 28, 2026</span></div>
+                            <div class="hp-comp-meta-item"><i class="bi bi-people"></i><span>Students</span></div>
+                            <div class="hp-comp-meta-item"><i class="bi bi-tag"></i><span>Design Challenge</span></div>
+                        </div>
+                        <div class="hp-comp-actions">
+                            <a href="competition-details.html" class="hp-comp-details-btn"><i class="bi bi-info-circle"></i> Details</a>
+                            <button class="hp-comp-closed-btn" disabled>Closed</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EdTech Innovation -->
+                <div class="hp-comp-card" data-status="upcoming">
+                    <div class="hp-comp-card-inner">
+                        <div class="hp-comp-card-top">
+                            <span class="hp-badge hp-badge-upcoming">Upcoming</span>
+                            <span class="hp-category hp-category-education">Education</span>
+                        </div>
+                        <h3>EdTech Innovation</h3>
+                        <p>Create innovative educational tools and methodologies.</p>
+                        <div class="hp-comp-meta">
+                            <div class="hp-comp-meta-item"><i class="bi bi-calendar3"></i><span>April 10 - May 20, 2026</span></div>
+                            <div class="hp-comp-meta-item"><i class="bi bi-people"></i><span>Educators</span></div>
+                            <div class="hp-comp-meta-item"><i class="bi bi-tag"></i><span>Innovation Challenge</span></div>
+                        </div>
+                        <div class="hp-comp-actions">
+                            <a href="competition-details.html" class="hp-comp-details-btn"><i class="bi bi-info-circle"></i> Details</a>
+                            <a href="submission.html" class="hp-comp-apply-btn">Apply Now <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI for Good Challenge -->
+                <div class="hp-comp-card" data-status="open">
+                    <div class="hp-comp-card-inner">
+                        <div class="hp-comp-card-top">
+                            <span class="hp-badge hp-badge-open">Open</span>
+                            <span class="hp-category hp-category-tech">Technology</span>
+                        </div>
+                        <h3>AI for Good Challenge</h3>
+                        <p>Leverage AI to solve social and community challenges.</p>
+                        <div class="hp-comp-meta">
+                            <div class="hp-comp-meta-item"><i class="bi bi-calendar3"></i><span>January 15 - March 1, 2026</span></div>
+                            <div class="hp-comp-meta-item"><i class="bi bi-people"></i><span>Students</span></div>
+                            <div class="hp-comp-meta-item"><i class="bi bi-tag"></i><span>Hackathon</span></div>
+                        </div>
+                        <div class="hp-comp-actions">
+                            <a href="competition-details.html" class="hp-comp-details-btn"><i class="bi bi-info-circle"></i> Details</a>
+                            <a href="submission.html" class="hp-comp-apply-btn">Apply Now <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Green Business Ideas -->
+                <div class="hp-comp-card" data-status="upcoming">
+                    <div class="hp-comp-card-inner">
+                        <div class="hp-comp-card-top">
+                            <span class="hp-badge hp-badge-upcoming">Upcoming</span>
+                            <span class="hp-category hp-category-sustainability">Sustainability</span>
+                        </div>
+                        <h3>Green Business Ideas</h3>
+                        <p>Develop sustainable business models and green ventures.</p>
+                        <div class="hp-comp-meta">
+                            <div class="hp-comp-meta-item"><i class="bi bi-calendar3"></i><span>June 1 - July 15, 2026</span></div>
+                            <div class="hp-comp-meta-item"><i class="bi bi-people"></i><span>Professionals</span></div>
+                            <div class="hp-comp-meta-item"><i class="bi bi-tag"></i><span>Business Plan</span></div>
+                        </div>
+                        <div class="hp-comp-actions">
+                            <a href="competition-details.html" class="hp-comp-details-btn"><i class="bi bi-info-circle"></i> Details</a>
+                            <a href="submission.html" class="hp-comp-apply-btn">Apply Now <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PARTNERSHIPS ========== -->
+    <section id="hp-partnerships" class="hp-section hp-partnerships">
+        <div class="hp-section-inner">
+            <div class="hp-partnerships-dark-grid">
+                <!-- Benefits on left -->
+                <div class="hp-partnerships-dark-benefits hp-reveal from-left">
+                    <div class="hp-partner-benefits">
+                        <div class="hp-partner-benefit">
+                            <div class="hp-partner-benefit-icon"><i class="bi bi-trophy-fill"></i></div>
+                            <span class="hp-partner-benefit-text">Co-design competitions around your industry challenges</span>
+                        </div>
+                        <div class="hp-partner-benefit">
+                            <div class="hp-partner-benefit-icon"><i class="bi bi-mortarboard-fill"></i></div>
+                            <span class="hp-partner-benefit-text">Develop future-ready talent with real-world relevance</span>
+                        </div>
+                        <div class="hp-partner-benefit">
+                            <div class="hp-partner-benefit-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                            <span class="hp-partner-benefit-text">Drive applied innovation aligned with Vision 2030</span>
+                        </div>
+                        <div class="hp-partner-benefit">
+                            <div class="hp-partner-benefit-icon"><i class="bi bi-globe2"></i></div>
+                            <span class="hp-partner-benefit-text">Connect with a growing national & international network</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text + CTA on right -->
+                <div class="hp-partnerships-dark-content hp-reveal from-right">
+                    <span class="hp-eyebrow">Collaborate</span>
+                    <h2 class="hp-section-title">PARTNERSHIPS</h2>
+                    <div class="hp-divider hp-divider-left"></div>
+                    <p class="hp-section-desc">PMU invites industry leaders, organizations, and institutions to co-create meaningful competitions, drive applied learning experiences, and collectively address the real-world challenges shaping our future. Through collaboration with the Hub, partners gain direct access to a motivated pool of talent, gain visibility across a broad academic and professional community, and play an active role in developing the next generation of innovators aligned with Saudi Arabia's Vision 2030.</p>
+
+                    <div class="hp-partnerships-dark-cta">
+                        <a href="partnerships.html" class="hp-btn-primary">
+                            <i class="bi bi-handshake"></i> Partner with PMU
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== JOIN ========== -->
+    <section id="hp-join" class="hp-section hp-join">
+        <div class="hp-join-glow"></div>
+        <div class="hp-section-inner">
+            <div class="hp-section-header hp-reveal">
+                <span class="hp-eyebrow">Be Part of It</span>
+                <h2 class="hp-section-title">JOIN THE HUB</h2>
+                <div class="hp-divider"></div>
+                <p class="hp-section-desc" style="max-width: 480px;">Open to national and international students, educators, professionals, and organizations.</p>
+            </div>
+
+            <div class="hp-join-grid">
+                <!-- Student -->
+                <div class="hp-join-card hp-reveal">
+                    <div class="hp-join-card-inner">
+                        <div class="hp-join-icon-wrap hp-join-icon-blue">
+                            <i class="bi bi-mortarboard-fill"></i>
+                        </div>
+                        <h3>Join as a Student</h3>
+                        <p>School or university student interested in challenges, competitions, and innovation projects.</p>
+                        <a href="signup.html" class="hp-join-btn">Register Now <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Educator -->
+                <div class="hp-join-card hp-reveal hp-reveal-delay-1">
+                    <div class="hp-join-card-inner">
+                        <div class="hp-join-icon-wrap hp-join-icon-purple">
+                            <i class="bi bi-person-video3"></i>
+                        </div>
+                        <h3>Join as an Educator / School Representative</h3>
+                        <p>Teacher, coordinator, or academic leader supporting student participation.</p>
+                        <a href="signup.html" class="hp-join-btn">Register Now <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Professional -->
+                <div class="hp-join-card hp-reveal hp-reveal-delay-2">
+                    <div class="hp-join-card-inner">
+                        <div class="hp-join-icon-wrap hp-join-icon-orange">
+                            <i class="bi bi-briefcase-fill"></i>
+                        </div>
+                        <h3>Join as a Professional or Organization</h3>
+                        <p>Entrepreneurs, industry professionals, and organizations participating in challenges and competitions.</p>
+                        <a href="signup.html" class="hp-join-btn">Register Now <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="hp-footer">
+        <div class="hp-footer-inner">
+            <div class="hp-footer-top">
+                <!-- Logo -->
+                <div class="hp-footer-logo">
+                    <img src="assets/images/nextgenengageu-logo.png" alt="NextGen EngageU Hub" class="hp-footer-logo-img">
+                </div>
+
+                <!-- Footer Nav -->
+                <nav class="hp-footer-nav">
+                    <a href="#hp-home">Home</a>
+                    <a href="#hp-about">About</a>
+                    <a href="#hp-focus">Focus Areas</a>
+                    <a href="#hp-competitions">Competitions</a>
+                    <a href="#hp-partnerships">Partnerships</a>
+                    <a href="#hp-join">Join</a>
+                </nav>
+            </div>
+
+            <div class="hp-footer-divider">
+                <p class="hp-footer-copyright">© 2026 NextGen EngageU Hub — Prince Mohammad bin Fahd University. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmX9cJEHJ3Z+VFxFSFTSqB1/Vss" crossorigin="anonymous"></script>
+
+    <script>
+        // ---- Scroll-reveal animations ----
+        const revealEls = document.querySelectorAll('.hp-reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        revealEls.forEach(el => revealObserver.observe(el));
+
+        // ---- Competition filter ----
+        const filterBtns = document.querySelectorAll('.hp-filter-btn');
+        const compCards = document.querySelectorAll('#hp-competitions-grid .hp-comp-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+                compCards.forEach(card => {
+                    const show = filter === 'all' || card.dataset.status === filter;
+                    card.style.display = show ? 'block' : 'none';
+                });
+            });
+        });
+    </script>
+
+
+</body>
+</html>

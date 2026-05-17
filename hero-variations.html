@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Variations — NextGen EngageU Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+        }
+
+        /* ── Shared nav stub ────────────────────────────────────────── */
+        .demo-nav {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 48px;
+        }
+        .demo-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800;
+            font-size: 18px;
+            color: #fff;
+            letter-spacing: -0.3px;
+        }
+        .demo-logo span { color: #f87322; }
+        .demo-nav-links { display: flex; gap: 32px; }
+        .demo-nav-links a {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .demo-nav-btn {
+            background: #f87322;
+            color: #fff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        /* ── Section labels ─────────────────────────────────────────── */
+        .variation-label {
+            background: #111;
+            color: rgba(255,255,255,0.5);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 10px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        /* ════════════════════════════════════════════════════════════ */
+        /* V1 — Ken Burns Crossfade (current / active)                 */
+        /* ════════════════════════════════════════════════════════════ */
+        .v1-hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .v1-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .v1-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            animation: v1Fade 18s ease-in-out infinite;
+            will-change: opacity;
+        }
+        .v1-slide:nth-child(1) { animation-delay: 0s; }
+        .v1-slide:nth-child(2) { animation-delay: 6s; }
+        .v1-slide:nth-child(3) { animation-delay: 12s; }
+        .v1-slide img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            animation: v1Zoom 6s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+        .v1-slide:nth-child(1) img { animation-delay: 0s; }
+        .v1-slide:nth-child(2) img { animation-delay: 6s; }
+        .v1-slide:nth-child(3) img { animation-delay: 12s; }
+        @keyframes v1Fade {
+            0%   { opacity: 0; }
+            8%   { opacity: 1; }
+            33%  { opacity: 1; }
+            42%  { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        @keyframes v1Zoom {
+            0%   { transform: scale(1.00) translate(0%, 0%); }
+            100% { transform: scale(1.07) translate(-1%, -0.5%); }
+        }
+        .v1-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                rgba(8, 29, 62, 0.52) 0%,
+                rgba(8, 29, 62, 0.38) 50%,
+                rgba(8, 29, 62, 0.68) 100%
+            );
+        }
+        .v1-content {
+            position: relative;
+            z-index: 2;
+            max-width: 760px;
+            padding: 0 24px;
+        }
+        .v1-eyebrow {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.65);
+            margin-bottom: 20px;
+        }
+        .v1-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(42px, 6vw, 78px);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -1px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .v1-title .accent { color: #f87322; }
+        .v1-divider {
+            width: 56px; height: 3px;
+            background: #f87322;
+            border-radius: 2px;
+            margin: 0 auto 20px;
+        }
+        .v1-tagline {
+            font-size: clamp(15px, 1.8vw, 18px);
+            color: rgba(255,255,255,0.82);
+            line-height: 1.6;
+            margin-bottom: 36px;
+        }
+        .v1-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+        .v1-btn-primary {
+            background: #f87322;
+            color: #fff;
+            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 15px;
+        }
+        .v1-btn-ghost {
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            border: 1px solid rgba(255,255,255,0.28);
+        }
+        .v1-scroll {
+            position: absolute;
+            bottom: 32px; left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.5);
+            font-size: 22px;
+            animation: v1Bounce 2s ease-in-out infinite;
+            text-decoration: none;
+        }
+        @keyframes v1Bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50%       { transform: translateX(-50%) translateY(6px); }
+        }
+
+        /* ════════════════════════════════════════════════════════════ */
+        /* V2 — Cinematic Dark (deep vignette, wide letterbox feel)    */
+        /* ════════════════════════════════════════════════════════════ */
+        .v2-hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .v2-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .v2-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            animation: v2Fade 18s ease-in-out infinite;
+        }
+        .v2-slide:nth-child(1) { animation-delay: 0s; }
+        .v2-slide:nth-child(2) { animation-delay: 6s; }
+        .v2-slide:nth-child(3) { animation-delay: 12s; }
+        .v2-slide img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: saturate(0.7);
+            animation: v2Pan 6s ease-in-out infinite alternate;
+        }
+        @keyframes v2Fade {
+            0%   { opacity: 0; }
+            8%   { opacity: 1; }
+            33%  { opacity: 1; }
+            42%  { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        @keyframes v2Pan {
+            0%   { transform: scale(1.05) translateX(0%); }
+            100% { transform: scale(1.10) translateX(-2%); }
+        }
+        /* Cinematic bars */
+        .v2-bar-top, .v2-bar-bottom {
+            position: absolute;
+            left: 0; right: 0;
+            height: 80px;
+            background: #000;
+            z-index: 2;
+        }
+        .v2-bar-top { top: 0; }
+        .v2-bar-bottom { bottom: 0; }
+        /* Deep radial vignette */
+        .v2-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.7) 100%),
+                linear-gradient(90deg, rgba(8,29,62,0.82) 0%, rgba(8,29,62,0.3) 55%, transparent 100%);
+        }
+        .v2-content {
+            position: relative;
+            z-index: 3;
+            max-width: 620px;
+            padding: 0 80px;
+        }
+        .v2-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #f87322;
+            margin-bottom: 16px;
+        }
+        .v2-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(38px, 5.5vw, 72px);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -2px;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+        .v2-line {
+            width: 3px; height: 60px;
+            background: #f87322;
+            margin-bottom: 24px;
+        }
+        .v2-tagline {
+            font-size: 16px;
+            color: rgba(255,255,255,0.78);
+            line-height: 1.65;
+            margin-bottom: 40px;
+            max-width: 440px;
+        }
+        .v2-actions { display: flex; flex-direction: column; gap: 12px; width: fit-content; }
+        .v2-btn-primary {
+            background: #f87322;
+            color: #fff;
+            text-decoration: none;
+            padding: 15px 32px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .v2-btn-ghost {
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        /* Progress bar */
+        .v2-progress {
+            position: absolute;
+            bottom: 80px; left: 80px;
+            z-index: 3;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .v2-dot {
+            width: 28px; height: 2px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+        }
+        .v2-dot.active { background: #f87322; }
+
+        /* ════════════════════════════════════════════════════════════ */
+        /* V3 — Split Screen (image left, content right)               */
+        /* ════════════════════════════════════════════════════════════ */
+        .v3-hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+        }
+        .v3-image-side {
+            position: relative;
+            overflow: hidden;
+        }
+        .v3-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            animation: v3Fade 18s ease-in-out infinite;
+        }
+        .v3-slide:nth-child(1) { animation-delay: 0s; }
+        .v3-slide:nth-child(2) { animation-delay: 6s; }
+        .v3-slide:nth-child(3) { animation-delay: 12s; }
+        .v3-slide img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            animation: v3Drift 6s ease-in-out infinite alternate;
+        }
+        @keyframes v3Fade {
+            0%   { opacity: 0; }
+            8%   { opacity: 1; }
+            33%  { opacity: 1; }
+            42%  { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        @keyframes v3Drift {
+            0%   { transform: scale(1.04) translateY(0%); }
+            100% { transform: scale(1.08) translateY(-1.5%); }
+        }
+        /* Diagonal clip */
+        .v3-image-side::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, transparent 70%, #081d3e 100%);
+        }
+        .v3-content-side {
+            background: #081d3e;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 64px;
+            position: relative;
+        }
+        /* Decorative grid */
+        .v3-content-side::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(248,115,34,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(248,115,34,0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .v3-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #f87322;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .v3-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(34px, 4vw, 60px);
+            font-weight: 800;
+            line-height: 1.0;
+            color: #fff;
+            margin-bottom: 8px;
+            position: relative;
+        }
+        .v3-title-sub {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(22px, 2.8vw, 40px);
+            font-weight: 400;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 28px;
+            position: relative;
+        }
+        .v3-divider {
+            width: 48px; height: 3px;
+            background: #f87322;
+            border-radius: 2px;
+            margin-bottom: 28px;
+            position: relative;
+        }
+        .v3-tagline {
+            font-size: 15px;
+            color: rgba(255,255,255,0.72);
+            line-height: 1.7;
+            margin-bottom: 44px;
+            position: relative;
+        }
+        .v3-actions { display: flex; gap: 14px; flex-wrap: wrap; position: relative; }
+        .v3-btn-primary {
+            background: #f87322;
+            color: #fff;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .v3-btn-ghost {
+            background: rgba(255,255,255,0.07);
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        /* Slide counter */
+        .v3-counter {
+            margin-top: 48px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+        .v3-counter-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.25);
+        }
+        .v3-counter-dot.active {
+            background: #f87322;
+            width: 24px;
+            border-radius: 3px;
+        }
+
+        /* ════════════════════════════════════════════════════════════ */
+        /* V4 — Glass Card Overlay (content in frosted glass panel)    */
+        /* ════════════════════════════════════════════════════════════ */
+        .v4-hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .v4-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .v4-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            animation: v4Fade 18s ease-in-out infinite;
+        }
+        .v4-slide:nth-child(1) { animation-delay: 0s; }
+        .v4-slide:nth-child(2) { animation-delay: 6s; }
+        .v4-slide:nth-child(3) { animation-delay: 12s; }
+        .v4-slide img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            animation: v4Zoom 6s ease-in-out infinite alternate;
+        }
+        @keyframes v4Fade {
+            0%   { opacity: 0; }
+            8%   { opacity: 1; }
+            33%  { opacity: 1; }
+            42%  { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        @keyframes v4Zoom {
+            0%   { transform: scale(1.00); }
+            100% { transform: scale(1.06); }
+        }
+        .v4-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(8, 29, 62, 0.45);
+        }
+        /* Glass card */
+        .v4-card {
+            position: relative;
+            z-index: 2;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(20px) saturate(140%);
+            -webkit-backdrop-filter: blur(20px) saturate(140%);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 24px;
+            padding: 60px 64px;
+            max-width: 640px;
+            text-align: center;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+        }
+        .v4-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.55);
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 100px;
+            padding: 6px 16px;
+            margin-bottom: 28px;
+        }
+        .v4-eyebrow-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #f87322;
+        }
+        .v4-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(36px, 4.5vw, 64px);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -1px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .v4-title .accent { color: #f87322; }
+        .v4-tagline {
+            font-size: 15px;
+            color: rgba(255,255,255,0.72);
+            line-height: 1.65;
+            margin-bottom: 36px;
+        }
+        .v4-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .v4-btn-primary {
+            background: #f87322;
+            color: #fff;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .v4-btn-ghost {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        /* Corner decoration */
+        .v4-card::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px;
+            width: 60px; height: 60px;
+            border-top: 2px solid #f87322;
+            border-left: 2px solid #f87322;
+            border-radius: 24px 0 0 0;
+        }
+        .v4-card::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; right: -1px;
+            width: 60px; height: 60px;
+            border-bottom: 2px solid rgba(248,115,34,0.4);
+            border-right: 2px solid rgba(248,115,34,0.4);
+            border-radius: 0 0 24px 0;
+        }
+        /* Image dots */
+        .v4-dots {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 32px;
+        }
+        .v4-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.25);
+        }
+        .v4-dot.active { background: #f87322; }
+    </style>
+</head>
+<body>
+
+    <!-- ════════════ V1: Ken Burns Crossfade ════════════ -->
+    <div class="variation-label">V1 — Ken Burns Crossfade &nbsp;·&nbsp; <strong>CURRENT ACTIVE DESIGN</strong></div>
+    <div style="position:relative;">
+        <nav class="demo-nav">
+            <div class="demo-logo">Engage<span>U</span> Hub</div>
+            <div class="demo-nav-links">
+                <a href="#">About</a>
+                <a href="#">Competitions</a>
+                <a href="#">Highlights</a>
+            </div>
+            <a href="#" class="demo-nav-btn">Join the Hub</a>
+        </nav>
+        <section class="v1-hero">
+            <div class="v1-bg">
+                <div class="v1-slide"><img src="assets/images/PMU_image.jpg" alt=""></div>
+                <div class="v1-slide"><img src="assets/images/PMU_image2.jpg" alt=""></div>
+                <div class="v1-slide"><img src="assets/images/PMU_image3.jpg" alt=""></div>
+                <div class="v1-overlay"></div>
+            </div>
+            <div class="v1-content">
+                <p class="v1-eyebrow">Prince Mohammad bin Fahd University &nbsp;|&nbsp; KSA-Educators</p>
+                <h1 class="v1-title"><span class="accent">NEXTGEN</span><br>ENGAGEU HUB</h1>
+                <div class="v1-divider"></div>
+                <p class="v1-tagline">Empowering innovators through competitions, collaboration, and community impact.</p>
+                <div class="v1-actions">
+                    <a href="#" class="v1-btn-primary">Explore Competitions</a>
+                    <a href="#" class="v1-btn-ghost">Learn More</a>
+                </div>
+            </div>
+            <a href="#v2" class="v1-scroll"><i class="bi bi-chevron-down"></i></a>
+        </section>
+    </div>
+
+    <!-- ════════════ V2: Cinematic Dark ════════════ -->
+    <div class="variation-label" id="v2">V2 — Cinematic Dark &nbsp;·&nbsp; Left-aligned, desaturated, letterboxed</div>
+    <div style="position:relative;">
+        <nav class="demo-nav">
+            <div class="demo-logo">Engage<span>U</span> Hub</div>
+            <div class="demo-nav-links">
+                <a href="#">About</a>
+                <a href="#">Competitions</a>
+                <a href="#">Highlights</a>
+            </div>
+            <a href="#" class="demo-nav-btn">Join the Hub</a>
+        </nav>
+        <section class="v2-hero">
+            <div class="v2-bg">
+                <div class="v2-slide"><img src="assets/images/PMU_image.jpg" alt=""></div>
+                <div class="v2-slide"><img src="assets/images/PMU_image2.jpg" alt=""></div>
+                <div class="v2-slide"><img src="assets/images/PMU_image3.jpg" alt=""></div>
+            </div>
+            <div class="v2-bar-top"></div>
+            <div class="v2-bar-bottom"></div>
+            <div class="v2-overlay"></div>
+            <div class="v2-content">
+                <p class="v2-eyebrow">PMU &nbsp;·&nbsp; KSA-Educators</p>
+                <h1 class="v2-title">NEXTGEN<br>ENGAGEU<br>HUB</h1>
+                <div class="v2-line"></div>
+                <p class="v2-tagline">Empowering innovators through competitions, collaboration, and community impact.</p>
+                <div class="v2-actions">
+                    <a href="#" class="v2-btn-primary">Explore Competitions &nbsp;<i class="bi bi-arrow-right"></i></a>
+                    <a href="#" class="v2-btn-ghost"><i class="bi bi-play-circle"></i>&nbsp; Watch Highlights</a>
+                </div>
+            </div>
+            <div class="v2-progress">
+                <div class="v2-dot active"></div>
+                <div class="v2-dot"></div>
+                <div class="v2-dot"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ════════════ V3: Split Screen ════════════ -->
+    <div class="variation-label" id="v3">V3 — Split Screen &nbsp;·&nbsp; Image left, content right</div>
+    <div style="position:relative;">
+        <section class="v3-hero">
+            <!-- Image side -->
+            <div class="v3-image-side">
+                <div class="v3-slide"><img src="assets/images/PMU_image.jpg" alt=""></div>
+                <div class="v3-slide"><img src="assets/images/PMU_image2.jpg" alt=""></div>
+                <div class="v3-slide"><img src="assets/images/PMU_image3.jpg" alt=""></div>
+            </div>
+            <!-- Content side -->
+            <div class="v3-content-side">
+                <p class="v3-eyebrow">PMU &nbsp;·&nbsp; KSA-Educators</p>
+                <h1 class="v3-title">NEXTGEN</h1>
+                <p class="v3-title-sub">ENGAGEU HUB</p>
+                <div class="v3-divider"></div>
+                <p class="v3-tagline">Empowering innovators through competitions, collaboration, and community impact across Saudi Arabia.</p>
+                <div class="v3-actions">
+                    <a href="#" class="v3-btn-primary">Explore Competitions</a>
+                    <a href="#" class="v3-btn-ghost">Learn More</a>
+                </div>
+                <div class="v3-counter">
+                    <div class="v3-counter-dot active"></div>
+                    <div class="v3-counter-dot"></div>
+                    <div class="v3-counter-dot"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ════════════ V4: Glass Card Overlay ════════════ -->
+    <div class="variation-label" id="v4">V4 — Glass Card Overlay &nbsp;·&nbsp; Frosted glass panel centered</div>
+    <div style="position:relative;">
+        <nav class="demo-nav">
+            <div class="demo-logo">Engage<span>U</span> Hub</div>
+            <div class="demo-nav-links">
+                <a href="#">About</a>
+                <a href="#">Competitions</a>
+                <a href="#">Highlights</a>
+            </div>
+            <a href="#" class="demo-nav-btn">Join the Hub</a>
+        </nav>
+        <section class="v4-hero">
+            <div class="v4-bg">
+                <div class="v4-slide"><img src="assets/images/PMU_image.jpg" alt=""></div>
+                <div class="v4-slide"><img src="assets/images/PMU_image2.jpg" alt=""></div>
+                <div class="v4-slide"><img src="assets/images/PMU_image3.jpg" alt=""></div>
+            </div>
+            <div class="v4-overlay"></div>
+            <div class="v4-card">
+                <div class="v4-eyebrow">
+                    <div class="v4-eyebrow-dot"></div>
+                    Prince Mohammad bin Fahd University
+                </div>
+                <h1 class="v4-title"><span class="accent">NEXTGEN</span><br>ENGAGEU HUB</h1>
+                <p class="v4-tagline">Empowering innovators through competitions, collaboration, and community impact.</p>
+                <div class="v4-actions">
+                    <a href="#" class="v4-btn-primary">Explore Competitions</a>
+                    <a href="#" class="v4-btn-ghost">Learn More</a>
+                </div>
+                <div class="v4-dots">
+                    <div class="v4-dot active"></div>
+                    <div class="v4-dot"></div>
+                    <div class="v4-dot"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply to Competition | EngageU Hub</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        .auth-wrapper {
+            align-items: flex-start;
+            padding: 3rem 0;
+            overflow-y: auto !important;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #17376e 100%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Hide scrollbar for sidebar but keep functionality */
+        .apply-sidebar {
+            scrollbar-width: none;
+        }
+
+        .apply-sidebar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="auth-wrapper page-home">
+    <div class="container">
+
+        <!-- Role Switcher -->
+        <div class="d-flex justify-content-end mb-3 position-relative" style="z-index: 50;">
+            <select class="form-select form-select-sm w-auto shadow-sm" id="simulatedRole">
+                <option value="Student" selected>Test as Student</option>
+                <option value="Educator">Test as Educator</option>
+                <option value="Professional">Test as Professional</option>
+            </select>
+        </div>
+
+        <div class="apply-container animate-fade-up">
+
+            <!-- ── Left Sidebar -->
+            <div class="apply-sidebar">
+                <a href="#" class="auth-logo mb-5 text-decoration-none"
+                    style="font-size: 1.5rem;">Engage<span>U</span></a>
+
+                <div class="sidebar-nav-label">Form Sections</div>
+                <nav class="sidebar-nav">
+                    <a href="#section-role" class="sidebar-step active" id="nav-role">
+                        <span class="sidebar-step-dot"></span>
+                        <span>Role</span>
+                    </a>
+                    <a href="#block-team" class="sidebar-step" id="nav-team">
+                        <span class="sidebar-step-dot"></span>
+                        <span>Team Information</span>
+                    </a>
+                    <a href="#block-project" class="sidebar-step" id="nav-project">
+                        <span class="sidebar-step-dot"></span>
+                        <span>Project Details</span>
+                    </a>
+                    <a href="#block-submit" class="sidebar-step" id="nav-submit">
+                        <span class="sidebar-step-dot"></span>
+                        <span>Submit</span>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- ── Main Content ── -->
+            <div class="apply-content">
+
+                <!-- Header -->
+                <div class="d-flex align-items-center justify-content-between mb-4 pb-3 border-bottom">
+                    <div>
+                        <h3 class="fw-bold text-dark mb-1">Competition Application</h3>
+                        <p class="text-muted small m-0">
+                            Applicant: <strong>John Doe</strong> (applicant@example.com)
+                            · <span id="roleBadge" class="badge bg-light text-dark border">Student</span>
+                        </p>
+                    </div>
+                </div>
+
+                <form id="submissionForm" novalidate enctype="multipart/form-data">
+                    <!-- SECTION 1: ROLE SELECTION                           -->
+                    <div class="form-block visible" id="section-role">
+                        <div class="section-header">
+                            <h5>Role & Participation</h5>
+                        </div>
+
+                        <!-- Sub-role (Educator / Professional only) -->
+                        <div class="mb-3 form-block" id="block-subrole">
+                            <label class="form-label fw-medium" id="subroleLabel">Your Role <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select" id="subroleSelect" name="role_type">
+                                <option value="" selected disabled>Select your role...</option>
+                            </select>
+                        </div>
+
+                        <!-- Supervisor registration type -->
+                        <div class="mb-3 form-block" id="block-supervisor">
+                            <label class="form-label fw-medium">Registration Type <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select" id="supervisorTypeSelect" name="registration_type">
+                                <option value="" selected disabled>Select registration type...</option>
+                                <option value="individual">Register one Individual</option>
+                                <option value="one-team">Register one Team</option>
+                                <option value="multi-team">Register Multiple Teams</option>
+                            </select>
+                        </div>
+
+                        <!-- (Individual / Team) for Participants -->
+                        <div class="mb-3 form-block" id="block-pathway">
+                            <label class="form-label fw-medium">Participation Type <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select" id="pathwaySelect" name="participation_pathway">
+                                <option value="" selected disabled>How would you like to participate?</option>
+                                <option value="individual">Individual</option>
+                                <option value="team">Team</option>
+                            </select>
+                        </div>
+
+                        <!-- Mentor sub-role -->
+                        <div class="mb-3 form-block" id="block-mentor-role">
+                            <label class="form-label fw-medium">Specify Your Capacity <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select" id="mentorRoleSelect" name="expert_capacity">
+                                <option value="" selected disabled>Select your capacity...</option>
+                                <option value="Mentor">Mentor</option>
+                                <option value="Judge">Judge</option>
+                                <option value="Expert Reviewer">Expert Reviewer</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 2:(Supervisor registering one individual)   -->
+
+                    <div class="form-block" id="block-individual">
+                        <div class="section-header">
+                            <h5>Individual Participant Details</h5>
+                        </div>
+                        <p class="text-muted small mb-3">Enter the participant's information.</p>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="indivName" name="participant_name"
+                                        placeholder="Full Name">
+                                    <label>Participant Full Name <span class="text-danger">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="indivEmail" name="participant_email"
+                                        placeholder="Email">
+                                    <label>Participant Email <span class="text-danger">*</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- SECTION 2: (Team participant OR supervisor registering teams)  -->
+
+                    <div class="form-block" id="block-team">
+                        <div class="section-header">
+                            <h5 id="teamSectionTitle">Team Information</h5>
+                        </div>
+                        <p class="text-muted small mb-3" id="teamSectionDesc">Add your team members below.</p>
+
+                        <div class="info-alert">
+                            <i class="bi bi-info-circle me-2"></i>Members will receive an automated email confirming
+                            their
+                            registration.
+                        </div>
+
+                        <div id="teamsContainer"></div>
+
+                        <button type="button" class="btn btn-outline-primary btn-sm d-none mt-2" id="addTeamBtn"
+                            onclick="addTeamBlock()">
+                            <i class="bi bi-plus-lg me-1"></i> Add Another Team
+                        </button>
+                    </div>
+
+
+                    <!-- SECTION 2: MENTOR/EXPERT PROFILE    -->
+                    <!-- SECTION 3: PROJECT INFORMATION   -->
+
+                    <div class="form-block" id="block-project">
+                        <div class="section-header">
+                            <h5>Project Information</h5>
+                        </div>
+                        <p class="text-muted small mb-3">Tell us about your project.</p>
+
+                        <!-- Project Overview -->
+                        <div class="subsection-title">Project Overview</div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="projectTitle" name="project_title"
+                                placeholder="Project Title">
+                            <label>Project Title <span class="text-danger">*</span></label>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-medium">Industry / Domain <span
+                                    class="text-danger">*</span></label>
+                            <small class="text-muted d-block mb-2">Select one or more domains your project
+                                addresses.</small>
+                            <div class="domain-grid">
+                                <label class="domain-check"><input type="checkbox" name="domain[]" value="Technology">
+                                    Technology</label>
+                                <label class="domain-check"><input type="checkbox" name="domain[]" value="Education">
+                                    Education</label>
+                                <label class="domain-check"><input type="checkbox" name="domain[]"
+                                        value="Entrepreneurship">
+                                    Entrepreneurship</label>
+                                <label class="domain-check"><input type="checkbox" name="domain[]" value="Sustainability">
+                                    Sustainability</label>
+                            </div>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="projectStage" name="project_stage">
+                                <option value="" selected disabled>Select Stage</option>
+                                <option value="Idea / Concept">Idea / Concept</option>
+                                <option value="Prototype">Prototype</option>
+                                <option value="Tested / Piloted">Tested / Piloted</option>
+                                <option value="Implemented">Implemented</option>
+                            </select>
+                            <label>Project Stage</label>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-medium">Brief Project Description <span
+                                    class="text-danger">*</span></label>
+                            <small class="text-muted d-block mb-2">Cover the problem, your proposed solution, and the
+                                intended impact.</small>
+                            <textarea class="form-control project-desc-textarea" id="projectDesc"
+                                name="project_description" rows="5" placeholder="Describe your project..."></textarea>
+                            <div class="d-flex justify-content-between mt-1">
+                                <small class="text-muted">150 – 250 words required.</small>
+                                <span class="word-count-indicator fw-medium" id="wordCountDisplay">0 words</span>
+                            </div>
+                        </div>
+
+                        <!-- Main Proposal -->
+                        <div class="subsection-title">Main Proposal File</div>
+                        <small class="text-muted d-block mb-2">Required · 1 document max · 10 MB max · PDF, DOC,
+                            PPT</small>
+                        <input type="file" class="form-control" id="mainProposal" name="project_proposal"
+                            accept=".pdf,.doc,.docx,.ppt,.pptx"
+                            onchange="validateFiles(this, 'mainProposalList', 1, 10, ['pdf','doc','docx','ppt','pptx'])">
+                        <div class="file-list" id="mainProposalList"></div>
+
+                        <!-- Project Media -->
+                        <div class="subsection-title">Project Video <span
+                                class="text-muted small fw-normal ms-1">(Optional)</span></div>
+                        <small class="text-muted d-block mb-2">Short video explaining your idea. Provide a link or
+                            upload a
+                            file.</small>
+                        <div class="video-toggle-group">
+                            <button type="button" class="video-toggle-btn active" onclick="toggleVideo('link', this)">
+                                <i class="bi bi-link-45deg me-1"></i> Provide a Link
+                            </button>
+                            <button type="button" class="video-toggle-btn" onclick="toggleVideo('file', this)">
+                                <i class="bi bi-upload me-1"></i> Upload a File
+                            </button>
+                        </div>
+                        <div id="videoLinkWrap">
+                            <input type="url" class="form-control" id="videoLink" name="project_video_link"
+                                placeholder="https://youtube.com/... or Google Drive / OneDrive link">
+                            <small class="text-muted d-block mt-1">Accepted: YouTube, Google Drive, OneDrive ·
+                                Recommended
+                                length 2–3 minutes</small>
+                        </div>
+                        <div id="videoFileWrap" class="d-none">
+                            <input type="file" class="form-control" id="videoFile" name="project_video_file"
+                                accept="video/*">
+                            <small class="text-muted d-block mt-1">Recommended length 2–3 minutes</small>
+                        </div>
+
+                        <!-- Project Documentation -->
+                        <div class="subsection-title">Project Documentation <span
+                                class="text-muted small fw-normal ms-1">(Optional)</span></div>
+                        <small class="text-muted d-block mb-2">Up to 5 documents · 10 MB max each · PDF, DOC, PPT. e.g.
+                            concept note, research, business model, curriculum design.</small>
+                        <input type="file" class="form-control" id="projectDocs" name="project_documentation[]" multiple
+                            accept=".pdf,.doc,.docx,.ppt,.pptx"
+                            onchange="validateFiles(this, 'projectDocsList', 5, 10, ['pdf','doc','docx','ppt','pptx'])">
+                        <div class="file-list" id="projectDocsList"></div>
+
+                        <!-- Project Visual Materials -->
+                        <div class="subsection-title">Project Visual Materials <span
+                                class="text-muted small fw-normal ms-1">(Optional)</span></div>
+                        <small class="text-muted d-block mb-2">Up to 5 files · 10 MB max each · PDF, JPG, PNG. e.g.
+                            wireframes, infographics, model images.</small>
+                        <input type="file" class="form-control" id="projectVisuals" name="project_visuals[]" multiple
+                            accept=".pdf,.jpg,.jpeg,.png"
+                            onchange="validateFiles(this, 'projectVisualsList', 5, 10, ['pdf','jpg','jpeg','png'])">
+                        <div class="file-list" id="projectVisualsList"></div>
+                    </div>
+
+                    <!-- SECTION 4: ACKNOWLEDGEMENT   -->
+                    <div class="form-block" id="block-submit">
+                        <div class="section-header">
+                            <h5>Acknowledgement & Declaration</h5>
+                        </div>
+
+                        <div class="info-alert">
+                            <p class="small text-dark mb-2 fw-medium">By submitting this application, I confirm that:
+                            </p>
+                            <ul class="declaration-list">
+                                <li>I have reviewed and understood the <a href="#"
+                                        class="text-decoration-none">competition
+                                        rules and regulations</a>.</li>
+                                <li>I am authorized to submit this project on behalf of my team or institution (if
+                                    applicable).</li>
+                                <li>All information provided in this submission is accurate and complete to the best of
+                                    my
+                                    knowledge.</li>
+                                <li>I acknowledge that false or misleading information may result in disqualification.
+                                </li>
+                            </ul>
+
+                            <hr>
+
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" id="declaration" name="declaration"
+                                    required>
+                                <label class="form-check-label fw-bold text-dark" for="declaration">
+                                    I agree to the above terms and conditions <span class="text-danger">*</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end mt-4">
+                            <button type="submit"
+                                class="btn btn-secondary-custom px-5 py-3 fw-bold shadow-sm rounded-pill">
+                                <i class="bi bi-send-check me-2"></i> Submit Application
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
+                <!-- SUCCESS STATE -->
+                <div id="successBlock" class="text-center py-5" style="display: none;">
+                    <div class="mb-4 animate-fade-up" style="color: var(--secondary-color);">
+                        <i class="bi bi-check-circle-fill" style="font-size: 5rem;"></i>
+                    </div>
+                    <h2 class="fw-bold mb-3 text-dark animate-fade-up delay-100">Application Submitted!</h2>
+                    <p class="text-muted mb-5 fs-5 animate-fade-up delay-200">Your application has been safely recorded.
+                        You
+                        will receive a confirmation email shortly.</p>
+
+                    <div
+                        class="d-flex flex-column flex-sm-row justify-content-center gap-3 mt-4 animate-fade-up delay-300">
+                        <a href="index.html" class="btn btn-cancel px-5 fw-bold rounded-pill">Go to Home</a>
+                        <button type="button" class="btn btn-primary-custom px-5 fw-bold rounded-pill"
+                            onclick="resetForm()">
+                            Submit Another
+                        </button>
+                    </div>
+                </div>
+
+            </div><!-- /.apply-content -->
+        </div><!-- /.apply-container -->
+    </div><!-- /.container -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmX9cJEHJ3Z+VFxFSFTSqB1/Vss" crossorigin="anonymous"></script>
+    <script>
+
+        // STATE
+        const state = {
+            role: 'Student',
+            subrole: null,          // 'participant' | 'supervisor' | 'mentor'
+            supervisorType: null,   // 'individual' | 'one-team' | 'multi-team'
+            pathway: null,          // 'individual' | 'team'
+            mentorRole: null
+        };
+
+        // ============================================
+        // SHOW / HIDE HELPERS
+        // ============================================
+        function show(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.classList.add('visible');
+                el.querySelectorAll('input, select, textarea, button').forEach(inp => inp.disabled = false);
+            }
+        }
+        function hide(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.classList.remove('visible');
+                el.querySelectorAll('input, select, textarea, button').forEach(inp => inp.disabled = true);
+            }
+        }
+        function hideAll(...ids) { ids.forEach(hide); }
+
+        // ============================================
+        // BUILD SUBROLE DROPDOWN BASED ON ROLE
+        // ============================================
+        function buildSubroleDropdown() {
+            const sel = document.getElementById('subroleSelect');
+            const lbl = document.getElementById('subroleLabel');
+            sel.innerHTML = '<option value="" selected disabled>Select your role...</option>';
+
+            if (state.role === 'Educator') {
+                lbl.innerHTML = 'Educator Role <span class="text-danger">*</span>';
+                sel.innerHTML += `
+                    <option value="participant">Educator as Participant</option>
+                    <option value="supervisor">Educator Supervising Students</option>
+                `;
+                show('block-subrole');
+            } else if (state.role === 'Professional') {
+                lbl.innerHTML = 'Professional Role <span class="text-danger">*</span>';
+                sel.innerHTML += `
+                    <option value="participant">Professional as Participant</option>
+                    <option value="supervisor">Professional Supervising Participants</option>
+                    <option value="mentor">Professional as Mentor / Expert</option>
+                `;
+                show('block-subrole');
+            } else {
+                // Student — no sub-role needed
+                hide('block-subrole');
+            }
+        }
+
+        // ============================================
+        // RECOMPUTE VISIBLE BLOCKS & UPDATE SIDEBAR
+        // ============================================
+        function refreshVisibility() {
+            // 1. Hide everything beneath Role selection first
+            hideAll(
+                'block-subrole', 'block-supervisor', 'block-pathway', 'block-mentor-role',
+                'block-individual', 'block-team',
+                'block-project', 'block-submit'
+            );
+
+            // 1. Role level visibility
+            if (state.role !== 'Student') {
+                show('block-subrole');
+            }
+
+            if (state.role === 'Student') {
+                show('block-pathway');
+            } else if (state.subrole === 'participant') {
+                show('block-pathway');
+            } else if (state.subrole === 'supervisor') {
+                show('block-supervisor');
+            } else if (state.subrole === 'mentor') {
+                show('block-mentor-role');
+            }
+
+            // 2. Determine "Flow Type"
+            let flowType = null; // 'individual', 'team', 'team-multi', 'mentor'
+
+            if (state.role === 'Student' || state.subrole === 'participant') {
+                if (state.pathway === 'individual') flowType = 'individual';
+                else if (state.pathway === 'team') flowType = 'team';
+            } else if (state.subrole === 'supervisor') {
+                if (state.supervisorType === 'individual') flowType = 'individual';
+                else if (state.supervisorType === 'one-team') flowType = 'team';
+                else if (state.supervisorType === 'multi-team') flowType = 'team-multi';
+            } else if (state.subrole === 'mentor') {
+                if (state.mentorRole) flowType = 'mentor';
+            }
+
+            // 3. Show blocks based on Flow Type
+            if (flowType === 'individual') {
+                // Same as individual registration: Skip Section 2, go to Project
+                if (state.subrole === 'supervisor') {
+                    show('block-individual');
+                }
+                show('block-project');
+                show('block-submit');
+            } else if (flowType === 'team' || flowType === 'team-multi') {
+                show('block-team');
+                buildTeamSection(flowType === 'team-multi' ? 'multi-team' : 'one-team');
+                show('block-project');
+                show('block-submit');
+            } else if (flowType === 'mentor') {
+                show('block-submit');
+            }
+
+            updateSidebar(flowType);
+
+            // Re-enforce video disable states
+            const videoFileWrap = document.getElementById('videoFileWrap');
+            if (videoFileWrap && videoFileWrap.classList.contains('d-none')) {
+                document.getElementById('videoFile').disabled = true;
+            } else if (document.getElementById('videoLink')) {
+                document.getElementById('videoLink').disabled = true;
+            }
+        }
+
+        function updateSidebar(flowType) {
+            // Show/Hide items based on block visibility
+            const config = [
+                { id: 'nav-role', target: 'section-role' },
+                { id: 'nav-team', target: 'block-team' },
+                { id: 'nav-project', target: 'block-project' },
+                { id: 'nav-submit', target: 'block-submit' }
+            ];
+
+            config.forEach(c => {
+                const navEl = document.getElementById(c.id);
+                const targetEl = document.getElementById(c.target);
+                if (navEl && targetEl) {
+                    navEl.style.display = targetEl.classList.contains('visible') ? 'flex' : 'none';
+                }
+            });
+        }
+
+        // ============================================
+        // SIDEBAR NAVIGATION HIGHLIGHT
+        // ============================================
+        document.querySelectorAll('.sidebar-step').forEach(step => {
+            step.addEventListener('click', function (e) {
+                // Manual click highlight
+                document.querySelectorAll('.sidebar-step').forEach(s => s.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Auto-highlight on scroll using Intersection Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '-10% 0px -75% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.target.classList.contains('visible')) {
+                    const id = entry.target.getAttribute('id');
+                    const navItem = document.querySelector(`.sidebar-step[href="#${id}"]`);
+                    if (navItem) {
+                        document.querySelectorAll('.sidebar-step').forEach(s => s.classList.remove('active'));
+                        navItem.classList.add('active');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.form-block').forEach(block => observer.observe(block));
+
+        // ============================================
+        // DROPDOWN LISTENERS
+        // ============================================
+        document.getElementById('simulatedRole').addEventListener('change', e => {
+            state.role = e.target.value;
+            state.subrole = null;
+            state.supervisorType = null;
+            state.pathway = null;
+            state.mentorRole = null;
+            document.getElementById('roleBadge').innerText = state.role;
+
+            // Reset dependent dropdowns
+            document.getElementById('subroleSelect').selectedIndex = 0;
+            document.getElementById('supervisorTypeSelect').selectedIndex = 0;
+            document.getElementById('pathwaySelect').selectedIndex = 0;
+            document.getElementById('mentorRoleSelect').selectedIndex = 0;
+
+            buildSubroleDropdown();
+            refreshVisibility();
+        });
+
+        document.getElementById('subroleSelect').addEventListener('change', e => {
+            state.subrole = e.target.value;
+            state.supervisorType = null;
+            state.pathway = null;
+            state.mentorRole = null;
+            document.getElementById('supervisorTypeSelect').selectedIndex = 0;
+            document.getElementById('pathwaySelect').selectedIndex = 0;
+            document.getElementById('mentorRoleSelect').selectedIndex = 0;
+            refreshVisibility();
+        });
+
+        document.getElementById('supervisorTypeSelect').addEventListener('change', e => {
+            state.supervisorType = e.target.value;
+            refreshVisibility();
+        });
+
+        document.getElementById('pathwaySelect').addEventListener('change', e => {
+            state.pathway = e.target.value;
+            refreshVisibility();
+        });
+
+        document.getElementById('mentorRoleSelect').addEventListener('change', e => {
+            state.mentorRole = e.target.value;
+            refreshVisibility();
+        });
+
+        // ============================================
+        // TEAM SECTION BUILDER
+        // ============================================
+        function buildTeamSection(mode) {
+            const titleEl = document.getElementById('teamSectionTitle');
+            const descEl = document.getElementById('teamSectionDesc');
+            const addBtn = document.getElementById('addTeamBtn');
+            const container = document.getElementById('teamsContainer');
+
+            // Only rebuild if it's empty (preserve typed data when user toggles other things)
+            const alreadyBuilt = container.children.length > 0;
+
+            if (mode === 'multi-team') {
+                titleEl.innerText = 'Team Registration (Multiple)';
+                descEl.innerText = 'Add details for each team you are registering.';
+                addBtn.classList.remove('d-none');
+            } else {
+                titleEl.innerText = 'Team Information';
+                descEl.innerText = state.subrole === 'supervisor'
+                    ? 'Add the team name and members. Members will receive a registration email.'
+                    : 'You will be registered as the Team Leader. Add your team members below.';
+                addBtn.classList.add('d-none');
+
+                // If switching from multi-team to one-team, keep only the first block
+                while (container.children.length > 1) {
+                    container.removeChild(container.lastChild);
+                }
+            }
+
+            if (!alreadyBuilt) addTeamBlock();
+        }
+
+        function addTeamBlock() {
+            const container = document.getElementById('teamsContainer');
+            const idx = container.children.length; // 0-based
+
+            const block = document.createElement('div');
+            block.className = 'team-block';
+            block.innerHTML = `
+                <div class="team-block-header">
+                    <span class="team-block-label">Team ${idx + 1}</span>
+                    ${idx > 0 ? `<button type="button" class="btn btn-sm btn-outline-danger" onclick="removeTeamBlock(this)"><i class="bi bi-trash"></i> Remove</button>` : ''}
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control team-name-input" placeholder="Team Name" required>
+                    <label>Team Name <span class="text-danger">*</span></label>
+                </div>
+
+                <div class="info-alert mb-3">
+                    <i class="bi bi-info-circle me-2"></i>You are registered as the Team Leader for this team.
+                </div>
+
+                <h6 class="fw-bold text-dark mb-2 small">Team Members</h6>
+                <div class="members-rows">
+                    ${memberRowHTML(true)}
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-secondary mt-1" onclick="addMemberRow(this)">
+                    <i class="bi bi-plus-lg me-1"></i> Add Member
+                </button>
+            `;
+            container.appendChild(block);
+            updateAllInputNames();
+        }
+
+        function memberRowHTML(isFirst) {
+            return `
+                <div class="member-row">
+                    <div class="form-floating">
+                        <input type="text" class="form-control member-name-input" placeholder="Member Name">
+                        <label>Member Name</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="email" class="form-control member-email-input" placeholder="Member Email">
+                        <label>Member Email</label>
+                    </div>
+                    <div>
+                        ${isFirst ? '<span class="text-muted small d-none d-md-inline">&nbsp;</span>' : `<button type="button" class="btn btn-outline-danger btn-sm" onclick="this.closest('.member-row').remove(); updateAllInputNames();"><i class="bi bi-trash"></i></button>`}
+                    </div>
+                </div>
+            `;
+        }
+
+        function addMemberRow(btn) {
+            const block = btn.closest('.team-block');
+            const rows = block.querySelector('.members-rows');
+            rows.insertAdjacentHTML('beforeend', memberRowHTML(false));
+            updateAllInputNames();
+        }
+
+        function removeTeamBlock(btn) {
+            btn.closest('.team-block').remove();
+            updateAllInputNames();
+        }
+
+        // Essential for Backend Readiness: Serializes dynamic structure
+        function updateAllInputNames() {
+            document.querySelectorAll('#teamsContainer .team-block').forEach((block, tIdx) => {
+                block.querySelector('.team-block-label').innerText = `Team ${tIdx + 1}`;
+                block.querySelector('.team-name-input').name = `teams[${tIdx}][name]`;
+                block.querySelectorAll('.member-row').forEach((row, mIdx) => {
+                    row.querySelector('.member-name-input').name = `teams[${tIdx}][members][${mIdx}][name]`;
+                    row.querySelector('.member-email-input').name = `teams[${tIdx}][members][${mIdx}][email]`;
+                });
+            });
+        }
+
+        // ============================================
+        // DOMAIN MULTI-SELECT
+        // ============================================
+        document.addEventListener('change', e => {
+            if (e.target.matches('input[name="domain[]"]')) {
+                e.target.closest('.domain-check').classList.toggle('checked', e.target.checked);
+            }
+        });
+
+        // ============================================
+        // VIDEO TOGGLE
+        // ============================================
+        function toggleVideo(mode, btn) {
+            document.querySelectorAll('.video-toggle-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('videoLinkWrap').classList.toggle('d-none', mode !== 'link');
+            document.getElementById('videoFileWrap').classList.toggle('d-none', mode !== 'file');
+            document.getElementById('videoLink').disabled = (mode !== 'link');
+            document.getElementById('videoFile').disabled = (mode !== 'file');
+        }
+
+        // ============================================
+        // FILE VALIDATION
+        // ============================================
+        function validateFiles(input, listId, maxCount, maxMB, allowedExts) {
+            const list = document.getElementById(listId);
+            list.innerHTML = '';
+            const files = Array.from(input.files);
+
+            // Store params for re-validation during deletion
+            input.setAttribute('data-list-id', listId);
+            input.setAttribute('data-max-count', maxCount);
+            input.setAttribute('data-max-mb', maxMB);
+            input.setAttribute('data-allowed-exts', JSON.stringify(allowedExts));
+
+            if (files.length > maxCount) {
+                alert(`You may only upload up to ${maxCount} file(s) here.`);
+                input.value = '';
+                return;
+            }
+
+            let valid = true;
+            files.forEach((f, idx) => {
+                const sizeMB = f.size / (1024 * 1024);
+                const ext = f.name.split('.').pop().toLowerCase();
+                const sizeOk = sizeMB <= maxMB;
+                const extOk = allowedExts.includes(ext);
+                const item = document.createElement('div');
+                item.className = 'file-item d-flex align-items-center justify-content-between' + ((sizeOk && extOk) ? '' : ' invalid');
+                item.innerHTML = `
+                    <div class="d-flex align-items-center overflow-hidden">
+                        <i class="bi bi-${extOk ? 'file-earmark' : 'exclamation-triangle'} me-2 flex-shrink-0"></i>
+                        <span class="file-name text-truncate">${f.name}</span>
+                        ${(!sizeOk || !extOk) ? '<span class="ms-2 small fw-bold text-danger">Invalid</span>' : ''}
+                    </div>
+                    <button type="button" class="btn btn-link text-danger p-0 ms-2" onclick="removeFileFromInput(this, '${input.id}')">
+                        <i class="bi bi-x-circle-fill"></i>
+                    </button>
+                `;
+                list.appendChild(item);
+                if (!sizeOk || !extOk) valid = false;
+            });
+
+            if (!valid) {
+                alert(`One or more files exceed ${maxMB} MB or have an invalid format.`);
+                input.value = '';
+                list.innerHTML = '';
+            }
+        }
+
+        function removeFileFromInput(btn, inputId) {
+            const input = document.getElementById(inputId);
+            const listId = input.getAttribute('data-list-id');
+            const maxCount = parseInt(input.getAttribute('data-max-count'));
+            const maxMB = parseInt(input.getAttribute('data-max-mb'));
+            const allowedExts = JSON.parse(input.getAttribute('data-allowed-exts'));
+
+            const item = btn.closest('.file-item');
+            const fileName = item.querySelector('.file-name').innerText;
+
+            const dt = new DataTransfer();
+            const { files } = input;
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                if (file.name !== fileName) {
+                    dt.items.add(file);
+                }
+            }
+
+            input.files = dt.files;
+            validateFiles(input, listId, maxCount, maxMB, allowedExts);
+        }
+
+        // ============================================
+        // WORD COUNT
+        // ============================================
+        document.getElementById('projectDesc').addEventListener('input', function () {
+            const words = this.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+            const display = document.getElementById('wordCountDisplay');
+            display.innerText = `${words} words`;
+            display.classList.toggle('error', words < 150 || words > 250);
+        });
+
+        // ============================================
+        // FINAL SUBMIT — validates everything visible
+        // ============================================
+        document.getElementById('submissionForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // ROLE-LEVEL VALIDATION
+            if (state.role !== 'Student' && !state.subrole) {
+                return alert('Please select your role.');
+            }
+            if (state.subrole === 'participant' && !state.pathway) {
+                return alert('Please select a participation type.');
+            }
+            if (state.role === 'Student' && !state.pathway) {
+                return alert('Please select a participation type.');
+            }
+            if (state.subrole === 'supervisor' && !state.supervisorType) {
+                return alert('Please select a registration type.');
+            }
+            if (state.subrole === 'mentor' && !state.mentorRole) {
+                return alert('Please select your capacity.');
+            }
+
+            // INDIVIDUAL DETAILS VALIDATION (if visible)
+            if (document.getElementById('block-individual').classList.contains('visible')) {
+                const n = document.getElementById('indivName').value.trim();
+                const emInput = document.getElementById('indivEmail');
+                const em = emInput.value.trim();
+                if (!n || !em) return alert('Please provide the participant name and email.');
+                if (!emInput.checkValidity()) {
+                    emInput.focus();
+                    return alert('Please provide a valid participant email format.');
+                }
+            }
+
+            // TEAM VALIDATION
+            const teamVisible = document.getElementById('block-team').classList.contains('visible');
+            if (teamVisible) {
+                const teams = document.querySelectorAll('#teamsContainer .team-block');
+                if (teams.length === 0) return alert('Please add at least one team.');
+                for (const t of teams) {
+                    const nameInput = t.querySelector('.team-name-input');
+                    if (!nameInput.value.trim()) {
+                        nameInput.focus();
+                        return alert('Please provide a team name for every team.');
+                    }
+
+                    const members = t.querySelectorAll('.member-row');
+                    for (const m of members) {
+                        const mName = m.querySelector('.member-name-input').value.trim();
+                        const mEmailInput = m.querySelector('.member-email-input');
+                        const mEmail = mEmailInput.value.trim();
+                        if (!mName || !mEmail) return alert('Please provide a name and email for every team member.');
+                        if (!mEmailInput.checkValidity()) {
+                            mEmailInput.focus();
+                            return alert('Please provide a valid email format for all members.');
+                        }
+                    }
+                }
+            }
+
+            // PROJECT VALIDATION (when applicable)
+            const projectVisible = document.getElementById('block-project').classList.contains('visible');
+            if (projectVisible) {
+                const title = document.getElementById('projectTitle').value.trim();
+                const desc = document.getElementById('projectDesc').value.trim();
+                const proposal = document.getElementById('mainProposal').files.length;
+                const domains = document.querySelectorAll('input[name="domain[]"]:checked');
+
+                if (!title) return alert('Project title is required.');
+                if (domains.length === 0) return alert('Please select at least one industry / domain.');
+                if (!desc) return alert('Project description is required.');
+                const words = desc.split(/\s+/).filter(w => w.length > 0).length;
+                if (words < 150 || words > 250) {
+                    document.getElementById('projectDesc').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return alert(`Project description must be between 150 and 250 words. You currently have ${words}.`);
+                }
+                if (!proposal) return alert('Please upload your main proposal.');
+            }
+
+            // DECLARATION
+            if (!document.getElementById('declaration').checked) {
+                return alert('Please agree to the terms and conditions to submit your application.');
+            }
+
+            // BACKEND READINESS: Sync hidden fields for dynamic state
+            let hiddenRole = document.getElementById('hidden-user-role');
+            let hiddenSubrole = document.getElementById('hidden-user-subrole');
+            if (!hiddenRole) {
+                hiddenRole = document.createElement('input');
+                hiddenRole.type = 'hidden';
+                hiddenRole.id = 'hidden-user-role';
+                hiddenRole.name = 'user_role';
+                this.appendChild(hiddenRole);
+            }
+            if (!hiddenSubrole) {
+                hiddenSubrole = document.createElement('input');
+                hiddenSubrole.type = 'hidden';
+                hiddenSubrole.id = 'hidden-user-subrole';
+                hiddenSubrole.name = 'user_subrole';
+                this.appendChild(hiddenSubrole);
+            }
+            hiddenRole.value = state.role;
+            hiddenSubrole.value = state.subrole || '';
+
+            // LOG FOR VERIFICATION (Simulating the "Push")
+            const formData = new FormData(this);
+            console.log('--- FORM DATA CAPTURED ---');
+            for (let [key, value] of formData.entries()) {
+                console.log(`${key}:`, value);
+            }
+
+            // SUCCESS
+            document.getElementById('submissionForm').style.display = 'none';
+            document.getElementById('successBlock').style.display = 'block';
+            document.querySelector('.apply-sidebar').style.display = 'none';
+            document.querySelector('.apply-container').style.maxWidth = '750px';
+            document.querySelector('.auth-wrapper').scrollTo(0, 0);
+        });
+
+        // ============================================
+        // RESET
+        // ============================================
+        function resetForm() {
+            document.getElementById('submissionForm').reset();
+            document.getElementById('submissionForm').style.display = 'block';
+            document.getElementById('successBlock').style.display = 'none';
+            document.querySelector('.apply-sidebar').style.display = '';
+            document.querySelector('.apply-container').style.maxWidth = '1060px';
+
+            state.subrole = null;
+            state.supervisorType = null;
+            state.pathway = null;
+            state.mentorRole = null;
+
+            document.querySelectorAll('.domain-check').forEach(el => el.classList.remove('checked'));
+            document.getElementById('wordCountDisplay').innerText = '0 words';
+            document.getElementById('wordCountDisplay').classList.remove('error');
+            ['mainProposalList', 'projectDocsList', 'projectVisualsList'].forEach(id => {
+                document.getElementById(id).innerHTML = '';
+            });
+            document.getElementById('teamsContainer').innerHTML = '';
+
+            buildSubroleDropdown();
+            refreshVisibility();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.querySelectorAll('.domain-check').forEach(label => {
+            label.addEventListener('change', function () {
+                this.classList.toggle('checked', this.querySelector('input').checked);
+            });
+        });
+
+        // ============================================
+        // INIT
+        // ============================================
+        buildSubroleDropdown();
+        refreshVisibility();
+    </script>
+</body>
+
+</html>

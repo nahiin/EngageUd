@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | EngageU Hub</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Core CSS -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        .auth-wrapper {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #17376e 100%);
+            padding: 2rem 0;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .signup-container {
+            max-width: 650px;
+            width: 100%;
+            margin: 2rem auto;
+            background: var(--surface-color);
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Progress Bar */
+        .progress-stepper {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .progress-stepper::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--border-color);
+            z-index: 1;
+        }
+
+        .step-item {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 25%;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--surface-color);
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-item.active .step-number {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 0 0 4px rgba(8, 29, 62, 0.1);
+        }
+
+        .step-item.completed .step-number {
+            background: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .step-item.active .step-label {
+            color: var(--primary-color);
+        }
+
+        /* Cards */
+        .role-option {
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .role-option:hover {
+            border-color: var(--primary-color);
+            background: rgba(8, 29, 62, 0.02);
+            transform: translateX(5px);
+        }
+
+        .role-option.selected {
+            border-color: var(--primary-color);
+            background: rgba(8, 29, 62, 0.05);
+            box-shadow: var(--shadow-md);
+        }
+
+        .role-icon-box {
+            width: 50px;
+            height: 50px;
+            background: rgba(8, 29, 62, 0.05);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .role-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .role-option.selected .role-icon-box {
+            background: var(--primary-color);
+        }
+
+        .role-option.selected .role-icon {
+            color: white;
+        }
+
+        /* Form step visibility */
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+            animation: fadeInStep 0.4s ease forwards;
+        }
+
+        @keyframes fadeInStep {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .other-input-group {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .interest-chip {
+            display: none;
+        }
+
+        .interest-checkbox:checked+.interest-label {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .interest-label {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            margin-bottom: 0.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .interest-label:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .animate-fade-up {
+            opacity: 1 !important;
+        }
+
+        .other-input-group {
+            display: none;
+        }
+
+        /* Success Step Styling */
+        .success-icon-box {
+            width: 100px;
+            height: 100px;
+            background: #fff3e0;
+            color: #f57c00;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            font-size: 3.5rem;
+            animation: pulseSuccess 2s infinite;
+        }
+
+        @keyframes pulseSuccess {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(245, 124, 0, 0.4);
+            }
+
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(245, 124, 0, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(245, 124, 0, 0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="auth-wrapper container-fluid p-0">
+        <div class="signup-container animate-fade-up">
+            <div class="text-center mb-5">
+                <div class="auth-logo mb-2">Engage<span>U</span></div>
+                <h2 class="fw-bold fs-4 text-dark" id="step-title">Join the Hub</h2>
+                <p class="text-muted" id="step-subtitle">Empowering the next generation of innovators.</p>
+            </div>
+
+            <!-- Progress -->
+            <div class="progress-stepper">
+                <div class="step-item active" id="step-1-indicator">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Role</div>
+                </div>
+                <div class="step-item" id="step-2-indicator">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Account</div>
+                </div>
+                <div class="step-item" id="step-3-indicator">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Profile</div>
+                </div>
+                <div class="step-item" id="step-4-indicator">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Interests</div>
+                </div>
+            </div>
+
+            <form id="signupForm" action="#" method="POST" novalidate>
+
+                <!-- STEP 1-->
+                <div class="form-step active" id="step-1">
+                    <div class="role-options-list">
+                        <div class="role-option" onclick="selectRole('student', this)">
+                            <div class="role-icon-box">
+                                <i class="bi bi-mortarboard role-icon"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Student</h6>
+                                <p class="small text-muted mb-0">Join as a school or university student to participate
+                                    in competitions and access learning resources.</p>
+                            </div>
+                        </div>
+
+                        <div class="role-option" onclick="selectRole('educator', this)">
+                            <div class="role-icon-box">
+                                <i class="bi bi-person-workspace role-icon"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Educator</h6>
+                                <p class="small text-muted mb-0">Join as a teacher, coordinator, or administrator to
+                                    guide students and collaborate with peers.</p>
+                            </div>
+                        </div>
+
+                        <div class="role-option" onclick="selectRole('professional', this)">
+                            <div class="role-icon-box">
+                                <i class="bi bi-building role-icon"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Industry Professional / Organization</h6>
+                                <p class="small text-muted mb-0">Join to mentor students, participate in competitions,
+                                    or explore partnership opportunities.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="selectedRole" name="role" required>
+
+                    <div class="mt-5 text-center">
+                        <button type="button" class="btn btn-primary-custom px-5"
+                            onclick="nextStep(2)">Continue</button>
+                    </div>
+                </div>
+
+                <!-- STEP 2 -->
+                <div class="form-step" id="step-2">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="firstName" name="firstName"
+                                    placeholder="First Name" required>
+                                <label for="firstName">First Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="lastName" name="lastName"
+                                    placeholder="Last Name" required>
+                                <label for="lastName">Last Name</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                                    required>
+                                <label for="email">Email Address</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Password" required>
+                                <label for="password">Password</label>
+                            </div>
+                        </div>
+                        <div class="col-12" id="phoneContainer">
+                            <div class="form-floating mb-3">
+                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone">
+                                <label for="phone">Phone (Optional)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions mt-4">
+                        <button type="button" class="btn btn-cancel" onclick="prevStep(1)">Back</button>
+                        <button type="button" class="btn btn-primary-custom" onclick="nextStep(3)">Next Step</button>
+                    </div>
+                </div>
+
+                <!-- STEP 3  -->
+                <div class="form-step" id="step-3">
+
+                    <!-- Student Fields -->
+                    <div id="student-fields" class="role-fields d-none">
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="studentInstitutionType" name="studentInstitutionType"
+                                required>
+                                <option value="" selected disabled>Select Institution Type</option>
+                                <option value="School">School</option>
+                                <option value="University">University</option>
+                            </select>
+                            <label for="studentInstitutionType">Institution Type</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="studentInstitution"
+                                onchange="toggleManualInput(this, 'studentInstitutionManualGroup')" required>
+                                <option value="" selected disabled>Select Institution</option>
+                                <option value="other">Other (Add Manually)</option>
+                                <option>Kansas State University</option>
+                                <option>Texas Tech University</option>
+                                <option>University of Ottawa</option>
+                                <option>Abu Dhabi University</option>
+                                <option>Adamson University</option>
+                                <option>Ain Shams University</option>
+                                <option>Ajman University</option>
+                                <option>Aklan State University</option>
+                                <option>Al Ahlia University</option>
+                                <option>Al al-Bayt University</option>
+                                <option>Al Jawf University</option>
+                                <option>Al-Ahliyya Amman University</option>
+                                <option>Al-Azhar University</option>
+                                <option>AlFaisal University</option>
+                                <option>Alhosn University</option>
+                                <option>Al-Hussein Bin Talal University</option>
+                                <option>Aligarh Muslim University</option>
+                                <option>Al-Islah University</option>
+                                <option>Al-Isra Private University</option>
+                                <option>Al-Manar University of Tripoli</option>
+                                <option>Al-Zaytoonah Private University</option>
+                                <option>American University in Dubai</option>
+                                <option>American University in Paris</option>
+                                <option>American University of Beirut</option>
+                                <option>American University of London</option>
+                                <option>American University of Sharjah</option>
+                                <option>Amman Arab University for Graduate Studies</option>
+                                <option>Applied Science University</option>
+                                <option>Aquinas University</option>
+                                <option>Arab International University</option>
+                                <option>Arab Open University</option>
+                                <option>Arabian Gulf University</option>
+                                <option>Arizona State University</option>
+                                <option>Arkansas State University</option>
+                                <option>Ashland University</option>
+                                <option>Aston University</option>
+                                <option>Ateneo de Davao University</option>
+                                <option>Ateneo de Manila University</option>
+                                <option>Ateneo de Naga University</option>
+                                <option>Australian Catholic University</option>
+                                <option>Australian National University</option>
+                                <option>Ball State University</option>
+                                <option>Bangalore University</option>
+                                <option>Bangladesh University of Engineering & Technology</option>
+                                <option>Bataan Peninsula State University</option>
+                                <option>Batangas State University</option>
+                                <option>Beirut Arab University</option>
+                                <option>Benguet State University</option>
+                                <option>Bicol University</option>
+                                <option>Birzeit University</option>
+                                <option>Bloomsburg University</option>
+                                <option>Boise State University</option>
+                                <option>Boston University</option>
+                                <option>Bowling Green State University</option>
+                                <option>British University in Dubai</option>
+                                <option>Brunel University</option>
+                                <option>Bukidnon State University</option>
+                                <option>Bulacan State University</option>
+                                <option>California State University</option>
+                                <option>Capella University</option>
+                                <option>Cardiff University</option>
+                                <option>Carleton University</option>
+                                <option>Central Luzon State University</option>
+                                <option>Central Michigan University</option>
+                                <option>Central Mindanao University</option>
+                                <option>Central Philippine University</option>
+                                <option>Central Queensland University</option>
+                                <option>Central Washington University</option>
+                                <option>Centro Escolar University</option>
+                                <option>City University London</option>
+                                <option>Cleveland State University</option>
+                                <option>Colorado State University</option>
+                                <option>Columbia University</option>
+                                <option>Concordia University</option>
+                                <option>Dalhousie University</option>
+                                <option>Dar Al-Uloom University Riyadh</option>
+                                <option>De La Salle University</option>
+                                <option>Devry University</option>
+                                <option>Dominican University</option>
+                                <option>Drexel University</option>
+                                <option>Durham University</option>
+                                <option>Eastern Kentucky University</option>
+                                <option>Eastern New Mexico University</option>
+                                <option>Eastern Washington University</option>
+                                <option>Fahad Bin Sultan University</option>
+                                <option>FEATI University</option>
+                                <option>Florida Atlantic University</option>
+                                <option>Florida State University</option>
+                                <option>Fort Hays State University</option>
+                                <option>Gannon University</option>
+                                <option>George Mason University</option>
+                                <option>German-Jordanian University</option>
+                                <option>Glasgow Caledonian University</option>
+                                <option>Glasgow University</option>
+                                <option>Global University</option>
+                                <option>Gulf Medical University</option>
+                                <option>Haigazian University</option>
+                                <option>Helwan University</option>
+                                <option>Holy Angel University</option>
+                                <option>Idaho State University</option>
+                                <option>Imam Abdulrahman University</option>
+                                <option>Imam Mohammad Ibn Saud University</option>
+                                <option>Indiana State University</option>
+                                <option>Indiana University</option>
+                                <option>International Islamic University Malaysia</option>
+                                <option>Irbid National University</option>
+                                <option>Irish University</option>
+                                <option>Islamic University</option>
+                                <option>Islamic University of Lebanon</option>
+                                <option>Jadara University</option>
+                                <option>Jamia Millia Islamia</option>
+                                <option>Jinan University</option>
+                                <option>Jordan University of Science and Technology</option>
+                                <option>Khalifa University</option>
+                                <option>King Abdulaziz University</option>
+                                <option>King Faisal University</option>
+                                <option>King Khalid University</option>
+                                <option>King Saud University</option>
+                                <option>King’s College London</option>
+                                <option>Kuwait University</option>
+                                <option>La Trobe University</option>
+                                <option>Laurentian University</option>
+                                <option>Lebanese American University</option>
+                                <option>Lebanese International University</option>
+                                <option>Leeds University</option>
+                                <option>Liceo de Cagayan University</option>
+                                <option>London Metropolitan University</option>
+                                <option>London South Bank University</option>
+                                <option>Makassed University of Beirut</option>
+                                <option>Manchester Metropolitan University</option>
+                                <option>Manila Central University</option>
+                                <option>Manuel L. Quezon University</option>
+                                <option>Mariano Marcos State University</option>
+                                <option>Marymount University</option>
+                                <option>McNeese State University</option>
+                                <option>MECAT University</option>
+                                <option>Memorial University of Newfoundland</option>
+                                <option>Mercer University</option>
+                                <option>Michigan State University</option>
+                                <option>Middle East University</option>
+                                <option>Mindanao State University</option>
+                                <option>Misamis University</option>
+                                <option>Missouri State University</option>
+                                <option>Monash University</option>
+                                <option>Montana State University</option>
+                                <option>Morehead State University</option>
+                                <option>Mu'tah University</option>
+                                <option>National University</option>
+                                <option>New Era University</option>
+                                <option>New Jersey City University</option>
+                                <option>New York Institute of Technology</option>
+                                <option>Nile Valley University</option>
+                                <option>North Carolina Central University</option>
+                                <option>North Dakota State University</option>
+                                <option>Northeastern University</option>
+                                <option>Northern Arizona University</option>
+                                <option>Northern Michigan University</option>
+                                <option>Northwestern University of the Philippines</option>
+                                <option>Notre Dame University</option>
+                                <option>Nova Southeastern University</option>
+                                <option>Oakland University</option>
+                                <option>Ohio State University</option>
+                                <option>Oklahoma State University</option>
+                                <option>Oran University</option>
+                                <option>Oregon State University</option>
+                                <option>Osmania University</option>
+                                <option>Our Lady of Fatima University</option>
+                                <option>Palawan State University</option>
+                                <option>Pangasinan State University</option>
+                                <option>Pennsylvania State University</option>
+                                <option>Philadelphia University</option>
+                                <option>Philippine Christian University</option>
+                                <option>Philippine Normal University</option>
+                                <option>Pittsburg State University</option>
+                                <option>Polytechnic University of the Philippines</option>
+                                <option>Portland State University</option>
+                                <option>Prince Mohammad Bin Fahd University</option>
+                                <option>Prince Sultan University</option>
+                                <option>Princess Noura University</option>
+                                <option>Princess Sumaya University for Technology</option>
+                                <option>Purdue University</option>
+                                <option>Qaseem University</option>
+                                <option>Quaid-I-Azam University</option>
+                                <option>Queensland University of Technology</option>
+                                <option>Robert Morris University</option>
+                                <option>Roger Williams University</option>
+                                <option>Royal University for Women</option>
+                                <option>Rutgers University</option>
+                                <option>Ryerson University</option>
+                                <option>Saginaw Valley State University</option>
+                                <option>Saint Louis University</option>
+                                <option>Saint Mary's University</option>
+                                <option>Sam Houston State University</option>
+                                <option>Samar State University</option>
+                                <option>San Diego State University</option>
+                                <option>San Francisco State University</option>
+                                <option>San Jose State University</option>
+                                <option>Simon Fraser University</option>
+                                <option>Silliman University</option>
+                                <option>South Dakota State University</option>
+                                <option>Southern Arkansas University</option>
+                                <option>Southern Methodist University</option>
+                                <option>Southern New Hampshire University</option>
+                                <option>Southwestern University</option>
+                                <option>Stanford University</option>
+                                <option>Strayer University</option>
+                                <option>Swinburne University of Technology</option>
+                                <option>Syracuse University</option>
+                                <option>Tafila Technical University</option>
+                                <option>Tarlac State University</option>
+                                <option>Tarleton State University</option>
+                                <option>Temple University</option>
+                                <option>Tennessee State University</option>
+                                <option>Texas A&M University</option>
+                                <option>Texas Southern University</option>
+                                <option>The Hashemite University</option>
+                                <option>The Kingdom University</option>
+                                <option>The Robert Gordon University</option>
+                                <option>The University of Arizona</option>
+                                <option>The University of Oklahoma</option>
+                                <option>The University of Rhode Island</option>
+                                <option>The University of Toledo</option>
+                                <option>The University of Utah</option>
+                                <option>Thompson Rivers University</option>
+                                <option>Trine University</option>
+                                <option>Umm Al-Qura University</option>
+                                <option>United Arab Emirates University</option>
+                                <option>University College Bahrain</option>
+                                <option>University of Adelaide</option>
+                                <option>University of Akron</option>
+                                <option>University of Arizona</option>
+                                <option>University of Bahrain</option>
+                                <option>University of Batangas</option>
+                                <option>University of Bohol</option>
+                                <option>University of Bridgeport</option>
+                                <option>University of British Columbia</option>
+                                <option>University of Cairo</option>
+                                <option>University of Cambridge</option>
+                                <option>University of Canberra</option>
+                                <option>University of Cebu</option>
+                                <option>University of Central Missouri</option>
+                                <option>University of Central Oklahoma</option>
+                                <option>University of Colorado</option>
+                                <option>University of Connecticut</option>
+                                <option>University of Dammam</option>
+                                <option>University of Delaware</option>
+                                <option>University of Dhaka</option>
+                                <option>University of Dubai</option>
+                                <option>University of East London</option>
+                                <option>University of Florida</option>
+                                <option>University of Hafr Al Batin</option>
+                                <option>University of Hail</option>
+                                <option>University of Hartford</option>
+                                <option>University of Hawaii</option>
+                                <option>University of Houston</option>
+                                <option>University of Indianapolis</option>
+                                <option>University of Jordan</option>
+                                <option>University of Kansas</option>
+                                <option>University of Kentucky</option>
+                                <option>University of Leicester</option>
+                                <option>University of Liverpool</option>
+                                <option>University of London</option>
+                                <option>University of Louisville</option>
+                                <option>University of Manchester</option>
+                                <option>University of Melbourne</option>
+                                <option>University of Miami</option>
+                                <option>University of Michigan</option>
+                                <option>University of Missouri</option>
+                                <option>University of Montana</option>
+                                <option>University of New Haven</option>
+                                <option>University of New Mexico</option>
+                                <option>University of New Orleans</option>
+                                <option>University of Newcastle</option>
+                                <option>University of North Dakota</option>
+                                <option>University of North Texas</option>
+                                <option>University of Notre Dame</option>
+                                <option>University of Oregon</option>
+                                <option>University of Oxford</option>
+                                <option>University of Pennsylvania</option>
+                                <option>University of Petra</option>
+                                <option>University of Phoenix</option>
+                                <option>University of Pittsburgh</option>
+                                <option>University of Portsmouth</option>
+                                <option>University of Queensland</option>
+                                <option>University of Regina</option>
+                                <option>University of San Diego</option>
+                                <option>University of San Francisco</option>
+                                <option>University of Santo Tomas</option>
+                                <option>University of Sharjah</option>
+                                <option>University of South Africa</option>
+                                <option>University of South Carolina</option>
+                                <option>University of South Florida</option>
+                                <option>University of Surrey</option>
+                                <option>University of Sydney</option>
+                                <option>University of Tasmania</option>
+                                <option>University of Tehran</option>
+                                <option>University of Tennessee</option>
+                                <option>University of Texas</option>
+                                <option>University of Texas at Austin</option>
+                                <option>University of the East</option>
+                                <option>University of the Pacific</option>
+                                <option>University of the Philippines</option>
+                                <option>University of Tulsa</option>
+                                <option>University of Victoria</option>
+                                <option>University of Wales</option>
+                                <option>University of Washington</option>
+                                <option>University of Western Sydney</option>
+                                <option>University of Westminster</option>
+                                <option>University of Windsor</option>
+                                <option>University of Wollongong</option>
+                                <option>University of Wyoming</option>
+                                <option>Vanderbilt University</option>
+                                <option>Virginia Tech</option>
+                                <option>Warsaw University</option>
+                                <option>Washburn University</option>
+                                <option>Wayne State University</option>
+                                <option>Wesleyan University</option>
+                                <option>West Virginia University</option>
+                                <option>Western Kentucky University</option>
+                                <option>Western Michigan University</option>
+                                <option>Western Oregon University</option>
+                                <option>Western Washington University</option>
+                                <option>Wichita State University</option>
+                                <option>Wright State University</option>
+                                <option>Xavier University</option>
+                                <option>Yale University</option>
+                                <option>Yarmouk University</option>
+                                <option>York University</option>
+                                <option>Zarqa Private University</option>
+                                <option>Zayed University</option>
+                            </select>
+                            <label for="studentInstitution">Institution Name</label>
+                        </div>
+                        <div class="form-floating mb-3 other-input-group" id="studentInstitutionManualGroup">
+                            <input type="text" class="form-control" id="studentInstitutionManual"
+                                name="studentInstitutionManual" placeholder="Enter Institution Name">
+                            <label for="studentInstitutionManual">Enter Institution Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="nationality" name="nationality" required>
+                                <option value="" selected disabled>Select Nationality</option>
+                                <option value="Afghan">Afghan</option>
+                                <option value="Albanian">Albanian</option>
+                                <option value="Algerian">Algerian</option>
+                                <option value="American">American</option>
+                                <option value="Andorran">Andorran</option>
+                                <option value="Angolan">Angolan</option>
+                                <option value="Antiguans">Antiguans</option>
+                                <option value="Argentinean">Argentinean</option>
+                                <option value="Armenian">Armenian</option>
+                                <option value="Australian">Australian</option>
+                                <option value="Austrian">Austrian</option>
+                                <option value="Azerbaijani">Azerbaijani</option>
+                                <option value="Bahamian">Bahamian</option>
+                                <option value="Bahraini">Bahraini</option>
+                                <option value="Bangladeshi">Bangladeshi</option>
+                                <option value="Barbadian">Barbadian</option>
+                                <option value="Barbudans">Barbudans</option>
+                                <option value="Batswana">Batswana</option>
+                                <option value="Belarusian">Belarusian</option>
+                                <option value="Belgian">Belgian</option>
+                                <option value="Belizean">Belizean</option>
+                                <option value="Beninese">Beninese</option>
+                                <option value="Bhutanese">Bhutanese</option>
+                                <option value="Bolivian">Bolivian</option>
+                                <option value="Bosnian">Bosnian</option>
+                                <option value="Brazilian">Brazilian</option>
+                                <option value="British">British</option>
+                                <option value="Bruneian">Bruneian</option>
+                                <option value="Bulgarian">Bulgarian</option>
+                                <option value="Burkinabe">Burkinabe</option>
+                                <option value="Burmese">Burmese</option>
+                                <option value="Burundian">Burundian</option>
+                                <option value="Cambodian">Cambodian</option>
+                                <option value="Cameroonian">Cameroonian</option>
+                                <option value="Canadian">Canadian</option>
+                                <option value="Cape Verdean">Cape Verdean</option>
+                                <option value="Central African">Central African</option>
+                                <option value="Chadian">Chadian</option>
+                                <option value="Chilean">Chilean</option>
+                                <option value="Chinese">Chinese</option>
+                                <option value="Colombian">Colombian</option>
+                                <option value="Comoran">Comoran</option>
+                                <option value="Congolese">Congolese</option>
+                                <option value="Costa Rican">Costa Rican</option>
+                                <option value="Croatian">Croatian</option>
+                                <option value="Cuban">Cuban</option>
+                                <option value="Cypriot">Cypriot</option>
+                                <option value="Czech">Czech</option>
+                                <option value="Danish">Danish</option>
+                                <option value="Djibouti">Djibouti</option>
+                                <option value="Dominican">Dominican</option>
+                                <option value="Dutch">Dutch</option>
+                                <option value="East Timorese">East Timorese</option>
+                                <option value="Ecuadorean">Ecuadorean</option>
+                                <option value="Egyptian">Egyptian</option>
+                                <option value="Emirati">Emirati</option>
+                                <option value="Equatorial Guinean">Equatorial Guinean</option>
+                                <option value="Eritrean">Eritrean</option>
+                                <option value="Estonian">Estonian</option>
+                                <option value="Ethiopian">Ethiopian</option>
+                                <option value="Fijian">Fijian</option>
+                                <option value="Filipino">Filipino</option>
+                                <option value="Finnish">Finnish</option>
+                                <option value="French">French</option>
+                                <option value="Gabonese">Gabonese</option>
+                                <option value="Gambian">Gambian</option>
+                                <option value="Georgian">Georgian</option>
+                                <option value="German">German</option>
+                                <option value="Ghanaian">Ghanaian</option>
+                                <option value="Greek">Greek</option>
+                                <option value="Grenadian">Grenadian</option>
+                                <option value="Guatemalan">Guatemalan</option>
+                                <option value="Guinea-Bissauan">Guinea-Bissauan</option>
+                                <option value="Guinean">Guinean</option>
+                                <option value="Guyanese">Guyanese</option>
+                                <option value="Haitian">Haitian</option>
+                                <option value="Herzegovinian">Herzegovinian</option>
+                                <option value="Honduran">Honduran</option>
+                                <option value="Hungarian">Hungarian</option>
+                                <option value="I-Kiribati">I-Kiribati</option>
+                                <option value="Icelander">Icelander</option>
+                                <option value="Indian">Indian</option>
+                                <option value="Indonesian">Indonesian</option>
+                                <option value="Iranian">Iranian</option>
+                                <option value="Iraqi">Iraqi</option>
+                                <option value="Irish">Irish</option>
+                                <option value="Italian">Italian</option>
+                                <option value="Ivorian">Ivorian</option>
+                                <option value="Jamaican">Jamaican</option>
+                                <option value="Japanese">Japanese</option>
+                                <option value="Jordanian">Jordanian</option>
+                                <option value="Kazakhstani">Kazakhstani</option>
+                                <option value="Kenyan">Kenyan</option>
+                                <option value="Kittian and Nevisian">Kittian and Nevisian</option>
+                                <option value="Kuwaiti">Kuwaiti</option>
+                                <option value="Kyrgyz">Kyrgyz</option>
+                                <option value="Laotian">Laotian</option>
+                                <option value="Latvian">Latvian</option>
+                                <option value="Lebanese">Lebanese</option>
+                                <option value="Liberian">Liberian</option>
+                                <option value="Libyan">Libyan</option>
+                                <option value="Liechtensteiner">Liechtensteiner</option>
+                                <option value="Lithuanian">Lithuanian</option>
+                                <option value="Luxembourger">Luxembourger</option>
+                                <option value="Macedonian">Macedonian</option>
+                                <option value="Malagasy">Malagasy</option>
+                                <option value="Malawian">Malawian</option>
+                                <option value="Malaysian">Malaysian</option>
+                                <option value="Maldivan">Maldivan</option>
+                                <option value="Malian">Malian</option>
+                                <option value="Maltese">Maltese</option>
+                                <option value="Marshallese">Marshallese</option>
+                                <option value="Mauritanian">Mauritanian</option>
+                                <option value="Mauritian">Mauritian</option>
+                                <option value="Mexican">Mexican</option>
+                                <option value="Micronesian">Micronesian</option>
+                                <option value="Moldovan">Moldovan</option>
+                                <option value="Monacan">Monacan</option>
+                                <option value="Mongolian">Mongolian</option>
+                                <option value="Moroccan">Moroccan</option>
+                                <option value="Mosotho">Mosotho</option>
+                                <option value="Motswana">Motswana</option>
+                                <option value="Mozambican">Mozambican</option>
+                                <option value="Namibian">Namibian</option>
+                                <option value="Nauruan">Nauruan</option>
+                                <option value="Nepalese">Nepalese</option>
+                                <option value="New Zealander">New Zealander</option>
+                                <option value="Ni-Vanuatu">Ni-Vanuatu</option>
+                                <option value="Nicaraguan">Nicaraguan</option>
+                                <option value="Nigerian">Nigerian</option>
+                                <option value="Nigerien">Nigerien</option>
+                                <option value="North Korean">North Korean</option>
+                                <option value="Northern Irish">Northern Irish</option>
+                                <option value="Norwegian">Norwegian</option>
+                                <option value="Omani">Omani</option>
+                                <option value="Pakistani">Pakistani</option>
+                                <option value="Palauan">Palauan</option>
+                                <option value="Panamanian">Panamanian</option>
+                                <option value="Papua New Guinean">Papua New Guinean</option>
+                                <option value="Paraguayan">Paraguayan</option>
+                                <option value="Peruvian">Peruvian</option>
+                                <option value="Polish">Polish</option>
+                                <option value="Portuguese">Portuguese</option>
+                                <option value="Qatari">Qatari</option>
+                                <option value="Romanian">Romanian</option>
+                                <option value="Russian">Russian</option>
+                                <option value="Rwandan">Rwandan</option>
+                                <option value="Saint Lucian">Saint Lucian</option>
+                                <option value="Salvadoran">Salvadoran</option>
+                                <option value="Samoan">Samoan</option>
+                                <option value="San Marinese">San Marinese</option>
+                                <option value="Sao Tomean">Sao Tomean</option>
+                                <option value="Saudi">Saudi</option>
+                                <option value="Scottish">Scottish</option>
+                                <option value="Senegalese">Senegalese</option>
+                                <option value="Serbian">Serbian</option>
+                                <option value="Seychellois">Seychellois</option>
+                                <option value="Sierra Leonean">Sierra Leonean</option>
+                                <option value="Singaporean">Singaporean</option>
+                                <option value="Slovakian">Slovakian</option>
+                                <option value="Slovenian">Slovenian</option>
+                                <option value="Solomon Islander">Solomon Islander</option>
+                                <option value="Somali">Somali</option>
+                                <option value="South African">South African</option>
+                                <option value="South Korean">South Korean</option>
+                                <option value="Spanish">Spanish</option>
+                                <option value="Sri Lankan">Sri Lankan</option>
+                                <option value="Sudanese">Sudanese</option>
+                                <option value="Surinamer">Surinamer</option>
+                                <option value="Swazi">Swazi</option>
+                                <option value="Swedish">Swedish</option>
+                                <option value="Swiss">Swiss</option>
+                                <option value="Syrian">Syrian</option>
+                                <option value="Taiwanese">Taiwanese</option>
+                                <option value="Tajik">Tajik</option>
+                                <option value="Tanzanian">Tanzanian</option>
+                                <option value="Thai">Thai</option>
+                                <option value="Togolese">Togolese</option>
+                                <option value="Tongan">Tongan</option>
+                                <option value="Trinidadian or Tobagonian">Trinidadian or Tobagonian</option>
+                                <option value="Tunisian">Tunisian</option>
+                                <option value="Turkish">Turkish</option>
+                                <option value="Tuvaluan">Tuvaluan</option>
+                                <option value="Ugandan">Ugandan</option>
+                                <option value="Ukrainian">Ukrainian</option>
+                                <option value="Uruguayan">Uruguayan</option>
+                                <option value="Uzbekistani">Uzbekistani</option>
+                                <option value="Venezuelan">Venezuelan</option>
+                                <option value="Vietnamese">Vietnamese</option>
+                                <option value="Welsh">Welsh</option>
+                                <option value="Yemenite">Yemenite</option>
+                                <option value="Zambian">Zambian</option>
+                                <option value="Zimbabwean">Zimbabwean</option>
+                            </select>
+                            <label for="nationality">Nationality</label>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label d-block fw-bold text-muted small mb-2">Student Enrollment
+                                Attestation</label>
+                            <div class="input-group">
+                                <input type="file" class="form-control" id="attestationFile" name="attestationFile"
+                                    accept=".pdf,.jpg,.jpeg,.png">
+                            </div>
+                            <div class="form-text small text-muted mt-1">Please attach an official attestation from your
+                                university or school that proves you are an active registered student.</div>
+                        </div>
+                    </div>
+
+                    <!-- Educator  -->
+                    <div id="educator-fields" class="role-fields d-none">
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="educatorRoleTitle" name="educatorRoleTitle" required>
+                                <option value="" selected disabled>Select Role / Title</option>
+                                <option value="Teacher">Teacher</option>
+                                <option value="Coordinator">Coordinator</option>
+                                <option value="Administrator">Administrator</option>
+                            </select>
+                            <label for="educatorRoleTitle">Role / Title</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="educatorInstitution"
+                                onchange="toggleManualInput(this, 'educatorInstitutionManualGroup')" required>
+                                <option value="" selected disabled>Select Institution</option>
+                                <option>Kansas State University</option>
+                                <option>Texas Tech University</option>
+                                <option>University of Ottawa</option>
+                                <option>Abu Dhabi University</option>
+                                <option>Adamson University</option>
+                                <option>Ain Shams University</option>
+                                <option>Ajman University</option>
+                                <option>Aklan State University</option>
+                                <option>Al Ahlia University</option>
+                                <option>Al al-Bayt University</option>
+                                <option>Al Jawf University</option>
+                                <option>Al-Ahliyya Amman University</option>
+                                <option>Al-Azhar University</option>
+                                <option>AlFaisal University</option>
+                                <option>Alhosn University</option>
+                                <option>Al-Hussein Bin Talal University</option>
+                                <option>Aligarh Muslim University</option>
+                                <option>Al-Islah University</option>
+                                <option>Al-Isra Private University</option>
+                                <option>Al-Manar University of Tripoli</option>
+                                <option>Al-Zaytoonah Private University</option>
+                                <option>American University in Dubai</option>
+                                <option>American University in Paris</option>
+                                <option>American University of Beirut</option>
+                                <option>American University of London</option>
+                                <option>American University of Sharjah</option>
+                                <option>Amman Arab University for Graduate Studies</option>
+                                <option>Applied Science University</option>
+                                <option>Aquinas University</option>
+                                <option>Arab International University</option>
+                                <option>Arab Open University</option>
+                                <option>Arabian Gulf University</option>
+                                <option>Arizona State University</option>
+                                <option>Arkansas State University</option>
+                                <option>Ashland University</option>
+                                <option>Aston University</option>
+                                <option>Ateneo de Davao University</option>
+                                <option>Ateneo de Manila University</option>
+                                <option>Ateneo de Naga University</option>
+                                <option>Australian Catholic University</option>
+                                <option>Australian National University</option>
+                                <option>Ball State University</option>
+                                <option>Bangalore University</option>
+                                <option>Bangladesh University of Engineering & Technology</option>
+                                <option>Bataan Peninsula State University</option>
+                                <option>Batangas State University</option>
+                                <option>Beirut Arab University</option>
+                                <option>Benguet State University</option>
+                                <option>Bicol University</option>
+                                <option>Birzeit University</option>
+                                <option>Bloomsburg University</option>
+                                <option>Boise State University</option>
+                                <option>Boston University</option>
+                                <option>Bowling Green State University</option>
+                                <option>British University in Dubai</option>
+                                <option>Brunel University</option>
+                                <option>Bukidnon State University</option>
+                                <option>Bulacan State University</option>
+                                <option>California State University</option>
+                                <option>Capella University</option>
+                                <option>Cardiff University</option>
+                                <option>Carleton University</option>
+                                <option>Central Luzon State University</option>
+                                <option>Central Michigan University</option>
+                                <option>Central Mindanao University</option>
+                                <option>Central Philippine University</option>
+                                <option>Central Queensland University</option>
+                                <option>Central Washington University</option>
+                                <option>Centro Escolar University</option>
+                                <option>City University London</option>
+                                <option>Cleveland State University</option>
+                                <option>Colorado State University</option>
+                                <option>Columbia University</option>
+                                <option>Concordia University</option>
+                                <option>Dalhousie University</option>
+                                <option>Dar Al-Uloom University Riyadh</option>
+                                <option>De La Salle University</option>
+                                <option>Devry University</option>
+                                <option>Dominican University</option>
+                                <option>Drexel University</option>
+                                <option>Durham University</option>
+                                <option>Eastern Kentucky University</option>
+                                <option>Eastern New Mexico University</option>
+                                <option>Eastern Washington University</option>
+                                <option>Fahad Bin Sultan University</option>
+                                <option>FEATI University</option>
+                                <option>Florida Atlantic University</option>
+                                <option>Florida State University</option>
+                                <option>Fort Hays State University</option>
+                                <option>Gannon University</option>
+                                <option>George Mason University</option>
+                                <option>German-Jordanian University</option>
+                                <option>Glasgow Caledonian University</option>
+                                <option>Glasgow University</option>
+                                <option>Global University</option>
+                                <option>Gulf Medical University</option>
+                                <option>Haigazian University</option>
+                                <option>Helwan University</option>
+                                <option>Holy Angel University</option>
+                                <option>Idaho State University</option>
+                                <option>Imam Abdulrahman University</option>
+                                <option>Imam Mohammad Ibn Saud University</option>
+                                <option>Indiana State University</option>
+                                <option>Indiana University</option>
+                                <option>International Islamic University Malaysia</option>
+                                <option>Irbid National University</option>
+                                <option>Irish University</option>
+                                <option>Islamic University</option>
+                                <option>Islamic University of Lebanon</option>
+                                <option>Jadara University</option>
+                                <option>Jamia Millia Islamia</option>
+                                <option>Jinan University</option>
+                                <option>Jordan University of Science and Technology</option>
+                                <option>Khalifa University</option>
+                                <option>King Abdulaziz University</option>
+                                <option>King Faisal University</option>
+                                <option>King Khalid University</option>
+                                <option>King Saud University</option>
+                                <option>King’s College London</option>
+                                <option>Kuwait University</option>
+                                <option>La Trobe University</option>
+                                <option>Laurentian University</option>
+                                <option>Lebanese American University</option>
+                                <option>Lebanese International University</option>
+                                <option>Leeds University</option>
+                                <option>Liceo de Cagayan University</option>
+                                <option>London Metropolitan University</option>
+                                <option>London South Bank University</option>
+                                <option>Makassed University of Beirut</option>
+                                <option>Manchester Metropolitan University</option>
+                                <option>Manila Central University</option>
+                                <option>Manuel L. Quezon University</option>
+                                <option>Mariano Marcos State University</option>
+                                <option>Marymount University</option>
+                                <option>McNeese State University</option>
+                                <option>MECAT University</option>
+                                <option>Memorial University of Newfoundland</option>
+                                <option>Mercer University</option>
+                                <option>Michigan State University</option>
+                                <option>Middle East University</option>
+                                <option>Mindanao State University</option>
+                                <option>Misamis University</option>
+                                <option>Missouri State University</option>
+                                <option>Monash University</option>
+                                <option>Montana State University</option>
+                                <option>Morehead State University</option>
+                                <option>Mu'tah University</option>
+                                <option>National University</option>
+                                <option>New Era University</option>
+                                <option>New Jersey City University</option>
+                                <option>New York Institute of Technology</option>
+                                <option>Nile Valley University</option>
+                                <option>North Carolina Central University</option>
+                                <option>North Dakota State University</option>
+                                <option>Northeastern University</option>
+                                <option>Northern Arizona University</option>
+                                <option>Northern Michigan University</option>
+                                <option>Northwestern University of the Philippines</option>
+                                <option>Notre Dame University</option>
+                                <option>Nova Southeastern University</option>
+                                <option>Oakland University</option>
+                                <option>Ohio State University</option>
+                                <option>Oklahoma State University</option>
+                                <option>Oran University</option>
+                                <option>Oregon State University</option>
+                                <option>Osmania University</option>
+                                <option>Our Lady of Fatima University</option>
+                                <option>Palawan State University</option>
+                                <option>Pangasinan State University</option>
+                                <option>Pennsylvania State University</option>
+                                <option>Philadelphia University</option>
+                                <option>Philippine Christian University</option>
+                                <option>Philippine Normal University</option>
+                                <option>Pittsburg State University</option>
+                                <option>Polytechnic University of the Philippines</option>
+                                <option>Portland State University</option>
+                                <option>Prince Mohammad Bin Fahd University</option>
+                                <option>Prince Sultan University</option>
+                                <option>Princess Noura University</option>
+                                <option>Princess Sumaya University for Technology</option>
+                                <option>Purdue University</option>
+                                <option>Qaseem University</option>
+                                <option>Quaid-I-Azam University</option>
+                                <option>Queensland University of Technology</option>
+                                <option>Robert Morris University</option>
+                                <option>Roger Williams University</option>
+                                <option>Royal University for Women</option>
+                                <option>Rutgers University</option>
+                                <option>Ryerson University</option>
+                                <option>Saginaw Valley State University</option>
+                                <option>Saint Louis University</option>
+                                <option>Saint Mary's University</option>
+                                <option>Sam Houston State University</option>
+                                <option>Samar State University</option>
+                                <option>San Diego State University</option>
+                                <option>San Francisco State University</option>
+                                <option>San Jose State University</option>
+                                <option>Simon Fraser University</option>
+                                <option>Silliman University</option>
+                                <option>South Dakota State University</option>
+                                <option>Southern Arkansas University</option>
+                                <option>Southern Methodist University</option>
+                                <option>Southern New Hampshire University</option>
+                                <option>Southwestern University</option>
+                                <option>Stanford University</option>
+                                <option>Strayer University</option>
+                                <option>Swinburne University of Technology</option>
+                                <option>Syracuse University</option>
+                                <option>Tafila Technical University</option>
+                                <option>Tarlac State University</option>
+                                <option>Tarleton State University</option>
+                                <option>Temple University</option>
+                                <option>Tennessee State University</option>
+                                <option>Texas A&M University</option>
+                                <option>Texas Southern University</option>
+                                <option>The Hashemite University</option>
+                                <option>The Kingdom University</option>
+                                <option>The Robert Gordon University</option>
+                                <option>The University of Arizona</option>
+                                <option>The University of Oklahoma</option>
+                                <option>The University of Rhode Island</option>
+                                <option>The University of Toledo</option>
+                                <option>The University of Utah</option>
+                                <option>Thompson Rivers University</option>
+                                <option>Trine University</option>
+                                <option>Umm Al-Qura University</option>
+                                <option>United Arab Emirates University</option>
+                                <option>University College Bahrain</option>
+                                <option>University of Adelaide</option>
+                                <option>University of Akron</option>
+                                <option>University of Arizona</option>
+                                <option>University of Bahrain</option>
+                                <option>University of Batangas</option>
+                                <option>University of Bohol</option>
+                                <option>University of Bridgeport</option>
+                                <option>University of British Columbia</option>
+                                <option>University of Cairo</option>
+                                <option>University of Cambridge</option>
+                                <option>University of Canberra</option>
+                                <option>University of Cebu</option>
+                                <option>University of Central Missouri</option>
+                                <option>University of Central Oklahoma</option>
+                                <option>University of Colorado</option>
+                                <option>University of Connecticut</option>
+                                <option>University of Dammam</option>
+                                <option>University of Delaware</option>
+                                <option>University of Dhaka</option>
+                                <option>University of Dubai</option>
+                                <option>University of East London</option>
+                                <option>University of Florida</option>
+                                <option>University of Hafr Al Batin</option>
+                                <option>University of Hail</option>
+                                <option>University of Hartford</option>
+                                <option>University of Hawaii</option>
+                                <option>University of Houston</option>
+                                <option>University of Indianapolis</option>
+                                <option>University of Jordan</option>
+                                <option>University of Kansas</option>
+                                <option>University of Kentucky</option>
+                                <option>University of Leicester</option>
+                                <option>University of Liverpool</option>
+                                <option>University of London</option>
+                                <option>University of Louisville</option>
+                                <option>University of Manchester</option>
+                                <option>University of Melbourne</option>
+                                <option>University of Miami</option>
+                                <option>University of Michigan</option>
+                                <option>University of Missouri</option>
+                                <option>University of Montana</option>
+                                <option>University of New Haven</option>
+                                <option>University of New Mexico</option>
+                                <option>University of New Orleans</option>
+                                <option>University of Newcastle</option>
+                                <option>University of North Dakota</option>
+                                <option>University of North Texas</option>
+                                <option>University of Notre Dame</option>
+                                <option>University of Oregon</option>
+                                <option>University of Oxford</option>
+                                <option>University of Pennsylvania</option>
+                                <option>University of Petra</option>
+                                <option>University of Phoenix</option>
+                                <option>University of Pittsburgh</option>
+                                <option>University of Portsmouth</option>
+                                <option>University of Queensland</option>
+                                <option>University of Regina</option>
+                                <option>University of San Diego</option>
+                                <option>University of San Francisco</option>
+                                <option>University of Santo Tomas</option>
+                                <option>University of Sharjah</option>
+                                <option>University of South Africa</option>
+                                <option>University of South Carolina</option>
+                                <option>University of South Florida</option>
+                                <option>University of Surrey</option>
+                                <option>University of Sydney</option>
+                                <option>University of Tasmania</option>
+                                <option>University of Tehran</option>
+                                <option>University of Tennessee</option>
+                                <option>University of Texas</option>
+                                <option>University of Texas at Austin</option>
+                                <option>University of the East</option>
+                                <option>University of the Pacific</option>
+                                <option>University of the Philippines</option>
+                                <option>University of Tulsa</option>
+                                <option>University of Victoria</option>
+                                <option>University of Wales</option>
+                                <option>University of Washington</option>
+                                <option>University of Western Sydney</option>
+                                <option>University of Westminster</option>
+                                <option>University of Windsor</option>
+                                <option>University of Wollongong</option>
+                                <option>University of Wyoming</option>
+                                <option>Vanderbilt University</option>
+                                <option>Virginia Tech</option>
+                                <option>Warsaw University</option>
+                                <option>Washburn University</option>
+                                <option>Wayne State University</option>
+                                <option>Wesleyan University</option>
+                                <option>West Virginia University</option>
+                                <option>Western Kentucky University</option>
+                                <option>Western Michigan University</option>
+                                <option>Western Oregon University</option>
+                                <option>Western Washington University</option>
+                                <option>Wichita State University</option>
+                                <option>Wright State University</option>
+                                <option>Xavier University</option>
+                                <option>Yale University</option>
+                                <option>Yarmouk University</option>
+                                <option>York University</option>
+                                <option>Zarqa Private University</option>
+                                <option>Zayed University</option>
+                                <option value="other">Other (Add Manually)</option>
+                            </select>
+                            <label for="educatorInstitution">Institution Name</label>
+                        </div>
+                        <div class="form-floating mb-3 other-input-group" id="educatorInstitutionManualGroup">
+                            <input type="text" class="form-control" id="educatorInstitutionManual"
+                                name="educatorInstitutionManual" placeholder="Enter Institution Name">
+                            <label for="educatorInstitutionManual">Enter Institution Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="educatorInstitutionType" name="educatorInstitutionType"
+                                required>
+                                <option value="" selected disabled>Select Institution Type</option>
+                                <option value="School">School</option>
+                                <option value="University">University</option>
+                            </select>
+                            <label for="educatorInstitutionType">Institution Type</label>
+                        </div>
+                    </div>
+
+                    <!-- Professional -->
+                    <div id="professional-fields" class="role-fields d-none">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="organizationName" name="organizationName"
+                                placeholder="Organization Name" required>
+                            <label for="organizationName">Organization Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="industry" name="industry"
+                                placeholder="Industry / Sector" required>
+                            <label for="industry">Industry / Sector</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="professionalRoleTitle"
+                                name="professionalRoleTitle" placeholder="Role / Title" required>
+                            <label for="professionalRoleTitle">Role / Title</label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions mt-4">
+                        <button type="button" class="btn btn-cancel" onclick="prevStep(2)">Back</button>
+                        <button type="button" class="btn btn-primary-custom" onclick="nextStep(4)">Next Step</button>
+                    </div>
+                </div>
+
+                <!-- STEP 4: INTERESTS -->
+                <div class="form-step" id="step-4">
+                    <div class="mb-4">
+                        <input type="checkbox" class="interest-chip interest-checkbox" id="int-ent" name="interests"
+                            value="Entrepreneurship">
+                        <label class="interest-label" for="int-ent">Entrepreneurship</label>
+
+                        <input type="checkbox" class="interest-chip interest-checkbox" id="int-tech" name="interests"
+                            value="Technology">
+                        <label class="interest-label" for="int-tech">Technology</label>
+
+                        <input type="checkbox" class="interest-chip interest-checkbox" id="int-edu" name="interests"
+                            value="Education">
+                        <label class="interest-label" for="int-edu">Education</label>
+                        <input type="checkbox" class="interest-chip interest-checkbox" id="int-sus" name="interests"
+                            value="Sustainability">
+                        <label class="interest-label" for="int-sus">Sustainability</label>
+                    </div>
+                    <div class="form-actions mt-5">
+                        <button type="button" class="btn btn-cancel" onclick="prevStep(3)">Back</button>
+                        <button type="submit" class="btn btn-primary-custom px-5">Finish</button>
+                    </div>
+                </div>
+
+                <!-- STEP 5: SUCCESS -->
+                <div class="form-step" id="step-5">
+                    <div class="text-center py-4">
+                        <div class="success-icon-box mb-4">
+                            <i class="bi bi-check-lg"></i>
+                        </div>
+                        <h2 class="fw-bold mb-3" style="color: var(--primary-color);">Registration Complete!</h2>
+                        <p class="text-muted fs-5 mb-5">
+                            Your EngageU account has been successfully created.
+                        </p>
+                        <div class="d-grid">
+                            <a href="login.html"
+                                class="btn btn-primary-custom py-3 fw-bold fs-5 shadow-sm text-decoration-none">
+                                Go to Sign In
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+            <div class="text-center mt-5 pt-3 border-top">
+                <p class="text-muted small mb-0">Already have an account? <a href="login.html"
+                        class="text-primary-custom fw-bold text-decoration-none">Sign In</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let currentStep = 1;
+        let selectedRole = '';
+
+        const stepContent = {
+            1: { title: "Join the Hub", subtitle: "Select your role to get started" },
+            2: { title: "Create Your Account", subtitle: "Let's start with your basic information" },
+            3: {
+                student: { title: "Student Profile", subtitle: "Tell us about your academic background" },
+                educator: { title: "Role Information", subtitle: "Tell us about your professional role" },
+                professional: { title: "Professional Details", subtitle: "Tell us about your organization" }
+            },
+            4: { title: "Your Interests", subtitle: "Select the areas you're interested in (select all that apply)" }
+        };
+
+        function selectRole(role, element) {
+            selectedRole = role;
+            document.getElementById('selectedRole').value = role;
+
+            // UI update
+            const options = document.querySelectorAll('.role-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+
+            if (element) {
+                element.classList.add('selected');
+            }
+
+            // Step 3 fields: Hide and disable unselected roles
+            document.querySelectorAll('.role-fields').forEach(f => {
+                f.classList.add('d-none');
+                f.querySelectorAll('input, select, textarea').forEach(input => input.disabled = true);
+            });
+
+            const activeFields = document.getElementById(`${role}-fields`);
+            activeFields.classList.remove('d-none');
+            activeFields.querySelectorAll('input, select, textarea').forEach(input => input.disabled = false);
+        }
+
+        function validateCurrentStep() {
+            const currentStepEl = document.getElementById(`step-${currentStep}`);
+            const inputs = currentStepEl.querySelectorAll('input, select, textarea');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                input._validated = false;
+
+                // check skip if field or its parents are hidden
+                const isHidden = !input.offsetParent && input.type !== 'hidden';
+                if (isHidden || input.closest('.d-none')) return;
+
+                if (input.hasAttribute('required') && !input.value.trim()) {
+                    showError(input, 'This field is required.');
+                    isValid = false;
+                } else if (input.type === 'email' && input.value.trim()) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(input.value.trim())) {
+                        showError(input, 'Please enter a valid email address.');
+                        isValid = false;
+                    } else {
+                        hideError(input);
+                    }
+                } else if (input.id === 'password' && input.value.trim()) {
+                    hideError(input);
+                } else if (input.id === 'phone' && input.value.trim()) {
+                    // Phone validation
+                    const phoneRegex = /^\+?[0-9\s\-()]{7,20}$/;
+                    if (!phoneRegex.test(input.value.trim())) {
+                        showError(input, 'Please enter a valid phone number.');
+                        isValid = false;
+                    } else {
+                        hideError(input);
+                    }
+                } else if (input.id === 'attestationFile' && input.files.length > 0) {
+                    const file = input.files[0];
+                    if (!file.name.toLowerCase().endsWith('.pdf')) {
+                        showError(input, 'Please upload a PDF file.');
+                        isValid = false;
+                    } else {
+                        hideError(input);
+                    }
+                } else if (input.name === 'interests') {
+                    // Checkbox group validation 
+                    if (!input._validated) {
+                        const group = currentStepEl.querySelectorAll('input[name="interests"]');
+                        const isChecked = Array.from(group).some(c => c.checked);
+                        if (!isChecked) {
+                            isValid = false;
+                            alert('Please select at least one interest.');
+                            // Mark all in group as validated for this pass
+                            group.forEach(i => i._validated = true);
+                        }
+                    }
+                } else {
+                    if (input.hasAttribute('required') && input.value.trim()) {
+                        hideError(input);
+                    }
+                }
+            });
+
+            return isValid;
+        }
+
+        function showError(input, message) {
+            input.classList.add('is-invalid');
+            let feedback = input.parentElement.querySelector('.invalid-feedback');
+            if (!feedback) {
+                feedback = document.createElement('div');
+                feedback.className = 'invalid-feedback';
+                input.parentElement.appendChild(feedback);
+            }
+            feedback.innerText = message;
+        }
+
+        function hideError(input) {
+            input.classList.remove('is-invalid');
+        }
+
+        function nextStep(step) {
+            if (step > currentStep) {
+                if (currentStep === 1 && !selectedRole) {
+                    alert('Please select a role to continue.');
+                    return;
+                }
+
+                if (currentStep > 1 && !validateCurrentStep()) {
+                    return;
+                }
+            }
+
+            goToStep(step);
+        }
+
+        function prevStep(step) {
+            goToStep(step);
+        }
+
+        function goToStep(step) {
+            // Clear previous errors
+            document.querySelectorAll('.is-invalid, .is-valid').forEach(el => {
+                el.classList.remove('is-invalid', 'is-valid');
+            });
+
+            if (step === 1) {
+                // Reset everything when going back to Step 1
+                document.getElementById('signupForm').reset();
+                selectedRole = '';
+                document.getElementById('selectedRole').value = '';
+                const options = document.querySelectorAll('.role-option');
+                options.forEach(opt => opt.classList.remove('selected'));
+
+                // Hide all 'Other'
+                document.querySelectorAll('.other-input-group').forEach(group => {
+                    group.style.display = 'none';
+                    const input = group.querySelector('input');
+                    if (input) input.removeAttribute('required');
+                });
+
+                // Hide and disable role-specific fields
+                document.querySelectorAll('.role-fields').forEach(f => {
+                    f.classList.add('d-none');
+                    f.querySelectorAll('input, select, textarea').forEach(input => input.disabled = true);
+                });
+
+                // Reset interests "Other" group
+                const interestOtherGroup = document.getElementById('interestOtherGroup');
+                if (interestOtherGroup) interestOtherGroup.classList.add('d-none');
+            }
+
+            // Update Visibility
+            document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+            document.getElementById(`step-${step}`).classList.add('active');
+
+            // Update Header 
+            const titleEl = document.getElementById('step-title');
+            const subEl = document.getElementById('step-subtitle');
+
+            if (step === 3) {
+                titleEl.innerText = stepContent[3][selectedRole].title;
+                subEl.innerText = stepContent[3][selectedRole].subtitle;
+            } else if (step < 5) {
+                titleEl.innerText = stepContent[step].title;
+                subEl.innerText = stepContent[step].subtitle;
+            }
+
+            // Update Indicators
+            document.querySelectorAll('.step-item').forEach((item, index) => {
+                const itemStep = index + 1;
+                item.classList.remove('active', 'completed');
+
+                if (itemStep === step) {
+                    item.classList.add('active');
+                } else if (itemStep < step) {
+                    item.classList.add('completed');
+                }
+            });
+
+            currentStep = step;
+            window.scrollTo(0, 0);
+        }
+
+        function toggleManualInput(select, manualGroupId) {
+            const manualGroup = document.getElementById(manualGroupId);
+            if (select.value === 'other') {
+                manualGroup.style.display = 'block';
+                const input = manualGroup.querySelector('input');
+                input.setAttribute('required', 'true');
+                input.disabled = false;
+                input.focus();
+            } else {
+                manualGroup.style.display = 'none';
+                const input = manualGroup.querySelector('input');
+                input.removeAttribute('required');
+                input.disabled = true;
+            }
+        }
+
+        function toggleOtherInterest(checkbox) {
+            const group = document.getElementById('interestOtherGroup');
+            if (checkbox.checked) {
+                group.classList.remove('d-none');
+                const input = group.querySelector('input');
+                input.disabled = false;
+                input.focus();
+            } else {
+                group.classList.add('d-none');
+                const input = group.querySelector('input');
+                input.disabled = true;
+            }
+        }
+
+        document.getElementById('signupForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            if (!validateCurrentStep()) {
+                return;
+            }
+
+            const btn = this.querySelector('button[type="submit"]');
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Creating Account...';
+            btn.disabled = true;
+
+            // Success transition
+            setTimeout(() => {
+                goToStep(5);
+                // Hide header and stepper on success
+                const header = document.querySelector('.signup-container > .text-center.mb-5');
+                if (header) header.style.display = 'none';
+
+                const stepper = document.querySelector('.progress-stepper');
+                if (stepper) stepper.style.display = 'none';
+            }, 1500);
+        });
+    </script>
+</body>
+
+</html>

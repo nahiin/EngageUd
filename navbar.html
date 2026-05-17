@@ -110,12 +110,16 @@
     var closeBtn  = document.getElementById('hp-drawer-close');
 
     if (!nav) return;
+    requestAnimationFrame(function () { nav.classList.add('hp-anim'); });
 
     /* ---- Scroll behaviour ---- */
-    if (!cfg.transparent) nav.classList.add('scrolled');
-    window.addEventListener('scroll', function () {
-        nav.classList.toggle('scrolled', window.scrollY > 30);
-    }, { passive: true });
+    if (cfg.transparent) {
+        window.addEventListener('scroll', function () {
+            nav.classList.toggle('scrolled', window.scrollY > 30);
+        }, { passive: true });
+    } else {
+        nav.classList.add('scrolled');
+    }
 
     /* ---- Side drawer ---- */
     function openDrawer() {

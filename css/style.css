@@ -1206,6 +1206,9 @@ body.page-home {
     -webkit-backdrop-filter: none;
     border-bottom: 1px solid transparent;
     box-shadow: none;
+}
+
+.hp-nav.hp-anim {
     transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
@@ -1686,6 +1689,7 @@ body.page-home {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    background-color: var(--primary-color);
 }
 
 .hp-hero-bg {
@@ -3006,7 +3010,7 @@ body.page-home {
 }
 
 @media (max-width: 575.98px) {
-    .pp-focus-item { flex: 0 0 calc(50% - 8px); }
+    .pp-focus-item { flex: 0 0 100%; }
     .pp-why-pillars { grid-template-columns: 1fr; }
 }
 
@@ -3296,6 +3300,15 @@ body.page-home {
     box-shadow: 0 0 0 18px rgba(248, 115, 34, 0.12);
 }
 
+@media (max-width: 575.98px) {
+    .hp-video-player-btn {
+        width: 52px;
+        height: 52px;
+        font-size: 1.2rem;
+        box-shadow: 0 0 0 8px rgba(248, 115, 34, 0.18);
+    }
+}
+
 .hp-video-player-label {
     margin-top: 20px;
     font-family: 'Space Grotesk', sans-serif;
@@ -3390,6 +3403,7 @@ body.page-home {
         grid-template-columns: 1fr;
         gap: 48px;
     }
+    .hp-partnerships-dark-content { order: -1; }
 }
 
 .hp-partnerships-dark-benefits {
@@ -3757,7 +3771,7 @@ body.page-home {
     .cd-body-inner {
         grid-template-columns: 1fr;
     }
-    .cd-sidebar { order: -1; }
+    .cd-sidebar { order: 1; position: static; }
 }
 
 @media (max-width: 767.98px) {
@@ -4742,13 +4756,13 @@ body.page-home {
 
 @media (max-width: 991.98px) {
     .hd-body-inner { grid-template-columns: 1fr; }
-    .hd-sidebar { order: -1; }
+    .hd-sidebar { order: 1; position: static; }
 }
 
 @media (max-width: 575.98px) {
     .hd-hero { min-height: auto; }
     .hd-hero-content { padding: 40px 20px 44px; }
-    .hd-cta-bar { padding: 20px 20px; flex-direction: column; align-items: flex-start; }
+    .hd-cta-bar { padding: 20px 20px; flex-direction: column; align-items: center; text-align: center; }
     .hd-body { padding: 28px 0 56px; }
 }
 

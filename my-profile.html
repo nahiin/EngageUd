@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Submissions | NextGen EngageU Hub</title>
+    <title>My Profile | NextGen EngageU Hub</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,10 +19,9 @@
 <body class="page-home">
 
     <!-- ========== NAVBAR ========== -->
-    <script>window._navCfg = { transparent: false, activePage: 'submissions' };</script>
+    <script>window._navCfg = { transparent: false, activePage: '' };</script>
     <nav class="hp-nav scrolled" id="hp-nav">
         <div class="hp-nav-inner">
-            <!-- Logo -->
             <a href="index.html" class="hp-logo">
                 <img src="assets/images/nextgenengageu-logo.png" alt="NextGen EngageU Hub" class="hp-logo-img">
                 <div class="hp-logo-brand">
@@ -31,7 +30,6 @@
                 </div>
             </a>
 
-            <!-- Desktop Links -->
             <div class="hp-nav-links">
                 <a href="index.html"                 data-nav-key="home">Home</a>
                 <a href="index.html#hp-about"        data-nav-key="about">About</a>
@@ -40,7 +38,6 @@
                 <a href="partnerships.html"          data-nav-key="partnerships">Partnerships</a>
             </div>
 
-            <!-- Desktop Auth Area (hidden on mobile via CSS) -->
             <div class="hp-auth-area">
                 <div id="hp-auth-out" class="hp-auth-out">
                     <a href="login.html" id="hp-login-btn" class="hp-nav-login-btn">Login</a>
@@ -59,6 +56,7 @@
                                 <span class="hp-user-dd-email" id="hp-dd-email">john@pmu.edu.sa</span>
                             </div>
                             <div class="hp-user-dd-sep"></div>
+                            <a href="my-profile.html" class="hp-user-dd-item"><i class="bi bi-person-circle"></i> My Profile</a>
                             <a href="my-submissions.html" class="hp-user-dd-item"><i class="bi bi-file-earmark-text"></i> My Submissions</a>
                             <div class="hp-user-dd-sep"></div>
                             <button class="hp-user-dd-item hp-user-dd-logout" id="hp-logout-btn"><i class="bi bi-box-arrow-right"></i> Logout</button>
@@ -67,7 +65,6 @@
                 </div>
             </div>
 
-            <!-- Hamburger (mobile only) -->
             <button class="hp-mobile-toggle" id="hp-mobile-toggle" aria-label="Open menu">
                 <i class="bi bi-list"></i>
             </button>
@@ -79,7 +76,6 @@
 
     <!-- Side Drawer -->
     <div class="hp-side-drawer" id="hp-side-drawer" aria-hidden="true">
-
         <div class="hp-drawer-header">
             <a href="index.html" class="hp-logo">
                 <img src="assets/images/nextgenengageu-logo.png" alt="NextGen EngageU Hub" class="hp-logo-img">
@@ -101,24 +97,22 @@
             <a href="partnerships.html"          class="hp-drawer-link" data-nav-key="partnerships">Partnerships</a>
         </nav>
 
-        <!-- Single auth section — mobile only, no duplication -->
         <div class="hp-drawer-auth">
             <div id="hp-mobile-auth-out">
                 <a href="login.html" id="hp-mobile-login-btn" class="hp-drawer-login-btn">Login</a>
                 <a href="signup.html" class="hp-drawer-join-btn">Join the Hub <i class="bi bi-arrow-right"></i></a>
             </div>
             <div id="hp-mobile-auth-in" style="display:none;">
+                <a href="my-profile.html" class="hp-drawer-link"><i class="bi bi-person-circle me-2"></i> My Profile</a>
                 <a href="my-submissions.html" class="hp-drawer-link"><i class="bi bi-file-earmark-text me-2"></i> My Submissions</a>
                 <button class="hp-drawer-logout-btn" id="hp-mobile-logout"><i class="bi bi-box-arrow-right me-2"></i> Logout</button>
             </div>
         </div>
-
     </div>
 
     <script>
     (function () {
         var cfg = window._navCfg || {};
-
         var nav       = document.getElementById('hp-nav');
         var overlay   = document.getElementById('hp-drawer-overlay');
         var drawer    = document.getElementById('hp-side-drawer');
@@ -127,48 +121,26 @@
 
         if (!nav) return;
         requestAnimationFrame(function () { nav.classList.add('hp-anim'); });
+        nav.classList.add('scrolled');
 
-        /* ---- Scroll behaviour ---- */
-        if (cfg.transparent) {
-            window.addEventListener('scroll', function () {
-                nav.classList.toggle('scrolled', window.scrollY > 30);
-            }, { passive: true });
-        } else {
-            nav.classList.add('scrolled');
-        }
-
-        /* ---- Side drawer ---- */
         function openDrawer() {
-            drawer.classList.add('open');
-            overlay.classList.add('open');
-            drawer.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
+            drawer.classList.add('open'); overlay.classList.add('open');
+            drawer.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden';
         }
         function closeDrawer() {
-            drawer.classList.remove('open');
-            overlay.classList.remove('open');
-            drawer.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
+            drawer.classList.remove('open'); overlay.classList.remove('open');
+            drawer.setAttribute('aria-hidden', 'true'); document.body.style.overflow = '';
         }
 
         if (toggleBtn) toggleBtn.addEventListener('click', openDrawer);
         if (closeBtn)  closeBtn.addEventListener('click', closeDrawer);
         if (overlay)   overlay.addEventListener('click', closeDrawer);
         document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
-
         drawer.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeDrawer); });
         drawer.querySelectorAll('button').forEach(function (b) {
             if (b !== closeBtn) b.addEventListener('click', closeDrawer);
         });
 
-        /* ---- Active nav link ---- */
-        if (cfg.activePage) {
-            document.querySelectorAll('[data-nav-key="' + cfg.activePage + '"]').forEach(function (el) {
-                el.classList.add('active');
-            });
-        }
-
-        /* ---- Auth state ---- */
         var KEY  = 'engageu_user';
         var DEMO = { name: 'John Doe', email: 'john@pmu.edu.sa', initials: '<i class="bi bi-person-fill"></i>' };
 
@@ -205,13 +177,10 @@
 
         var loginBtn = document.getElementById('hp-login-btn');
         if (loginBtn) loginBtn.addEventListener('click', function (e) { e.preventDefault(); saveUser(DEMO); applyState(DEMO); });
-
         var mLoginBtn = document.getElementById('hp-mobile-login-btn');
         if (mLoginBtn) mLoginBtn.addEventListener('click', function (e) { e.preventDefault(); saveUser(DEMO); applyState(DEMO); });
-
         var logoutBtn = document.getElementById('hp-logout-btn');
         if (logoutBtn) logoutBtn.addEventListener('click', function () { clearUser(); applyState(null); });
-
         var mLogout = document.getElementById('hp-mobile-logout');
         if (mLogout) mLogout.addEventListener('click', function () { clearUser(); applyState(null); });
 
@@ -237,96 +206,85 @@
     <section class="ms-page-header">
         <div class="ms-page-header-inner">
             <div>
-                <h1 class="ms-page-title">My Submissions</h1>
-                <p class="ms-page-sub" id="ms-page-sub">Logged in as John Doe</p>
+                <h1 class="ms-page-title">My Profile</h1>
+                <p class="ms-page-sub">Your account information on file</p>
             </div>
         </div>
     </section>
 
-    <!-- ========== SUBMISSIONS LIST ========== -->
+    <!-- ========== PROFILE CONTENT ========== -->
     <div class="ms-body">
         <div class="ms-body-inner">
 
-            <!-- Loading state — shown while fetching from backend -->
-            <div id="ms-loading" style="display:none;">
-                <div class="ms-state-wrap">
-                    <div class="ms-state-icon ms-state-spin"><i class="bi bi-arrow-repeat"></i></div>
-                    <p class="ms-state-text">Loading your submissions…</p>
+            <!-- Role switcher (test helper) -->
+            <div class="d-flex justify-content-end mb-3">
+                <select class="form-select form-select-sm w-auto shadow-sm" id="simulatedRole">
+                    <option value="student"       selected>Test as Student</option>
+                    <option value="educator">Test as Educator</option>
+                    <option value="professional">Test as Professional</option>
+                </select>
+            </div>
+
+            <!-- Identity card -->
+            <div class="mp-card">
+                <div class="mp-avatar-row">
+                    <div class="mp-avatar">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                    <div class="mp-avatar-info">
+                        <p class="mp-avatar-name">John Doe</p>
+                        <p class="mp-avatar-role" id="mp-identity-role">
+                            <i class="bi bi-mortarboard me-1"></i> Student
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Empty state — shown when user has no submissions -->
-            <div id="ms-empty" style="display:none;">
-                <div class="ms-state-wrap">
-                    <div class="ms-state-icon"><i class="bi bi-inbox"></i></div>
-                    <h3 class="ms-state-title">No Submissions Yet</h3>
-                    <p class="ms-state-text">You haven't applied to any competitions yet. Browse open competitions to get started.</p>
+            <!-- Account Information -->
+            <div class="mp-card">
+                <h2 class="mp-card-title"><i class="bi bi-person me-2"></i>Account Information</h2>
+                <div class="mp-fields">
+                    <div class="mp-field">
+                        <p class="mp-field-label">First Name</p>
+                        <p class="mp-field-value">John</p>
+                    </div>
+                    <div class="mp-field">
+                        <p class="mp-field-label">Last Name</p>
+                        <p class="mp-field-value">Doe</p>
+                    </div>
+                    <div class="mp-field">
+                        <p class="mp-field-label">Email Address</p>
+                        <p class="mp-field-value">john@pmu.edu.sa</p>
+                    </div>
+                    <div class="mp-field">
+                        <p class="mp-field-label">Phone</p>
+                        <p class="mp-field-value">+966 50 123 4567</p>
+                    </div>
+                    <div class="mp-field">
+                        <p class="mp-field-label">Role</p>
+                        <p class="mp-field-value" id="mp-account-role">Student</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Error state — shown when the fetch fails -->
-            <div id="ms-error" style="display:none;">
-                <div class="ms-state-wrap">
-                    <div class="ms-state-icon ms-state-error"><i class="bi bi-exclamation-triangle"></i></div>
-                    <h3 class="ms-state-title">Something Went Wrong</h3>
-                    <p class="ms-state-text">We couldn't load your submissions. Check your connection and try again.</p>
-                    <button class="ms-edit-btn" style="margin-top:8px; cursor:pointer;" onclick="window.location.reload()"><i class="bi bi-arrow-clockwise"></i> Retry</button>
+            <!-- Role-specific card (dynamic) -->
+            <div class="mp-card" id="mp-role-card">
+                <h2 class="mp-card-title" id="mp-role-card-title">
+                    <i class="bi bi-mortarboard me-2"></i>Academic Profile
+                </h2>
+                <div class="mp-fields" id="mp-role-fields">
+                    <!-- populated by JS -->
                 </div>
             </div>
 
-            <div class="ms-list">
-
-                <!-- Submission 1 — Accepted -->
-                <div class="ms-card">
-                    <div class="ms-card-body">
-                        <p class="ms-card-comp">RWADTHON 2026</p>
-                        <h3 class="ms-card-title">SmartGrid — AI-Powered Energy Distribution for Smart Cities</h3>
-                        <div class="ms-card-tags">
-                            <span class="ms-card-tag"><i class="bi bi-cpu-fill"></i> Technology</span>
-                            <span class="ms-card-tag"><i class="bi bi-people-fill"></i> Team</span>
-                            <span class="ms-card-tag"><i class="bi bi-calendar3"></i> Apr 12, 2026</span>
-                        </div>
-                    </div>
-                    <div class="ms-card-side">
-                        <span class="ms-badge ms-badge-accepted"><i class="bi bi-check-circle-fill"></i> Accepted</span>
-                        <a href="my-submission-edit.html" class="ms-edit-btn"><i class="bi bi-pencil"></i> Edit</a>
-                    </div>
+            <!-- Interests -->
+            <div class="mp-card">
+                <h2 class="mp-card-title"><i class="bi bi-stars me-2"></i>Interests</h2>
+                <div class="mp-interest-chips">
+                    <span class="mp-interest-chip">Technology</span>
+                    <span class="mp-interest-chip">Entrepreneurship</span>
+                    <span class="mp-interest-chip">Sustainability</span>
                 </div>
-
-                <!-- Submission 2 — Pending -->
-                <div class="ms-card">
-                    <div class="ms-card-body">
-                        <p class="ms-card-comp">Startup Pitch Finals 2026</p>
-                        <h3 class="ms-card-title">EduPath — Adaptive Learning Platform for Saudi K-12</h3>
-                        <div class="ms-card-tags">
-                            <span class="ms-card-tag"><i class="bi bi-rocket-takeoff-fill"></i> Entrepreneurship</span>
-                            <span class="ms-card-tag"><i class="bi bi-person-fill"></i> Individual</span>
-                            <span class="ms-card-tag"><i class="bi bi-calendar3"></i> May 3, 2026</span>
-                        </div>
-                    </div>
-                    <div class="ms-card-side">
-                        <span class="ms-badge ms-badge-pending"><i class="bi bi-clock-fill"></i> Pending</span>
-                        <a href="my-submission-edit.html" class="ms-edit-btn"><i class="bi bi-pencil"></i> Edit</a>
-                    </div>
-                </div>
-
-                <!-- Submission 3 — Rejected -->
-                <div class="ms-card">
-                    <div class="ms-card-body">
-                        <p class="ms-card-comp">Sustainable Solutions Challenge</p>
-                        <h3 class="ms-card-title">AquaSense — IoT Water Monitoring for Saudi Agricultural Communities</h3>
-                        <div class="ms-card-tags">
-                            <span class="ms-card-tag"><i class="bi bi-tree-fill"></i> Sustainability</span>
-                            <span class="ms-card-tag"><i class="bi bi-people-fill"></i> Team</span>
-                            <span class="ms-card-tag"><i class="bi bi-calendar3"></i> May 10, 2026</span>
-                        </div>
-                    </div>
-                    <div class="ms-card-side">
-                        <span class="ms-badge ms-badge-rejected"><i class="bi bi-x-circle-fill"></i> Rejected</span>
-                        <a href="my-submission-edit.html" class="ms-edit-btn"><i class="bi bi-pencil"></i> Edit</a>
-                    </div>
-                </div>
-
             </div>
 
         </div>
@@ -342,10 +300,8 @@
                 <nav class="hp-footer-nav">
                     <a href="index.html#hp-home">Home</a>
                     <a href="index.html#hp-about">About</a>
-                    <a href="index.html#hp-focus">Focus Areas</a>
                     <a href="index.html#hp-competitions">Competitions</a>
                     <a href="index.html#hp-partnerships">Partnerships</a>
-                    <a href="index.html#hp-join">Join</a>
                 </nav>
             </div>
             <div class="hp-footer-divider">
@@ -358,16 +314,65 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmX9cJEHJ3Z+VFxFSFTSqB1/Vss" crossorigin="anonymous"></script>
 
     <script>
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const user = JSON.parse(localStorage.getItem('engageu_user') || 'null');
-            if (user) {
-                const sub = document.getElementById('ms-page-sub');
-                if (sub) sub.textContent = 'Logged in as ' + user.name;
+        var roleConfig = {
+            student: {
+                label: 'Student',
+                identityIcon: 'bi-mortarboard',
+                cardTitle: '<i class="bi bi-mortarboard me-2"></i>Academic Profile',
+                fields: [
+                    { label: 'Institution Type', value: 'University' },
+                    { label: 'Institution Name', value: 'Prince Mohammad Bin Fahd University' },
+                    { label: 'Nationality',       value: 'Saudi' },
+                    { label: 'Enrollment Attestation', value: '<div class="mp-attestation-wrap"><span class="mp-attestation-badge"><i class="bi bi-check-circle-fill"></i> Uploaded</span><a href="assets/images/rwadthon-poster.png" target="_blank" class="mp-view-btn"><i class="bi bi-eye me-1"></i>View</a></div>' }
+                ]
+            },
+            educator: {
+                label: 'Educator',
+                identityIcon: 'bi-person-workspace',
+                cardTitle: '<i class="bi bi-person-workspace me-2"></i>Professional Profile',
+                fields: [
+                    { label: 'Role / Title',      value: 'Coordinator' },
+                    { label: 'Institution Name',  value: 'King Saud University' },
+                    { label: 'Institution Type',  value: 'University' }
+                ]
+            },
+            professional: {
+                label: 'Industry Professional',
+                identityIcon: 'bi-building',
+                cardTitle: '<i class="bi bi-building me-2"></i>Organization Profile',
+                fields: [
+                    { label: 'Organization Name', value: 'Saudi Aramco' },
+                    { label: 'Industry / Sector', value: 'Energy & Technology' },
+                    { label: 'Role / Title',       value: 'Innovation Manager' }
+                ]
             }
-        });
-    </script>
+        };
 
+        function applyRole(role) {
+            var cfg = roleConfig[role];
+
+            document.getElementById('mp-identity-role').innerHTML =
+                '<i class="bi ' + cfg.identityIcon + ' me-1"></i> ' + cfg.label;
+
+            document.getElementById('mp-account-role').textContent = cfg.label;
+
+            document.getElementById('mp-role-card-title').innerHTML = cfg.cardTitle;
+
+            document.getElementById('mp-role-fields').innerHTML = cfg.fields.map(function (f) {
+                return '<div class="mp-field">' +
+                    '<p class="mp-field-label">' + f.label + '</p>' +
+                    '<p class="mp-field-value">' + f.value + '</p>' +
+                    '</div>';
+            }).join('');
+        }
+
+        document.getElementById('simulatedRole').addEventListener('change', function () {
+            applyRole(this.value);
+        });
+
+        // Init with student
+        applyRole('student');
+    </script>
 
 </body>
 </html>

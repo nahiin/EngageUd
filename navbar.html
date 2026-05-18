@@ -15,12 +15,11 @@
 
         <!-- Desktop Links -->
         <div class="hp-nav-links">
-            <a href="index.html#hp-home"         data-nav-key="home">Home</a>
+            <a href="index.html"                 data-nav-key="home">Home</a>
             <a href="index.html#hp-about"        data-nav-key="about">About</a>
-            <a href="index.html#hp-focus"        data-nav-key="focus">Focus Areas</a>
+            <a href="highlights.html"            data-nav-key="highlights">Highlights</a>
             <a href="index.html#hp-competitions" data-nav-key="competitions">Competitions</a>
             <a href="partnerships.html"          data-nav-key="partnerships">Partnerships</a>
-            <a href="index.html#hp-join"         data-nav-key="join">Join</a>
         </div>
 
         <!-- Desktop Auth Area (hidden on mobile via CSS) -->
@@ -42,6 +41,7 @@
                             <span class="hp-user-dd-email" id="hp-dd-email">john@pmu.edu.sa</span>
                         </div>
                         <div class="hp-user-dd-sep"></div>
+                        <a href="my-profile.html" class="hp-user-dd-item"><i class="bi bi-person-circle"></i> My Profile</a>
                         <a href="my-submissions.html" class="hp-user-dd-item"><i class="bi bi-file-earmark-text"></i> My Submissions</a>
                         <div class="hp-user-dd-sep"></div>
                         <button class="hp-user-dd-item hp-user-dd-logout" id="hp-logout-btn"><i class="bi bi-box-arrow-right"></i> Logout</button>
@@ -77,12 +77,11 @@
     </div>
 
     <nav class="hp-drawer-nav">
-        <a href="index.html#hp-home"         class="hp-drawer-link" data-nav-key="home">Home</a>
+        <a href="index.html"                 class="hp-drawer-link" data-nav-key="home">Home</a>
         <a href="index.html#hp-about"        class="hp-drawer-link" data-nav-key="about">About</a>
-        <a href="index.html#hp-focus"        class="hp-drawer-link" data-nav-key="focus">Focus Areas</a>
+        <a href="highlights.html"            class="hp-drawer-link" data-nav-key="highlights">Highlights</a>
         <a href="index.html#hp-competitions" class="hp-drawer-link" data-nav-key="competitions">Competitions</a>
         <a href="partnerships.html"          class="hp-drawer-link" data-nav-key="partnerships">Partnerships</a>
-        <a href="index.html#hp-join"         class="hp-drawer-link" data-nav-key="join">Join</a>
     </nav>
 
     <!-- Single auth section — mobile only, no duplication -->
@@ -92,6 +91,7 @@
             <a href="signup.html" class="hp-drawer-join-btn">Join the Hub <i class="bi bi-arrow-right"></i></a>
         </div>
         <div id="hp-mobile-auth-in" style="display:none;">
+            <a href="my-profile.html" class="hp-drawer-link"><i class="bi bi-person-circle me-2"></i> My Profile</a>
             <a href="my-submissions.html" class="hp-drawer-link"><i class="bi bi-file-earmark-text me-2"></i> My Submissions</a>
             <button class="hp-drawer-logout-btn" id="hp-mobile-logout"><i class="bi bi-box-arrow-right me-2"></i> Logout</button>
         </div>
@@ -149,8 +149,6 @@
     if (cfg.activePage) {
         document.querySelectorAll('[data-nav-key="' + cfg.activePage + '"]').forEach(function (el) {
             el.classList.add('active');
-            el.style.color = 'var(--secondary-color)';
-            el.style.fontWeight = '600';
         });
     }
 

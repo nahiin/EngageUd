@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NextGen EngageU Hub | Prince Mohammad bin Fahd University</title>
-    <style>html,body{background:#081d3e}</style>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,6 +23,7 @@
 
     <!-- Core CSS -->
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
 </head>
 
 <body class="page-home">
@@ -43,12 +43,11 @@
 
             <!-- Desktop Links -->
             <div class="hp-nav-links">
-                <a href="index.html#hp-home"         data-nav-key="home">Home</a>
-                <a href="index.html#hp-about"        data-nav-key="about">About</a>
-                <a href="index.html#hp-focus"        data-nav-key="focus">Focus Areas</a>
-                <a href="index.html#hp-competitions" data-nav-key="competitions">Competitions</a>
-                <a href="partnerships.html"          data-nav-key="partnerships">Partnerships</a>
-                <a href="index.html#hp-join"         data-nav-key="join">Join</a>
+                <a href="#hp-home"         data-nav-key="home">Home</a>
+                <a href="#hp-about"        data-nav-key="about">About</a>
+                <a href="highlights.html"  data-nav-key="highlights">Highlights</a>
+                <a href="#hp-competitions" data-nav-key="competitions">Competitions</a>
+                <a href="partnerships.html" data-nav-key="partnerships">Partnerships</a>
             </div>
 
             <!-- Desktop Auth Area (hidden on mobile via CSS) -->
@@ -70,6 +69,7 @@
                                 <span class="hp-user-dd-email" id="hp-dd-email">john@pmu.edu.sa</span>
                             </div>
                             <div class="hp-user-dd-sep"></div>
+                            <a href="my-profile.html" class="hp-user-dd-item"><i class="bi bi-person-circle"></i> My Profile</a>
                             <a href="my-submissions.html" class="hp-user-dd-item"><i class="bi bi-file-earmark-text"></i> My Submissions</a>
                             <div class="hp-user-dd-sep"></div>
                             <button class="hp-user-dd-item hp-user-dd-logout" id="hp-logout-btn"><i class="bi bi-box-arrow-right"></i> Logout</button>
@@ -105,12 +105,10 @@
         </div>
 
         <nav class="hp-drawer-nav">
-            <a href="index.html#hp-home"         class="hp-drawer-link" data-nav-key="home">Home</a>
-            <a href="index.html#hp-about"        class="hp-drawer-link" data-nav-key="about">About</a>
-            <a href="index.html#hp-focus"        class="hp-drawer-link" data-nav-key="focus">Focus Areas</a>
+            <a href="index.html"       class="hp-drawer-link" data-nav-key="home">Home</a>
+            <a href="highlights.html"  class="hp-drawer-link" data-nav-key="highlights">Highlights</a>
             <a href="index.html#hp-competitions" class="hp-drawer-link" data-nav-key="competitions">Competitions</a>
-            <a href="partnerships.html"          class="hp-drawer-link" data-nav-key="partnerships">Partnerships</a>
-            <a href="index.html#hp-join"         class="hp-drawer-link" data-nav-key="join">Join</a>
+            <a href="partnerships.html" class="hp-drawer-link" data-nav-key="partnerships">Partnerships</a>
         </nav>
 
         <!-- Single auth section — mobile only, no duplication -->
@@ -120,6 +118,7 @@
                 <a href="signup.html" class="hp-drawer-join-btn">Join the Hub <i class="bi bi-arrow-right"></i></a>
             </div>
             <div id="hp-mobile-auth-in" style="display:none;">
+                <a href="my-profile.html" class="hp-drawer-link"><i class="bi bi-person-circle me-2"></i> My Profile</a>
                 <a href="my-submissions.html" class="hp-drawer-link"><i class="bi bi-file-earmark-text me-2"></i> My Submissions</a>
                 <button class="hp-drawer-logout-btn" id="hp-mobile-logout"><i class="bi bi-box-arrow-right me-2"></i> Logout</button>
             </div>
@@ -177,8 +176,6 @@
         if (cfg.activePage) {
             document.querySelectorAll('[data-nav-key="' + cfg.activePage + '"]').forEach(function (el) {
                 el.classList.add('active');
-                el.style.color = 'var(--secondary-color)';
-                el.style.fontWeight = '600';
             });
         }
 
@@ -265,7 +262,7 @@
 
         <!-- Content -->
         <div class="hp-hero-content">
-            <p class="hp-hero-eyebrow">Prince Mohammad bin Fahd University &nbsp;|&nbsp; KSA-Educators</p>
+            <p class="hp-hero-eyebrow">Prince Mohammad bin Fahd University</p>
             <h1 class="hp-hero-title">
                 <span class="accent">NEXTGEN</span><br>
                 <span>ENGAGEU HUB</span>
@@ -375,19 +372,8 @@
             </div>
 
             <!-- Big centered video player -->
-            <div class="hp-video-player-wrap hp-reveal hp-reveal-delay-1">
-                <div class="hp-video-player" id="hp-video-player" role="button" tabindex="0"
-                     aria-label="Play Hub Story video"
-                     onclick="this.innerHTML='<iframe src=\'https://www.youtube.com/embed/aqz-KE-bpKQ?autoplay=1&rel=0\' allow=\'autoplay; fullscreen\' allowfullscreen style=\'position:absolute;inset:0;width:100%;height:100%;border:none;border-radius:20px;\'></iframe>'; this.style.cursor='default';"
-                     onkeydown="if(event.key==='Enter'||event.key===' ')this.click();">
-                    <div class="hp-video-player-inner">
-                        <div class="hp-video-player-btn">
-                            <i class="bi bi-play-fill" style="margin-left:4px;"></i>
-                        </div>
-                        <p class="hp-video-player-label">Watch the Hub Story</p>
-                        <p class="hp-video-player-sub">Click to play</p>
-                    </div>
-                </div>
+            <div class="hp-video-wrap hp-reveal hp-reveal-delay-1">
+                <div id="hp-hub-player" data-plyr-provider="youtube" data-plyr-embed-id="YE7VzlLtp-4"></div>
             </div>
 
             <!-- What's Next block -->
@@ -649,25 +635,46 @@
     <!-- ========== FOOTER ========== -->
     <footer class="hp-footer">
         <div class="hp-footer-inner">
-            <div class="hp-footer-top">
-                <!-- Logo -->
-                <div class="hp-footer-logo">
+            <div class="hp-footer-grid">
+
+                <!-- Brand column -->
+                <div class="hp-footer-brand">
                     <img src="assets/images/nextgenengageu-logo.png" alt="NextGen EngageU Hub" class="hp-footer-logo-img">
+                    <p class="hp-footer-brand-name">NextGen EngageU Hub</p>
+                    <p class="hp-footer-brand-uni">Prince Mohammad bin Fahd University</p>
+                    <p class="hp-footer-brand-tagline">Empowering innovation and collaboration</p>
                 </div>
 
-                <!-- Footer Nav -->
-                <nav class="hp-footer-nav">
-                    <a href="#hp-home">Home</a>
-                    <a href="#hp-about">About</a>
-                    <a href="#hp-focus">Focus Areas</a>
-                    <a href="#hp-competitions">Competitions</a>
-                    <a href="#hp-partnerships">Partnerships</a>
-                    <a href="#hp-join">Join</a>
-                </nav>
+                <!-- Quick Links column -->
+                <div class="hp-footer-col">
+                    <h4 class="hp-footer-col-title">Quick Links</h4>
+                    <nav class="hp-footer-links">
+                        <a href="#hp-home">Home</a>
+                        <a href="#hp-about">About</a>
+                        <a href="#hp-competitions">Competitions</a>
+                        <a href="partnerships.html">Partnerships</a>
+                    </nav>
+                </div>
+
+                <!-- Contact column -->
+                <div class="hp-footer-col">
+                    <h4 class="hp-footer-col-title">Contact</h4>
+                    <div class="hp-footer-contact">
+                        <p><span>Email</span><a href="mailto:engageuhub@pmu.edu.sa">engageuhub@pmu.edu.sa</a></p>
+                        <p><span>Website</span><a href="https://www.pmu.edu.sa" target="_blank" rel="noopener">www.pmu.edu.sa</a></p>
+                    </div>
+                    <div class="hp-footer-social">
+                        <a href="#" aria-label="Twitter / X"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="hp-footer-divider">
-                <p class="hp-footer-copyright">© 2026 NextGen EngageU Hub — Prince Mohammad bin Fahd University. All rights reserved.</p>
+            <div class="hp-footer-bottom">
+                <p>© 2026 Prince Mohammad Bin Fahd University Web Center. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -675,6 +682,11 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmX9cJEHJ3Z+VFxFSFTSqB1/Vss" crossorigin="anonymous"></script>
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+
+    <script>
+        new Plyr('#hp-hub-player', { youtube: { rel: 0, showinfo: 0, iv_load_policy: 3 } });
+    </script>
 
     <script>
         // ---- Scroll-reveal animations ----

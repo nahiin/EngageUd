@@ -239,6 +239,22 @@
                             <label>Project Stage</label>
                         </div>
 
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="targetAudience" name="target_audience">
+                                <option value="" selected disabled>Select Target Audience</option>
+                                <option value="Student">Student</option>
+                                <option value="Educator">Educator</option>
+                                <option value="Investor">Investor</option>
+                            </select>
+                            <label>Target Audience <span class="text-danger">*</span></label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="projectTag" name="project_tag"
+                                placeholder="e.g. AI, HealthTech, EdTech">
+                            <label>Tag</label>
+                        </div>
+
                         <div class="mb-3">
                             <label class="form-label fw-medium">Brief Project Description <span
                                     class="text-danger">*</span></label>
@@ -885,6 +901,7 @@
 
                 if (!title) return alert('Project title is required.');
                 if (domains.length === 0) return alert('Please select at least one industry / domain.');
+                if (!document.getElementById('targetAudience').value) return alert('Please select a target audience.');
                 if (!desc) return alert('Project description is required.');
                 const words = desc.split(/\s+/).filter(w => w.length > 0).length;
                 if (words < 150 || words > 250) {

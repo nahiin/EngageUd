@@ -3653,6 +3653,24 @@ body.page-home {
     flex-shrink: 0;
 }
 
+.pp-attachment-hint {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--text-light);
+    margin: 10px 0 4px;
+}
+
+.pp-attachment-hint-list {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--text-light);
+    padding-left: 18px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
 /* =========================================================
    Competition Detail Page (competition-details.html)
    ========================================================= */
@@ -4471,12 +4489,72 @@ body.page-home {
     padding: 0 24px;
     display: flex;
     align-items: center;
-    gap: 4px;
-    overflow-x: auto;
-    scrollbar-width: none;
+    justify-content: space-between;
+    gap: 16px;
 }
 
-.hl-filters-inner::-webkit-scrollbar { display: none; }
+/* Category tabs — scrollable on mobile */
+.hl-cat-tabs {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    overflow-x: auto;
+    scrollbar-width: none;
+    min-width: 0;
+}
+.hl-cat-tabs::-webkit-scrollbar { display: none; }
+
+/* Semester pill group — right side */
+.hl-sem-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    padding-left: 20px;
+    border-left: 1px solid var(--border-color);
+    align-self: stretch;
+}
+
+.hl-sem-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.hl-sem-pills {
+    display: flex;
+    gap: 5px;
+}
+
+.hl-sem-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 0.18s, border-color 0.18s, color 0.18s;
+    white-space: nowrap;
+}
+.hl-sem-pill:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+.hl-sem-pill.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
 
 .hl-filter-btn {
     display: inline-flex;
@@ -4519,7 +4597,7 @@ body.page-home {
 .hl-featured {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 48px;
+    gap: 0;
     align-items: center;
     background: white;
     border: 1px solid var(--border-color);
@@ -4534,29 +4612,45 @@ body.page-home {
 }
 
 @media (max-width: 767.98px) {
-    .hl-filters-bar { position: relative; }
-    .hl-filters-bar::after {
-        content: '';
-        position: absolute;
-        top: 0; right: 0; bottom: 0;
-        width: 48px;
-        background: linear-gradient(to right, transparent, #f8f9fb);
-        pointer-events: none;
+    .hl-filters-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 0;
     }
+    .hl-cat-tabs {
+        padding: 0 20px;
+    }
+    .hl-sem-group {
+        flex-wrap: wrap;
+        border-left: none;
+        border-top: 1px solid var(--border-color);
+        padding: 10px 20px;
+        align-self: auto;
+        gap: 8px;
+    }
+    .hl-sem-pills { flex-wrap: wrap; }
+}
+
+@media (max-width: 400px) {
+    .hl-sem-group { flex-direction: column; align-items: flex-start; }
 }
 
 @media (max-width: 767.98px) {
-    .hl-featured { grid-template-columns: 1fr; gap: 0; }
+    .hl-featured { grid-template-columns: 1fr; }
+    .hl-featured-img-wrap { align-self: auto; aspect-ratio: 16/9; }
 }
 
 .hl-featured-img-wrap {
     display: block;
     position: relative;
     overflow: hidden;
-    aspect-ratio: 16/10;
+    align-self: stretch;
 }
 
 .hl-featured-img-wrap img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -4582,7 +4676,7 @@ body.page-home {
 }
 
 .hl-featured-content {
-    padding: 40px 40px 40px 0;
+    padding: 36px 40px 36px 40px;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -5084,6 +5178,67 @@ body.page-home {
 .hd-section .plyr {
     border-radius: 0;
 }
+
+/* Attachments list inside hd-section */
+.hd-attachments {
+    display: flex;
+    flex-direction: column;
+}
+
+.hd-att-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 24px;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-color);
+    transition: background 0.15s;
+}
+.hd-att-item:last-child { border-bottom: none; }
+.hd-att-item:hover { background: #f8f9fb; }
+
+.hd-att-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(239,68,68,0.1);
+    color: #dc2626;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+.hd-att-icon-ppt { background: rgba(234,88,12,0.1); color: #ea580c; }
+.hd-att-icon-doc { background: rgba(37,99,235,0.1); color: #2563eb; }
+
+.hd-att-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+}
+.hd-att-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.hd-att-size {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+.hd-att-dl {
+    font-size: 1rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: color 0.2s;
+}
+.hd-att-item:hover .hd-att-dl { color: var(--primary-color); }
 
 /* Competition details player */
 .cd-video-wrap {
@@ -5692,9 +5847,9 @@ body.page-home {
 }
 
 @media (max-width: 575.98px) {
-    .ms-page-header { padding: 90px 0 40px; }
+    .ms-page-header { padding: 112px 0 64px; }
     .ms-page-header-inner { padding: 0 20px; gap: 12px; }
-    .ms-body { padding: 28px 0 56px; }
+    .ms-body { padding: 40px 0 72px; }
     .ms-body-inner { padding: 0 20px; }
 }
 

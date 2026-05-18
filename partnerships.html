@@ -386,7 +386,7 @@
         <div class="hp-section-inner">
             <div class="hp-section-header hp-reveal" style="margin-bottom: 56px;">
                 <span class="hp-eyebrow">Get in Touch</span>
-                <h2 class="hp-section-title">PARTNERSHIP DISCOVERY FORM</h2>
+                <h2 class="hp-section-title">PARTNERSHIP ENQUIRY FORM</h2>
                 <div class="hp-divider"></div>
                 <p class="hp-section-desc" style="max-width: 600px;">To explore partnership opportunities and initiate discussions on joint competitions or challenges, please fill in the form below. Our team will coordinate a meeting and guide you through the collaboration process.</p>
             </div>
@@ -459,6 +459,25 @@
                             </div>
                         </div>
 
+                        <!-- Type of Partnership -->
+                        <p class="pp-form-section-label" style="margin-top: 32px;">Type of Partnership</p>
+
+                        <div class="pp-form-group">
+                            <label class="pp-label" for="pp-partnership-type">What type of collaboration are you interested in? <span class="text-danger">*</span></label>
+                            <select class="form-select" id="pp-partnership-type" name="partnership_type" required>
+                                <option value="" disabled selected>Select type of partnership</option>
+                                <option value="propose-competition">Propose a Competition or Challenge</option>
+                                <option value="sponsor">Sponsor or Support an Initiative</option>
+                                <option value="mentorship">Mentorship &amp; Expert Engagement</option>
+                                <option value="joint-projects">Joint Projects or Research</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="pp-form-group" id="pp-type-other-wrap" style="display:none;">
+                            <label class="pp-label" for="pp-type-other">Please specify</label>
+                            <input type="text" class="form-control" id="pp-type-other" name="partnership_type_other" placeholder="Describe the type of partnership you have in mind…">
+                        </div>
+
                         <!-- Focus Areas -->
                         <p class="pp-form-section-label" style="margin-top: 32px;">Focus Areas of Interest</p>
 
@@ -512,6 +531,14 @@
                                     accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.png,.jpg,.jpeg">
                             </div>
                             <small style="font-size: 12px; color: var(--text-light); margin-top: 6px; display: block;">Accepted: PDF, Word, PowerPoint, Excel, Images — Max 10 MB</small>
+                            <p class="pp-attachment-hint">Examples of documents you may upload include:</p>
+                            <ul class="pp-attachment-hint-list">
+                                <li>A brief organization profile or brochure</li>
+                                <li>A concept note or idea for a competition or challenge</li>
+                                <li>A presentation or proposal related to the collaboration</li>
+                                <li>A formal letter of interest or intent</li>
+                                <li>Any other relevant supporting material</li>
+                            </ul>
                         </div>
 
                         <!-- Submit -->
@@ -575,6 +602,12 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
         revealEls.forEach(el => revealObserver.observe(el));
 
+        // ---- Partnership type — show/hide Other field ----
+        document.getElementById('pp-partnership-type').addEventListener('change', function () {
+            const wrap = document.getElementById('pp-type-other-wrap');
+            wrap.style.display = this.value === 'other' ? '' : 'none';
+        });
+
         // ---- Focus area checkboxes ----
         document.querySelectorAll('.pp-focus-check-label').forEach(label => {
             label.addEventListener('click', () => {
@@ -603,6 +636,7 @@
             this.classList.remove('was-validated');
             document.querySelectorAll('.pp-focus-check-label').forEach(l => l.classList.remove('checked'));
             document.getElementById('pp-file-name').textContent = 'Company profile, proposal, or relevant document…';
+            document.getElementById('pp-type-other-wrap').style.display = 'none';
             window.scrollTo({ top: document.getElementById('pp-form').closest('.hp-section').offsetTop - 80, behavior: 'smooth' });
         });
     </script>

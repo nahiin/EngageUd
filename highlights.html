@@ -248,11 +248,24 @@
     <!-- ========== FILTERS ========== -->
     <div class="hl-filters-bar">
         <div class="hl-filters-inner">
-            <button class="hl-filter-btn active" data-cat="all">All</button>
-            <button class="hl-filter-btn" data-cat="Entrepreneurship"><i class="bi bi-rocket-takeoff-fill"></i> Entrepreneurship</button>
-            <button class="hl-filter-btn" data-cat="Technology"><i class="bi bi-cpu-fill"></i> Technology</button>
-            <button class="hl-filter-btn" data-cat="Education"><i class="bi bi-book-fill"></i> Education</button>
-            <button class="hl-filter-btn" data-cat="Sustainability"><i class="bi bi-tree-fill"></i> Sustainability</button>
+            <!-- Category tabs (left) -->
+            <div class="hl-cat-tabs">
+                <button class="hl-filter-btn active" data-cat="all">All</button>
+                <button class="hl-filter-btn" data-cat="Entrepreneurship"><i class="bi bi-rocket-takeoff-fill"></i> Entrepreneurship</button>
+                <button class="hl-filter-btn" data-cat="Technology"><i class="bi bi-cpu-fill"></i> Technology</button>
+                <button class="hl-filter-btn" data-cat="Education"><i class="bi bi-book-fill"></i> Education</button>
+                <button class="hl-filter-btn" data-cat="Sustainability"><i class="bi bi-tree-fill"></i> Sustainability</button>
+            </div>
+            <!-- Semester pills (right) -->
+            <div class="hl-sem-group">
+                <span class="hl-sem-label">Semester</span>
+                <div class="hl-sem-pills">
+                    <button class="hl-sem-pill active" data-sem="all">All</button>
+                    <button class="hl-sem-pill" data-sem="Fall">Fall</button>
+                    <button class="hl-sem-pill" data-sem="Winter">Winter</button>
+                    <button class="hl-sem-pill" data-sem="Summer">Summer</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -261,7 +274,7 @@
         <div class="hl-section-inner">
 
             <!-- Featured (latest) highlight -->
-            <div class="hl-featured hp-reveal" data-cat="Technology">
+            <div class="hl-featured hp-reveal" data-cat="Technology" data-semester="Winter">
                 <a href="highlight-details.html" class="hl-featured-img-wrap">
                     <img src="assets/images/rwadthon-poster.png" alt="RWADTHON 2026">
                     <span class="hl-featured-badge">Featured</span>
@@ -282,7 +295,7 @@
             <!-- Grid -->
             <div class="hl-grid" id="hl-grid">
 
-                <div class="hl-card hp-reveal" data-cat="Entrepreneurship">
+                <div class="hl-card hp-reveal" data-cat="Entrepreneurship" data-semester="Fall">
                     <a href="highlight-details.html" class="hl-card-img-wrap">
                         <img src="assets/images/highlight-judging.png" alt="">
                     </a>
@@ -297,7 +310,7 @@
                     </div>
                 </div>
 
-                <div class="hl-card hp-reveal hp-reveal-delay-1" data-cat="Education">
+                <div class="hl-card hp-reveal hp-reveal-delay-1" data-cat="Education" data-semester="Fall">
                     <a href="highlight-details.html" class="hl-card-img-wrap">
                         <img src="assets/images/highlight-teams.png" alt="">
                     </a>
@@ -312,7 +325,7 @@
                     </div>
                 </div>
 
-                <div class="hl-card hp-reveal hp-reveal-delay-2" data-cat="Sustainability">
+                <div class="hl-card hp-reveal hp-reveal-delay-2" data-cat="Sustainability" data-semester="Fall">
                     <a href="highlight-details.html" class="hl-card-img-wrap">
                         <img src="assets/images/highlight-awards.png" alt="">
                     </a>
@@ -327,7 +340,7 @@
                     </div>
                 </div>
 
-                <div class="hl-card hp-reveal" data-cat="Technology">
+                <div class="hl-card hp-reveal" data-cat="Technology" data-semester="Fall">
                     <a href="highlight-details.html" class="hl-card-img-wrap">
                         <img src="assets/images/hero-bg.png" alt="">
                     </a>
@@ -342,7 +355,7 @@
                     </div>
                 </div>
 
-                <div class="hl-card hp-reveal hp-reveal-delay-1" data-cat="Entrepreneurship">
+                <div class="hl-card hp-reveal hp-reveal-delay-1" data-cat="Entrepreneurship" data-semester="Summer">
                     <a href="highlight-details.html" class="hl-card-img-wrap">
                         <img src="assets/images/highlight-ceremony.png" alt="">
                     </a>
@@ -357,7 +370,7 @@
                     </div>
                 </div>
 
-                <div class="hl-card hp-reveal hp-reveal-delay-2" data-cat="Education">
+                <div class="hl-card hp-reveal hp-reveal-delay-2" data-cat="Education" data-semester="Summer">
                     <a href="highlight-details.html" class="hl-card-img-wrap">
                         <img src="assets/images/rwadthon-poster.png" alt="">
                     </a>
@@ -433,34 +446,47 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
         revealEls.forEach(el => revealObserver.observe(el));
 
-        // Category filter
-        const filterBtns = document.querySelectorAll('.hl-filter-btn');
-        const cards = document.querySelectorAll('#hl-grid .hl-card');
+        // Filters
+        const catBtns = document.querySelectorAll('.hl-filter-btn[data-cat]');
+        const semBtns = document.querySelectorAll('.hl-sem-pill[data-sem]');
+        const cards   = document.querySelectorAll('#hl-grid .hl-card');
         const featured = document.querySelector('.hl-featured');
-        const empty = document.getElementById('hl-empty');
+        const empty   = document.getElementById('hl-empty');
 
-        filterBtns.forEach(btn => {
+        let activeCat = 'all';
+        let activeSem = 'all';
+
+        function applyFilters() {
+            const showFeatured = (activeCat === 'all' || featured.dataset.cat === activeCat) &&
+                                 (activeSem === 'all' || featured.dataset.semester === activeSem);
+            featured.style.display = showFeatured ? '' : 'none';
+
+            let visible = 0;
+            cards.forEach(card => {
+                const show = (activeCat === 'all' || card.dataset.cat === activeCat) &&
+                             (activeSem === 'all' || card.dataset.semester === activeSem);
+                card.style.display = show ? '' : 'none';
+                if (show) visible++;
+            });
+
+            empty.style.display = (!showFeatured && visible === 0) ? '' : 'none';
+        }
+
+        catBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
+                catBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                const cat = btn.dataset.cat;
+                activeCat = btn.dataset.cat;
+                applyFilters();
+            });
+        });
 
-                // Featured
-                if (cat === 'all' || featured.dataset.cat === cat) {
-                    featured.style.display = '';
-                } else {
-                    featured.style.display = 'none';
-                }
-
-                // Grid cards
-                let visible = 0;
-                cards.forEach(card => {
-                    const show = cat === 'all' || card.dataset.cat === cat;
-                    card.style.display = show ? '' : 'none';
-                    if (show) visible++;
-                });
-
-                empty.style.display = visible === 0 && featured.style.display === 'none' ? '' : 'none';
+        semBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                semBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeSem = btn.dataset.sem;
+                applyFilters();
             });
         });
     </script>
